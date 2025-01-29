@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="utf-8"?>
+<efcore context-namespace="Sistema.Proctor.Data.Entities" namespace="Sistema.Proctor.Data.Entities" p1:name="DataContextProctor" p1:Guid="b42cb3aa-1fcc-4eae-870b-7a04e3bf10f7" xmlns:p1="http://devart.com/schemas/EntityDeveloper/1.0">
+  <class name="Parametro" entity-set="Parametros" table="parametros" schema="dicesa" p1:Guid="d6af8fdc-04af-4c46-b934-0f8c0ebfdf0e">
+    <id name="Idparametro" type="Int64" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="2f20819d-d8e3-4a7f-abb5-9366eb08691d">
+      <column name="idparametro" not-null="True" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </id>
+    <property name="CodigoProyecto" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="d0b440a3-a1b3-4e8a-944d-cc804d5b5f11">
+      <column name="codigo_proyecto" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="SiguienteCodigoProyecto" type="Int32" p1:ValidateRequired="true" p1:Guid="255739ce-de50-4a3a-bbf5-f11f52460863">
+      <column name="siguiente_codigo_proyecto" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="TipoFalla" entity-set="TipoFallas" table="tipo_falla" schema="dicesa" p1:Guid="785124a9-dbab-4f70-a53b-b286210c38a9">
+    <id name="IdTipoFalla" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="4bb3f3f2-506b-4a1d-834f-c64dff4ff1ed">
+      <column name="id_tipo_falla" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Descripcion" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="eae030bf-c95d-44e3-9d2d-782e6b01a4f3">
+      <column name="descripcion" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="UnidadMedida" entity-set="UnidadMedidas" table="unidad_medida" schema="dicesa" p1:Guid="439d7b27-2087-4eac-b4e1-3ad91ac68fb7">
+    <id name="Idunidad" type="Int64" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="ad5b947d-a0b8-4259-87d4-5af7ec2bbbf9">
+      <column name="idunidad" not-null="True" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </id>
+    <property name="Descripcion" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="58f25e2f-38af-4f99-a9c6-71e9f73b670d">
+      <column name="descripcion" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Simbolo" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="a9927bf8-f598-4aeb-972f-89477bf5ca9d">
+      <column name="simbolo" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Empleado" entity-set="Empleados" table="empleado" schema="dicesa" p1:Guid="2a1f9a3b-32dd-4079-b87d-ec30d91cd595">
+    <id name="Idempleado" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="2ad3bbfb-886c-4267-a43c-35b0c83a07af">
+      <column name="idempleado" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Apellido" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="a3ac7151-17de-4270-8de2-17269b4f0e9a">
+      <column name="apellido" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Cedula" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="41e46fe5-dbdf-45ab-80e4-6c6999c0e9de">
+      <column name="cedula" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Direccion" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="0d73199d-494a-4e10-a404-0200e5d49194">
+      <column name="direccion" default="NULL" not-null="False" sql-type="tinytext" p1:unicode="False" />
+    </property>
+    <property name="FIngreso" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="09d261c8-2ca0-4470-9742-c513aa49ddd9">
+      <column name="f_ingreso" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="FNacimiento" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="66d29b70-1713-4704-9bf2-14c017cb68b0">
+      <column name="f_nacimiento" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="Nombre" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="11016f8e-8f11-4f88-ad26-eafbef597e87">
+      <column name="nombre" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Proyecto" entity-set="Proyectos" table="proyecto" schema="dicesa" p1:Guid="18b271c1-ab51-4e16-ab2d-8997ae8f44ba">
+    <id name="Idproyecto" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="178aa1f3-5d38-494c-8ec1-3d8b39403728">
+      <column name="idproyecto" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Activo" type="Boolean" p1:ValidateRequired="true" p1:Guid="263c41e6-e598-428c-9b91-7b5dc64787c9">
+      <column name="activo" not-null="True" precision="1" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="CodigoProyecto" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="f9b6eaa6-58d0-4a14-aaa7-c703072ae828">
+      <column name="codigo_proyecto" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Descripcion" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="b85824a1-3e73-46f1-aa6b-3b59a6302df9">
+      <column name="descripcion" default="NULL" not-null="False" sql-type="tinytext" p1:unicode="False" />
+    </property>
+    <property name="DescripcionMezcla" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ea006c9c-7b6e-4bc8-bb8e-6e1fa2ac448a">
+      <column name="descripcion_mezcla" default="NULL" not-null="False" sql-type="tinytext" p1:unicode="False" />
+    </property>
+    <property name="FechaFin" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="2ecfe80b-a4a9-4c46-833f-c2605147a7df">
+      <column name="fecha_fin" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="FechaInicio" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7f0d7a18-3d05-43e3-8872-8634b05cc53c">
+      <column name="fecha_inicio" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="FechaMuestreo" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="e19838f1-417e-4370-8e44-d7d4f6a28ee0">
+      <column name="fecha_muestreo" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="ProecedenciaConcreto" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5a1e9390-bc42-459c-8865-e722e18883aa">
+      <column name="proecedencia_concreto" default="NULL" not-null="False" sql-type="tinytext" p1:unicode="False" />
+    </property>
+    <property name="UbicacionMuestra" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="46e00daf-22a2-4970-9bc6-31422331e526">
+      <column name="ubicacion_muestra" default="NULL" not-null="False" sql-type="tinytext" p1:unicode="False" />
+    </property>
+    <property name="UbicacionProyecto" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="4c071cf1-ceaa-4f5e-850a-245f82d3592a">
+      <column name="ubicacion_proyecto" default="NULL" not-null="False" sql-type="tinytext" p1:unicode="False" />
+    </property>
+    <property name="Idcliente" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f738f5eb-0434-463a-9510-46a115dd896c">
+      <column name="idcliente" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Ensayo" entity-set="Ensayos" table="ensayo" schema="dicesa" p1:Guid="4c5ade6b-2c38-410c-839b-c818945b9697">
+    <id name="Idensayo" type="Int64" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="52c1c6f8-5230-4baa-a5e9-de1d1f82be82">
+      <column name="idensayo" not-null="True" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </id>
+    <property name="EdadReal" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="6b300633-7eb1-4c16-8661-53f8dfb21bea">
+      <column name="edad_real" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="FechaIngreso" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ca2fa7f7-9fbb-4871-85ee-02137c23c14b">
+      <column name="fecha_ingreso" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="FechaPrevista" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="81665ac4-d451-42a6-a6f1-366c7adc8c1c">
+      <column name="fecha_prevista" default="NULL" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="FechaReal" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="67ce59ba-c3bb-4fde-bb66-473bd2f4ad98">
+      <column name="fecha_real" default="NULL" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="Idempleado" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="12de2ffd-fd1e-488f-b0ad-ff793fc8a3a0">
+      <column name="idempleado" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Muestra" entity-set="Muestras" table="muestra" schema="dicesa" p1:Guid="50a5738d-07a6-48e2-a9f7-63594baf043f">
+    <id name="Idmuestra" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="6545331a-76c5-4135-8a48-45cec2f88d14">
+      <column name="idmuestra" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Idproyecto" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7366e6ca-94a3-4eb0-9d7d-43684d3d36b1">
+      <column name="idproyecto" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="SondeoNumero" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="937a562e-f348-46d7-a8e4-7e940aaaaa67">
+      <column name="sondeo_numero" default="NULL" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="MuestraNumero" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="77a9fca1-07b0-42b9-b4a5-605d084834f5">
+      <column name="muestra_numero" default="NULL" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Coordenadas" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="100" p1:ValidateRequired="false" p1:Guid="44587402-6c3b-4d1b-b023-4d879c67a4de">
+      <column name="coordenadas" default="NULL" not-null="False" length="100" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="LadoBanda" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="459baaef-1e5e-4aaf-9fbe-cae0eae14eda">
+      <column name="lado_banda" default="NULL" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="DescripcionMaterial" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="0f50d7cf-427c-482d-8864-a524407ee7fb">
+      <column name="descripcion_material" default="NULL" not-null="False" sql-type="text" p1:unicode="False" />
+    </property>
+    <property name="Idcliente" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="71b5719d-f379-4fbd-a72d-4fd60d942935">
+      <column name="idcliente" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Idempleado" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d7702445-7efa-4465-9d45-9be7c25bf50c">
+      <column name="idempleado" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="FechaEnsayo" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="0ab09af5-e08f-48d3-b342-496883066f70">
+      <column name="fecha_ensayo" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="CoordeandasZ" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="9cc2fa62-7b3f-4ffb-8720-365c5dbfa81f">
+      <column name="coordeandas_z" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="CodigoIngreso" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="de09840b-3fe4-43dd-9430-41ae44e5469c">
+      <column name="codigo_ingreso" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Cliente" entity-set="Clientes" table="cliente" schema="dicesa" p1:Guid="9f228a92-62cb-4c53-8bf7-6f0dc312fbda">
+    <id name="Idcliente" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="689d39f2-2497-4d9d-ae0e-bf1c6b21be04">
+      <column name="idcliente" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Celular" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="e524a8a1-17cf-4cdd-af88-55f7ee0baa15">
+      <column name="celular" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Ciudad" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="d06b8dba-9858-462d-ac49-0b86ec41b5b4">
+      <column name="ciudad" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Contacto" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="ef7a5dd5-ce4e-43e7-afe6-939f19e7f64c">
+      <column name="contacto" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Departamento" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="c6601ee3-9f8f-4a90-a826-8e4c972e2de7">
+      <column name="departamento" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Direccion" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="198dd984-f624-4ec2-bc70-6f1cd86b53fb">
+      <column name="direccion" default="NULL" not-null="False" sql-type="tinytext" p1:unicode="False" />
+    </property>
+    <property name="Email" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="540dc7c4-d078-4453-9c7c-ef77c358b484">
+      <column name="email" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="FIngreso" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="330714dd-9dd2-4095-aabd-c17faafdb986">
+      <column name="f_ingreso" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="NombreAbreviado" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="6296deff-1d2c-4953-86db-6e91afbc673a">
+      <column name="nombre_abreviado" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="NombreComercial" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="b725ce56-c841-4110-af17-8e654bd808eb">
+      <column name="nombre_comercial" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Ruc" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="0355d747-f6e1-4f87-ad69-f6da5732965a">
+      <column name="ruc" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Telefono" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="39925a0c-f0fc-4761-8df5-a7ce95ec334c">
+      <column name="telefono" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Usuario" entity-set="Usuarios" table="usuario" schema="dicesa" p1:Guid="4446a093-6d23-4dc3-b48d-28c4c4500160">
+    <id name="Idusuario" type="Int64" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="43f7b6d2-98eb-44a6-b59c-2d4a4cc215da">
+      <column name="idusuario" not-null="True" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </id>
+    <property name="Activo" type="Boolean" p1:ValidateRequired="true" p1:Guid="db61d8bd-2005-4c45-a483-94b5c528d82d">
+      <column name="activo" not-null="True" precision="1" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="Email" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="58bebd66-547f-4a69-a695-3fdba887c001">
+      <column name="email" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Nombre" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="74247756-ff6b-46b8-a553-0fc953a188d4">
+      <column name="nombre" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Password" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="8a52a250-ad96-43f3-a248-3c038dd00a84">
+      <column name="`password`" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="ResultadosProctor" entity-set="ResultadosProctors" table="resultados_proctor" schema="dicesa" p1:Guid="df23ce7d-4a1b-48f4-8295-73e51eb4bffe">
+    <id name="Idresultado" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="a252859a-8003-4389-995d-3e7f7a088e1b">
+      <column name="idresultado" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Idensayo" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="313bdfca-a800-4030-bbdf-02ca4f1da6c8">
+      <column name="idensayo" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="AguaAgregada" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="84ed5e82-3757-4b78-9a47-cd340db412b8">
+      <column name="agua_agregada" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="PesoMoldeMaterialHumedo" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="9fd0118c-55b7-4efa-9fe1-69a34be7242e">
+      <column name="peso_molde_material_humedo" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="PesoMolde" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="e30be05d-721e-4484-ba39-b9ded932a1d2">
+      <column name="peso_molde" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="PesoMaterialHumedo" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d7d78e14-b51b-40cc-b931-f21ea74121f7">
+      <column name="peso_material_humedo" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="VolumenMolde" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="3c623b27-2dcc-4ede-97a8-14d5077fd9eb">
+      <column name="volumen_molde" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="DensidadHumeda" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="8955e972-fc8b-4d2c-bc23-2b563f270663">
+      <column name="densidad_humeda" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="TaraNumero" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="e1c04851-cea4-4ed9-bb8b-ada5d9da5520">
+      <column name="tara_numero" default="NULL" not-null="False" length="50" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="TaraMaterialHumedo" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="08f5f319-190f-4598-b2e2-6c2babf3914b">
+      <column name="tara_material_humedo" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="TaraMaterialSeco" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="3bd18eeb-dec5-43d1-8680-98ac3169fb25">
+      <column name="tara_material_seco" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="PesoAgua" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f0edd510-00d4-4cfe-b33e-be3760f1887f">
+      <column name="peso_agua" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="PesoTara" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5b34bbdb-8654-4731-80a8-e17c3519b8b7">
+      <column name="peso_tara" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="PesoSueloSeco" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7e7e2f45-4e12-450b-9e89-398de3a46796">
+      <column name="peso_suelo_seco" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="ContenidoHumedad" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="978edcfa-36c2-4253-afaf-af3bf0fc93cd">
+      <column name="contenido_humedad" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="DensidadSeca" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d8d7381c-cf99-48fa-bb04-f72612d31353">
+      <column name="densidad_seca" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="EnsayoProctor" entity-set="EnsayoProctors" table="ensayo_proctor" schema="dicesa" p1:Guid="9d7026aa-b540-4fa8-93eb-6c581df3d7c4">
+    <id name="Idensayo" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="df653229-da59-483b-a97e-f60150c54ef1">
+      <column name="idensayo" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Idmuestra" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="28cc0abd-4682-49ba-b28f-b54fe8ea9dc0">
+      <column name="idmuestra" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="FechaEnsayo" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="a6e8e1de-9e4d-4ee5-9f54-d12d60e7a976">
+      <column name="fecha_ensayo" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="Norma" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="100" p1:ValidateRequired="false" p1:Guid="d182572f-0f58-401a-b327-8e164a3db051">
+      <column name="norma" default="NULL" not-null="False" length="100" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="MetodoUtilizado" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="a5c7ae7a-25a8-4c24-87d1-8ca8809b9e55">
+      <column name="metodo_utilizado" default="NULL" not-null="False" length="50" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="PesoMartilloLb" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="3ff42aa8-0e42-47ad-b3df-d25f1b8fb1c6">
+      <column name="peso_martillo_lb" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="PesoMaterialG" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="dd8880ec-0a30-4be3-9535-3ecfdf01eaaf">
+      <column name="peso_material_g" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="TemperaturaSecado" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="c996557f-c272-4dab-942b-6a19addac613">
+      <column name="temperatura_secado" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="DiametroMoldeCm" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5e1b15c7-a070-4f0f-8fed-c68c290e5dff">
+      <column name="diametro_molde_cm" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="AlturaMoldeCm" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5292d36c-c80c-43df-a4d0-f3b15ed6433c">
+      <column name="altura_molde_cm" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    </property>
+    <property name="NumCapas" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="1eaa73bf-2d03-46d4-9438-4d3db3ed0342">
+      <column name="num_capas" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="NumGolpes" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="56ca9eb7-83f1-4894-8568-848741e5f780">
+      <column name="num_golpes" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="TipoProctor" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="2ead904f-e4c6-4168-9242-e4b142f1dfc2">
+      <column name="tipo_proctor" default="NULL" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="TipoEspeciman" entity-set="TipoEspecimen" table="tipo_especimen" schema="dicesa" p1:Guid="a3191bb7-79fd-4adb-a86f-8ceddc2ee7f1">
+    <id name="Idtipo" type="Int64" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="02648788-a3c0-46a8-8efd-63f81ddd66e5">
+      <column name="idtipo" not-null="True" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </id>
+    <property name="Descripcion" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="fc3c7996-03df-4845-87a0-6a0b679a42e2">
+      <column name="descripcion" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="TamanoEspeciman" entity-set="TamanoEspecimen" table="tamano_especimen" schema="dicesa" p1:Guid="8bd5f194-149d-41d3-bbfe-0db4e72fd57a">
+    <id name="Idtamano" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="0ed948d3-ea7c-49fc-9306-38befbcfd90c">
+      <column name="idtamano" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Tamano" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="4958c563-8523-4b59-9a80-ac47a66977ad">
+      <column name="tamano" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Resultado" entity-set="Resultados" table="resultados" schema="dicesa" p1:Guid="989ec4a4-da6a-44f2-8aa2-46ca02ac21a3">
+    <id name="Idresultados" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="5b65cbc9-aea4-48aa-9224-84165c601ab1">
+      <column name="idresultados" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Disenada" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ca3fa777-40eb-4d5d-8f60-dc2c611cb6d9">
+      <column name="disenada" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Evaluacion" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="578c84db-95d6-4ef5-9358-88a0daded163">
+      <column name="evaluacion" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Observacion" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="0b25c0b8-8c04-40e4-bba6-00c0376edef7">
+      <column name="observacion" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Obtenida" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="bd4ccfee-bc0b-4a08-bf8f-3e8688cdfd34">
+      <column name="obtenida" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Porcentaje" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f56ae571-ede1-432d-bbc7-ac0e234f96f5">
+      <column name="porcentaje" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Identry" type="Int64" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="e2fb0e53-36fa-4fa5-a127-f2c00525c4c8">
+      <column name="identry" default="NULL" not-null="False" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </property>
+    <property name="Idtipofalla" type="Int32" p1:ValidateRequired="true" p1:Guid="45007917-188c-40c4-a1cf-674b7daff339">
+      <column name="idtipofalla" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Entry" entity-set="Entries" table="entry" schema="dicesa" p1:Guid="98e5ac97-cf21-47f1-a0b1-9503d8ca628d">
+    <id name="IdEntry" type="Int64" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="b80ac3c2-38a4-4129-a25e-188f9fade9a4">
+      <column name="id_entry" not-null="True" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </id>
+    <property name="Altura" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="fb720fa4-cee9-4176-82f4-8ea3754ba7dc">
+      <column name="altura" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Anchura" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="943eec89-cbb6-46df-9428-f830bfdc487f">
+      <column name="anchura" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Area" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="c22cb372-5cb2-4bb7-afa6-0a291a3dfc4d">
+      <column name="area" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Carga" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="db4ac123-9745-481e-a699-8a770cffb3cc">
+      <column name="carga" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Codigo" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="37c2bbd6-ee53-4327-b2bc-6b78d3cdc8c9">
+      <column name="codigo" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Densidad" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ef1329f9-08b8-40ac-8335-275b6c61978b">
+      <column name="densidad" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Diametro" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="cf7e4b14-9deb-4912-8949-acf59ff0484d">
+      <column name="diametro" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Edad" type="Int32" p1:ValidateRequired="true" p1:Guid="fbc867be-2ba2-4772-b77b-8b589ed7bf0d">
+      <column name="edad" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="EdadReal" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="922a556e-385e-476a-be13-4f9807f85ddc">
+      <column name="edad_real" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="End" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="14b5541b-5c8d-4937-b3f0-7b987f48e0c4">
+      <column name="end" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="EndTime" type="Time" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="3476ecc7-0823-44d1-89b3-ecdbbb319f65">
+      <column name="end_time" default="NULL" not-null="False" sql-type="time" p1:unicode="False" />
+    </property>
+    <property name="Estructura" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="98c3113b-5c8f-4fe5-a2ca-58a2dc3b8e38">
+      <column name="estructura" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="FechaColado" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="33b01d89-fb6f-46e6-b16a-864660524d3f">
+      <column name="fecha_colado" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="FechaRoturaReal" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="b80130fb-039a-4892-8794-4e99b97d1a5c">
+      <column name="fecha_rotura_real" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="Finalizado" type="Boolean" p1:ValidateRequired="true" p1:Guid="e7bebaad-b879-42a2-820d-15e8f190e475">
+      <column name="finalizado" not-null="True" precision="1" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="FullDay" type="Boolean" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="bb61d767-84e7-493d-85fa-43cbd86c64c9">
+      <column name="full_day" default="NULL" not-null="False" precision="1" sql-type="bit" p1:unicode="False" />
+    </property>
+    <property name="Id" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="f84d7798-bf62-469b-b9c0-5f70d58f37ea">
+      <column name="id" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Location" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="39fc33d8-c2a6-4248-adc5-b4011ae63ca6">
+      <column name="location" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="LongitudSoporte" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="631ee4da-687a-4b30-93d8-99b2b2c8e234">
+      <column name="longitud_soporte" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Peso" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="4db1c985-3b0e-47fb-a31e-cec1f47889cb">
+      <column name="peso" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PromedioSoporte" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7cee09f9-9632-40cd-89f3-1f8b91fe2df8">
+      <column name="promedio_soporte" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="StarTime" type="Time" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="496d4c11-baa1-4b3e-9ccc-e98062bb6600">
+      <column name="star_time" default="NULL" not-null="False" sql-type="time" p1:unicode="False" />
+    </property>
+    <property name="Start" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d635706b-bf0f-4f28-94df-660733890eef">
+      <column name="start" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="Title" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="ba8128a1-17f4-4c7a-9e26-d219c1152283">
+      <column name="title" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Volumen" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="fe07d65e-aa67-46ef-8d2b-ea7d4e167e16">
+      <column name="volumen" default="NULL" not-null="False" precision="38" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="ZoneId" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="f4a12d20-f7fd-40a1-a3aa-c0cbfb7aa8e7">
+      <column name="zone_id" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Idempleado" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="60da3a68-a4c1-433f-9890-4cea67d0a353">
+      <column name="idempleado" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Idproyecto" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ab1cf0ef-bbdd-4f67-b386-4f681f508927">
+      <column name="idproyecto" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Idtamano" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="e154741b-10d0-4dde-85a1-1d3666376f01">
+      <column name="idtamano" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Idtipo" type="Int64" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7043fa9b-b215-4b83-8bef-9b61aabb7877">
+      <column name="idtipo" default="NULL" not-null="False" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </property>
+    <property name="Idunidad" type="Int64" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="8bd4bedf-fd85-4f4d-9eb0-fa7dcb50bb17">
+      <column name="idunidad" default="NULL" not-null="False" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    </property>
+  </class>
+  <associations>
+    <association name="Cliente_Proyecto" cardinality="OneToMany" p1:Guid="a22ce68f-548c-4df5-981e-3710b55beae3">
+      <end1 multiplicity="ZeroOrOne" name="Cliente" class="Proyecto" relation-class="Cliente" constrained="True" lazy="False" p1:Guid="e108c82e-375b-4181-9bb9-cbaba62cfcee">
+        <property name="Idcliente" />
+      </end1>
+      <end2 multiplicity="Many" name="Proyectos" class="Cliente" relation-class="Proyecto" lazy="False" p1:Guid="18d98a79-141b-4246-bfc9-9005be2f2e0f">
+        <property name="Idcliente" />
+      </end2>
+    </association>
+    <association name="Empleado_Ensayo" cardinality="OneToMany" p1:Guid="6f934b6a-3010-44b9-bd1d-5eb056c82028">
+      <end1 multiplicity="ZeroOrOne" name="Empleado" class="Ensayo" relation-class="Empleado" constrained="True" lazy="False" p1:Guid="4e9d55a0-d063-4cf0-a163-58aaee131dda">
+        <property name="Idempleado" />
+      </end1>
+      <end2 multiplicity="Many" name="Ensayos" class="Empleado" relation-class="Ensayo" lazy="False" p1:Guid="c38d6d9c-d1c2-4489-809c-a51686838e6b">
+        <property name="Idempleado" />
+      </end2>
+    </association>
+    <association name="Cliente_Muestra" cardinality="OneToMany" p1:Guid="2cfaca09-a1e8-41da-b697-56841c0cf9fb">
+      <end1 multiplicity="ZeroOrOne" name="Cliente" class="Muestra" relation-class="Cliente" constrained="True" lazy="False" p1:Guid="2bf33766-eb90-4042-b9c9-4d1a14666a9b">
+        <property name="Idcliente" />
+      </end1>
+      <end2 multiplicity="Many" name="Muestras" class="Cliente" relation-class="Muestra" lazy="False" p1:Guid="44bd4fa4-d861-4e43-8fab-8e7a83a64318">
+        <property name="Idcliente" />
+      </end2>
+    </association>
+    <association name="Empleado_Muestra" cardinality="OneToMany" p1:Guid="94d75f85-4615-4007-ba25-116826721f11">
+      <end1 multiplicity="ZeroOrOne" name="Empleado" class="Muestra" relation-class="Empleado" constrained="True" lazy="False" p1:Guid="0fd42f91-5054-4196-bb1e-0cb8444976c7">
+        <property name="Idempleado" />
+      </end1>
+      <end2 multiplicity="Many" name="Muestras" class="Empleado" relation-class="Muestra" lazy="False" p1:Guid="a1c84289-9865-407a-83f8-d122763bffc2">
+        <property name="Idempleado" />
+      </end2>
+    </association>
+    <association name="Proyecto_Muestra" cardinality="OneToMany" on-delete="Restrict" p1:Guid="b76a30f0-aae6-4a74-aca8-6ba979a7650d">
+      <end1 multiplicity="ZeroOrOne" name="Proyecto" class="Muestra" relation-class="Proyecto" constrained="True" lazy="False" p1:Guid="18c61576-1e9b-44c9-baa6-f73e2fe5697e">
+        <property name="Idproyecto" />
+      </end1>
+      <end2 multiplicity="Many" name="Muestras" class="Proyecto" relation-class="Muestra" lazy="False" p1:Guid="80a07d6f-4616-4878-a7c6-a96d931c24d4">
+        <property name="Idproyecto" />
+      </end2>
+    </association>
+    <association name="EnsayoProctor_ResultadosProctor" cardinality="OneToMany" on-delete="Restrict" p1:Guid="9f802daf-8f0f-4cae-9e3c-8da294bdfbf0">
+      <end1 multiplicity="ZeroOrOne" name="EnsayoProctor" class="ResultadosProctor" relation-class="EnsayoProctor" constrained="True" lazy="False" p1:Guid="288d3ecf-aef8-4a3e-a60b-d29c4b369306">
+        <property name="Idensayo" />
+      </end1>
+      <end2 multiplicity="Many" name="ResultadosProctors" class="EnsayoProctor" relation-class="ResultadosProctor" lazy="False" p1:Guid="f7b9462b-25c9-4731-a326-e411de49eb61">
+        <property name="Idensayo" />
+      </end2>
+    </association>
+    <association name="Muestra_EnsayoProctor" cardinality="OneToMany" on-delete="Restrict" p1:Guid="7d691a2c-3a6d-4bce-a6d9-33ae5448cf30">
+      <end1 multiplicity="ZeroOrOne" name="Muestra" class="EnsayoProctor" relation-class="Muestra" constrained="True" lazy="False" p1:Guid="bc551a94-b192-4182-b5cf-a39f3d0ff740">
+        <property name="Idmuestra" />
+      </end1>
+      <end2 multiplicity="Many" name="EnsayoProctors" class="Muestra" relation-class="EnsayoProctor" lazy="False" p1:Guid="cf8d2829-9a7f-4dd2-9a90-e68b0dc936c4">
+        <property name="Idmuestra" />
+      </end2>
+    </association>
+    <association name="TipoFalla_Resultado" cardinality="OneToMany" on-delete="Restrict" p1:Guid="7714e1cf-07d0-4eb6-a490-c6b5bddfcdf9">
+      <end1 multiplicity="One" name="TipoFalla" class="Resultado" relation-class="TipoFalla" constrained="True" lazy="False" p1:Guid="c4d5c49a-2d16-4b6c-96c5-fbfd1859f97f">
+        <property name="IdTipoFalla" />
+      </end1>
+      <end2 multiplicity="Many" name="Resultados" class="TipoFalla" relation-class="Resultado" lazy="False" p1:Guid="2a24bd4b-21c2-4aea-8692-1ec7ad10229d">
+        <property name="Idtipofalla" />
+      </end2>
+    </association>
+    <association name="Entry_Resultado" cardinality="OneToMany" on-delete="Restrict" p1:Guid="1a302f32-a3ad-4d9b-be2a-ed54a5677d47">
+      <end1 multiplicity="ZeroOrOne" name="Entry" class="Resultado" relation-class="Entry" constrained="True" lazy="False" p1:Guid="53ec03e8-5d3e-4966-83a5-5c72647e9deb">
+        <property name="IdEntry" />
+      </end1>
+      <end2 multiplicity="Many" name="Resultados" class="Entry" relation-class="Resultado" lazy="False" p1:Guid="64837158-5ce2-4559-9b31-54311f767225">
+        <property name="Identry" />
+      </end2>
+    </association>
+    <association name="TamanoEspeciman_Entry" cardinality="OneToMany" on-delete="Restrict" p1:Guid="1a1569b6-09b7-4ecb-a587-9e80ec6f77f8">
+      <end1 multiplicity="ZeroOrOne" name="TamanoEspeciman" class="Entry" relation-class="TamanoEspeciman" constrained="True" lazy="False" p1:Guid="5ebafa03-5e21-4eac-9ef2-6e4ee4542d1b">
+        <property name="Idtamano" />
+      </end1>
+      <end2 multiplicity="Many" name="Entries" class="TamanoEspeciman" relation-class="Entry" lazy="False" p1:Guid="9b772282-e488-4ecb-8708-8cbbe99feacf">
+        <property name="Idtamano" />
+      </end2>
+    </association>
+    <association name="Proyecto_Entry" cardinality="OneToMany" on-delete="Restrict" p1:Guid="4ce5dddc-c4dd-4d2f-9009-748e262f991c">
+      <end1 multiplicity="ZeroOrOne" name="Proyecto" class="Entry" relation-class="Proyecto" constrained="True" lazy="False" p1:Guid="c722e444-4aa2-4830-bf83-63cfbc62d48a">
+        <property name="Idproyecto" />
+      </end1>
+      <end2 multiplicity="Many" name="Entries" class="Proyecto" relation-class="Entry" lazy="False" p1:Guid="79d970be-121f-4463-8059-b1ed052cde8b">
+        <property name="Idproyecto" />
+      </end2>
+    </association>
+    <association name="TipoEspeciman_Entry" cardinality="OneToMany" on-delete="Restrict" p1:Guid="8fbdc159-de97-4573-a669-42aa3301639a">
+      <end1 multiplicity="ZeroOrOne" name="TipoEspeciman" class="Entry" relation-class="TipoEspeciman" constrained="True" lazy="False" p1:Guid="c95e217b-375c-4fe8-b7f0-56ce0237cd4e">
+        <property name="Idtipo" />
+      </end1>
+      <end2 multiplicity="Many" name="Entries" class="TipoEspeciman" relation-class="Entry" lazy="False" p1:Guid="b792c458-c0b4-404c-a432-747d24748b52">
+        <property name="Idtipo" />
+      </end2>
+    </association>
+    <association name="UnidadMedida_Entry" cardinality="OneToMany" on-delete="Restrict" p1:Guid="c540d1f4-5e14-4c13-b131-2430bdb4d5af">
+      <end1 multiplicity="ZeroOrOne" name="UnidadMedida" class="Entry" relation-class="UnidadMedida" constrained="True" lazy="False" p1:Guid="3b96aa2d-a31f-4564-80ba-b3e12c6665f7">
+        <property name="Idunidad" />
+      </end1>
+      <end2 multiplicity="Many" name="Entries" class="UnidadMedida" relation-class="Entry" lazy="False" p1:Guid="f82523e6-1f66-4a38-b52c-2d9e0436e807">
+        <property name="Idunidad" />
+      </end2>
+    </association>
+  </associations>
+</efcore>
