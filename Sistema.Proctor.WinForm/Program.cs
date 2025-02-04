@@ -1,3 +1,6 @@
+using DevExpress.XtraEditors;
+using Sistema.Proctor.WinForm.Views;
+
 namespace Sistema.Proctor.WinForm;
 
 static class Program
@@ -11,6 +14,6 @@ static class Program
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
-        Application.Run(new Form1());
+        Application.Run(new MainView());
     }
 }

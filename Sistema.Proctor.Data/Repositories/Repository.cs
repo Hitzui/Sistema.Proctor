@@ -14,7 +14,7 @@ public class Repository<T> : IRepository<T> where T : class
 
     public Task<List<T>> GetAllAsync()
     {
-        return _context.Set<T>().ToListAsync();
+        return _context.Set<T>().AsNoTracking().ToListAsync();
     }
 
     public ValueTask<T?> GetByIdAsync(int id)
