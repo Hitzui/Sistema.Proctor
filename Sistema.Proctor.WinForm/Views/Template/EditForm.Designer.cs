@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditForm));
-            stackPanel1 = new DevExpress.Utils.Layout.StackPanel();
+            stackPanelFooter = new DevExpress.Utils.Layout.StackPanel();
             btnCancelar = new DevExpress.XtraEditors.SimpleButton();
             btnGuardar = new DevExpress.XtraEditors.SimpleButton();
-            ((System.ComponentModel.ISupportInitialize)stackPanel1).BeginInit();
-            stackPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)stackPanelFooter).BeginInit();
+            stackPanelFooter.SuspendLayout();
             SuspendLayout();
             // 
-            // stackPanel1
+            // stackPanelFooter
             // 
-            stackPanel1.Controls.Add(btnCancelar);
-            stackPanel1.Controls.Add(btnGuardar);
-            stackPanel1.Dock = DockStyle.Bottom;
-            stackPanel1.LayoutDirection = DevExpress.Utils.Layout.StackPanelLayoutDirection.RightToLeft;
-            stackPanel1.Location = new Point(0, 353);
-            stackPanel1.Name = "stackPanel1";
-            stackPanel1.Size = new Size(676, 77);
-            stackPanel1.TabIndex = 2;
-            stackPanel1.UseSkinIndents = true;
+            stackPanelFooter.Controls.Add(btnCancelar);
+            stackPanelFooter.Controls.Add(btnGuardar);
+            stackPanelFooter.Dock = DockStyle.Bottom;
+            stackPanelFooter.LayoutDirection = DevExpress.Utils.Layout.StackPanelLayoutDirection.RightToLeft;
+            stackPanelFooter.Location = new Point(0, 353);
+            stackPanelFooter.Name = "stackPanelFooter";
+            stackPanelFooter.Size = new Size(676, 77);
+            stackPanelFooter.TabIndex = 2;
+            stackPanelFooter.UseSkinIndents = true;
             // 
             // btnCancelar
             // 
@@ -84,18 +84,17 @@
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(676, 430);
-            Controls.Add(stackPanel1);
+            Controls.Add(stackPanelFooter);
             Name = "EditForm";
             Text = "EditForm";
-            ((System.ComponentModel.ISupportInitialize)stackPanel1).EndInit();
-            stackPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)stackPanelFooter).EndInit();
+            stackPanelFooter.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private DevExpress.Utils.Layout.StackPanel stackPanel1;
-        public DevExpress.XtraEditors.SimpleButton btnCancelar;
-        public DevExpress.XtraEditors.SimpleButton btnGuardar;
+        protected DevExpress.Utils.Layout.StackPanel stackPanelFooter;
+        protected DevExpress.XtraEditors.SimpleButton btnCancelar;
+        protected DevExpress.XtraEditors.SimpleButton btnGuardar;
     }
 }

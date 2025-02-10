@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using NLog;
 using Sistema.Proctor.Data;
 using Sistema.Proctor.Data.Repositories;
+using Sistema.Proctor.WinForm.Data;
 using Sistema.Proctor.WinForm.Dto;
 using Sistema.Proctor.WinForm.Views.Template;
 

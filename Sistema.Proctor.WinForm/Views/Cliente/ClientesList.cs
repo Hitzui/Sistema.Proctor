@@ -3,6 +3,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using NLog;
 using Sistema.Proctor.Data;
 using Sistema.Proctor.Data.Repositories;
+using Sistema.Proctor.WinForm.Data;
 using Sistema.Proctor.WinForm.Dto;
 
 namespace Sistema.Proctor.WinForm.Views.Cliente
@@ -43,7 +44,7 @@ namespace Sistema.Proctor.WinForm.Views.Cliente
             var selectedRowsCount = gridViewClientes.SelectedRowsCount;
             if (selectedRowsCount > 0)
             {
-                var cliente = (Data.Entities.Cliente)gridViewClientes.GetRow(gridViewClientes.FocusedRowHandle);
+                var cliente = (Proctor.Data.Entities.Cliente)gridViewClientes.GetRow(gridViewClientes.FocusedRowHandle);
                 DependenciasGlobalesForm.Instance.SelectedCliente = new ClienteDto().GetClienteDto(cliente);
             }
         }

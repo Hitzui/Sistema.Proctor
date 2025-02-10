@@ -110,6 +110,12 @@
     <property name="Idempleado" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="12de2ffd-fd1e-488f-b0ad-ff793fc8a3a0">
       <column name="idempleado" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
+    <property name="Idtipoensayo" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="8565f7f3-3378-41cb-8232-ac14a3778339">
+      <column name="idtipoensayo" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Idmuestra" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="26108bd6-adc9-4fd3-90a3-80b985382dc6">
+      <column name="idmuestra" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
   </class>
   <class name="Muestra" entity-set="Muestras" table="muestra" schema="dicesa" p1:Guid="50a5738d-07a6-48e2-a9f7-63594baf043f">
     <id name="Idmuestra" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="6545331a-76c5-4135-8a48-45cec2f88d14">
@@ -435,6 +441,14 @@
       <column name="idunidad" default="NULL" not-null="False" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
     </property>
   </class>
+  <class name="TipoEnsayo" entity-set="TipoEnsayos" table="tipo_ensayo" schema="dicesa" p1:Guid="294ae20f-ccd5-4be5-b08e-c7c731f0389b">
+    <id name="Idtipoensayo" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="a6a698d9-ba06-433c-be5f-65c7cd686b36">
+      <column name="idtipoensayo" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Descripcion" type="String" p1:ValidateMaxLength="255" p1:ValidateRequired="true" p1:Guid="5b3d1b91-cda4-4e8a-a1d3-860d456e20cf">
+      <column name="descripcion" not-null="True" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+  </class>
   <associations>
     <association name="Cliente_Proyecto" cardinality="OneToMany" p1:Guid="a22ce68f-548c-4df5-981e-3710b55beae3">
       <end1 multiplicity="ZeroOrOne" name="Cliente" class="Proyecto" relation-class="Cliente" constrained="True" lazy="False" p1:Guid="e108c82e-375b-4181-9bb9-cbaba62cfcee">
@@ -484,14 +498,6 @@
         <property name="Idensayo" />
       </end2>
     </association>
-    <association name="Muestra_EnsayoProctor" cardinality="OneToMany" on-delete="Restrict" p1:Guid="7d691a2c-3a6d-4bce-a6d9-33ae5448cf30">
-      <end1 multiplicity="ZeroOrOne" name="Muestra" class="EnsayoProctor" relation-class="Muestra" constrained="True" lazy="False" p1:Guid="bc551a94-b192-4182-b5cf-a39f3d0ff740">
-        <property name="Idmuestra" />
-      </end1>
-      <end2 multiplicity="Many" name="EnsayoProctors" class="Muestra" relation-class="EnsayoProctor" lazy="False" p1:Guid="cf8d2829-9a7f-4dd2-9a90-e68b0dc936c4">
-        <property name="Idmuestra" />
-      </end2>
-    </association>
     <association name="TipoFalla_Resultado" cardinality="OneToMany" on-delete="Restrict" p1:Guid="7714e1cf-07d0-4eb6-a490-c6b5bddfcdf9">
       <end1 multiplicity="One" name="TipoFalla" class="Resultado" relation-class="TipoFalla" constrained="True" lazy="False" p1:Guid="c4d5c49a-2d16-4b6c-96c5-fbfd1859f97f">
         <property name="IdTipoFalla" />
@@ -538,6 +544,22 @@
       </end1>
       <end2 multiplicity="Many" name="Entries" class="UnidadMedida" relation-class="Entry" lazy="False" p1:Guid="f82523e6-1f66-4a38-b52c-2d9e0436e807">
         <property name="Idunidad" />
+      </end2>
+    </association>
+    <association name="Muestra_Ensayo" cardinality="OneToMany" p1:Guid="dc9195d8-5f54-4db2-868e-6cbf7aa854af">
+      <end1 multiplicity="ZeroOrOne" name="Muestra" class="Ensayo" relation-class="Muestra" constrained="True" lazy="False" p1:Guid="ad372894-09ee-4ba8-ac91-11742fd3230e">
+        <property name="Idmuestra" />
+      </end1>
+      <end2 multiplicity="Many" name="Ensayos" class="Muestra" relation-class="Ensayo" lazy="False" p1:Guid="17852374-3f9c-442a-82f7-266a97ce704e">
+        <property name="Idmuestra" />
+      </end2>
+    </association>
+    <association name="TipoEnsayo_Ensayo" cardinality="OneToMany" p1:Guid="9163d935-38ca-45b7-95ab-b2d3d0d8f30c">
+      <end1 multiplicity="ZeroOrOne" name="TipoEnsayo" class="Ensayo" relation-class="TipoEnsayo" constrained="True" lazy="False" p1:Guid="29952542-163d-4aa0-b3f8-a37e748c1f01">
+        <property name="Idtipoensayo" />
+      </end1>
+      <end2 multiplicity="Many" name="Ensayos" class="TipoEnsayo" relation-class="Ensayo" lazy="False" p1:Guid="fcf04a99-655c-4b2e-a3a5-350d3cde0f08">
+        <property name="Idtipoensayo" />
       </end2>
     </association>
   </associations>

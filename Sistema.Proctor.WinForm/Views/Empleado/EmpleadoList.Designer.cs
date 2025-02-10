@@ -67,7 +67,7 @@
             // 
             // empleadoBindingSource
             // 
-            empleadoBindingSource.DataSource = typeof(Data.Entities.Empleado);
+            empleadoBindingSource.DataSource = typeof(Proctor.Data.Entities.Empleado);
             // 
             // gridViewEmpleados
             // 

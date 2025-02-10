@@ -7,9 +7,8 @@ public interface IUnitOfWork
 
     IRepository<Cliente> ClienteRepository { get; }
     IRepository<Empleado> EmpleadoRepository { get; }
-    IRepository<Proyecto> ProyectoRepository { get; }
-    IRepository<Muestra> MuestrasRepository { get; }
     IRepository<EnsayoProctor> EnsayosProctorRepository { get; }
+    IRepository<Ensayo> EnsayosRepository { get; }
     Task<int> CompleteAsync();
 }
 
@@ -21,18 +20,16 @@ public class UnitOfWork : IUnitOfWork
     {
         _Context = context;
         ClienteRepository = new Repository<Cliente>(_Context);
-        ProyectoRepository = new Repository<Proyecto>(_Context);
-        MuestrasRepository = new Repository<Muestra>(_Context);
         EmpleadoRepository = new Repository<Empleado>(_Context);
         EnsayosProctorRepository = new Repository<EnsayoProctor>(_Context);
+        EnsayosRepository = new Repository<Ensayo>(_Context);
     }
 
     public IRepository<Cliente> ClienteRepository { get; }
-    public IRepository<Proyecto> ProyectoRepository { get; }
-    public IRepository<Muestra> MuestrasRepository { get; }
+    public IMuestraRepository MuestrasRepository { get; }
     public IRepository<Empleado> EmpleadoRepository { get; }
-
     public IRepository<EnsayoProctor> EnsayosProctorRepository { get; }
+    public IRepository<Ensayo> EnsayosRepository { get; }
 
     public async Task<int> CompleteAsync()
     {

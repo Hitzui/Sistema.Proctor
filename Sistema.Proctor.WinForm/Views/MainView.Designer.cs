@@ -36,23 +36,33 @@
             barButtonItemEliminarCliente = new DevExpress.XtraBars.BarButtonItem();
             barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             barButtonItemAgregarEmpleado = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemEliminarEmpleado = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemListaProyectos = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemCrearProyecto = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemAgregarProctor = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemClose = new DevExpress.XtraBars.BarButtonItem();
             ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            ribbonPageProyectos = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            ribbonPageEnsayos = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            barButtonItemEliminarEmpleado = new DevExpress.XtraBars.BarButtonItem();
+            splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(Cliente.WaitForm1), true, true);
             ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
             SuspendLayout();
             // 
             // ribbon
             // 
             ribbon.ExpandCollapseItem.Id = 0;
-            ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, barButtonItemListaClientes, barButtonItemAddCliente, barButtonItemEditarCliente, barButtonItemEliminarCliente, barButtonItem1, barButtonItemAgregarEmpleado, barButtonItemEliminarEmpleado });
+            ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, barButtonItemListaClientes, barButtonItemAddCliente, barButtonItemEditarCliente, barButtonItemEliminarCliente, barButtonItem1, barButtonItemAgregarEmpleado, barButtonItemEliminarEmpleado, barButtonItemListaProyectos, barButtonItemCrearProyecto, barButtonItemAgregarProctor, barButtonItemClose });
             ribbon.Location = new Point(0, 0);
-            ribbon.MaxItemId = 8;
+            ribbon.MaxItemId = 12;
             ribbon.Name = "ribbon";
-            ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { ribbonPage1 });
-            ribbon.Size = new Size(950, 151);
+            ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { ribbonPage1, ribbonPageProyectos, ribbonPageEnsayos });
+            ribbon.Size = new Size(950, 201);
             ribbon.StatusBar = ribbonStatusBar;
             // 
             // barButtonItemListaClientes
@@ -104,6 +114,49 @@
             barButtonItemAgregarEmpleado.Name = "barButtonItemAgregarEmpleado";
             barButtonItemAgregarEmpleado.ItemClick += barButtonItemAgregarEmpleado_ItemClick;
             // 
+            // barButtonItemEliminarEmpleado
+            // 
+            barButtonItemEliminarEmpleado.Caption = "Eliminar";
+            barButtonItemEliminarEmpleado.Id = 7;
+            barButtonItemEliminarEmpleado.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
+            barButtonItemEliminarEmpleado.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemEliminarEmpleado.ImageOptions.SvgImage");
+            barButtonItemEliminarEmpleado.ItemAppearance.Normal.ForeColor = Color.Red;
+            barButtonItemEliminarEmpleado.ItemAppearance.Normal.Options.UseForeColor = true;
+            barButtonItemEliminarEmpleado.Name = "barButtonItemEliminarEmpleado";
+            barButtonItemEliminarEmpleado.ItemClick += barButtonItemEliminarEmpleado_ItemClick;
+            // 
+            // barButtonItemListaProyectos
+            // 
+            barButtonItemListaProyectos.Caption = "Lista Proyectos";
+            barButtonItemListaProyectos.Id = 8;
+            barButtonItemListaProyectos.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemListaProyectos.ImageOptions.SvgImage");
+            barButtonItemListaProyectos.Name = "barButtonItemListaProyectos";
+            barButtonItemListaProyectos.ItemClick += barButtonItemListaProyectos_ItemClick;
+            // 
+            // barButtonItemCrearProyecto
+            // 
+            barButtonItemCrearProyecto.Caption = "Crear Proyecto";
+            barButtonItemCrearProyecto.Id = 9;
+            barButtonItemCrearProyecto.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemCrearProyecto.ImageOptions.SvgImage");
+            barButtonItemCrearProyecto.Name = "barButtonItemCrearProyecto";
+            barButtonItemCrearProyecto.ItemClick += barButtonItemCrearProyecto_ItemClick;
+            // 
+            // barButtonItemAgregarProctor
+            // 
+            barButtonItemAgregarProctor.Caption = "Agregar";
+            barButtonItemAgregarProctor.Id = 10;
+            barButtonItemAgregarProctor.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItem2.ImageOptions.SvgImage");
+            barButtonItemAgregarProctor.Name = "barButtonItemAgregarProctor";
+            barButtonItemAgregarProctor.ItemClick += barButtonItemAgregarProctor_ItemClick;
+            // 
+            // barButtonItemClose
+            // 
+            barButtonItemClose.Caption = "Cerrar";
+            barButtonItemClose.Id = 11;
+            barButtonItemClose.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemClose.ImageOptions.SvgImage");
+            barButtonItemClose.Name = "barButtonItemClose";
+            barButtonItemClose.ItemClick += barButtonItemClose_ItemClick;
+            // 
             // ribbonPage1
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, ribbonPageGroup2 });
@@ -127,23 +180,50 @@
             ribbonPageGroup2.Name = "ribbonPageGroup2";
             ribbonPageGroup2.Text = "Empleado";
             // 
+            // ribbonPageProyectos
+            // 
+            ribbonPageProyectos.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup3 });
+            ribbonPageProyectos.Name = "ribbonPageProyectos";
+            ribbonPageProyectos.Text = "Proyectos";
+            // 
+            // ribbonPageGroup3
+            // 
+            ribbonPageGroup3.ItemLinks.Add(barButtonItemListaProyectos);
+            ribbonPageGroup3.ItemLinks.Add(barButtonItemCrearProyecto);
+            ribbonPageGroup3.Name = "ribbonPageGroup3";
+            ribbonPageGroup3.Text = "Proyectos";
+            // 
+            // ribbonPageEnsayos
+            // 
+            ribbonPageEnsayos.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup4, ribbonPageGroup5 });
+            ribbonPageEnsayos.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("ribbonPageEnsayos.ImageOptions.SvgImage");
+            ribbonPageEnsayos.ImageOptions.SvgImageSize = new Size(16, 16);
+            ribbonPageEnsayos.Name = "ribbonPageEnsayos";
+            ribbonPageEnsayos.Text = "Ensayos";
+            ribbonPageEnsayos.Visible = false;
+            // 
+            // ribbonPageGroup4
+            // 
+            ribbonPageGroup4.ItemLinks.Add(barButtonItemAgregarProctor);
+            ribbonPageGroup4.Name = "ribbonPageGroup4";
+            ribbonPageGroup4.Text = "Proctor";
+            // 
+            // ribbonPageGroup5
+            // 
+            ribbonPageGroup5.ItemLinks.Add(barButtonItemClose);
+            ribbonPageGroup5.Name = "ribbonPageGroup5";
+            ribbonPageGroup5.Text = "Cerrar";
+            // 
             // ribbonStatusBar
             // 
-            ribbonStatusBar.Location = new Point(0, 699);
+            ribbonStatusBar.Location = new Point(0, 683);
             ribbonStatusBar.Name = "ribbonStatusBar";
             ribbonStatusBar.Ribbon = ribbon;
-            ribbonStatusBar.Size = new Size(950, 21);
+            ribbonStatusBar.Size = new Size(950, 37);
             // 
-            // barButtonItemEliminarEmpleado
+            // splashScreenManager1
             // 
-            barButtonItemEliminarEmpleado.Caption = "Eliminar";
-            barButtonItemEliminarEmpleado.Id = 7;
-            barButtonItemEliminarEmpleado.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
-            barButtonItemEliminarEmpleado.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItem2.ImageOptions.SvgImage");
-            barButtonItemEliminarEmpleado.ItemAppearance.Normal.ForeColor = Color.Red;
-            barButtonItemEliminarEmpleado.ItemAppearance.Normal.Options.UseForeColor = true;
-            barButtonItemEliminarEmpleado.Name = "barButtonItemEliminarEmpleado";
-            barButtonItemEliminarEmpleado.ItemClick += barButtonItemEliminarEmpleado_ItemClick;
+            splashScreenManager1.ClosingDelay = 500;
             // 
             // MainView
             // 
@@ -179,5 +259,15 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup2;
         private DevExpress.XtraBars.BarButtonItem barButtonItemAgregarEmpleado;
         private DevExpress.XtraBars.BarButtonItem barButtonItemEliminarEmpleado;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemListaProyectos;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageProyectos;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemCrearProyecto;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemAgregarProctor;
+        public DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageEnsayos;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemClose;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
     }
 }

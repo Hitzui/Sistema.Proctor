@@ -12,7 +12,7 @@
       <PackageReference Include="AutoMapper" Version="13.0.1" />
       <PackageReference Include="DevExpress.Win.Design" Version="24.2.3" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
-      <PackageReference Include="NLog" Version="5.3.4" />
+      <PackageReference Include="NLog" Version="5.4.0" />
     </ItemGroup>
 
     <ItemGroup>

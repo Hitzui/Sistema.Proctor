@@ -13,6 +13,7 @@ using NLog;
 using Sistema.Proctor.Data;
 using Sistema.Proctor.WinForm.Dto;
 using Sistema.Proctor.Data.Repositories;
+using Sistema.Proctor.WinForm.Data;
 
 namespace Sistema.Proctor.WinForm.Views.Empleado
 {
@@ -67,7 +68,7 @@ namespace Sistema.Proctor.WinForm.Views.Empleado
         {
             var selectedRowsCount = gridViewEmpleados.SelectedRowsCount;
             if (selectedRowsCount <= 0) return;
-            var empleado = (Data.Entities.Empleado)gridViewEmpleados.GetRow(gridViewEmpleados.FocusedRowHandle);
+            var empleado = (Proctor.Data.Entities.Empleado)gridViewEmpleados.GetRow(gridViewEmpleados.FocusedRowHandle);
             DependenciasGlobalesForm.Instance.SelectedEmpleado = new EmpleadoDto().GetEmpleadoDto(empleado);
         }
 

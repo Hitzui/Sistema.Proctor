@@ -118,7 +118,7 @@
             // 
             // clienteBindingSource
             // 
-            clienteBindingSource.DataSource = typeof(Data.Entities.Cliente);
+            clienteBindingSource.DataSource = typeof(Proctor.Data.Entities.Cliente);
             // 
             // txtNombreAbreviado
             // 

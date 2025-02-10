@@ -2,11 +2,13 @@
 using System.Windows.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
+using Sistema.Proctor.Data;
+using Sistema.Proctor.Data.Dto;
 using Sistema.Proctor.Data.Entities;
 using Sistema.Proctor.Data.Repositories;
 using Sistema.Proctor.WinForm.Dto;
 
-namespace Sistema.Proctor.Data;
+namespace Sistema.Proctor.WinForm.Data;
 
 public class DependenciasGlobalesForm
 {
@@ -25,6 +27,9 @@ public class DependenciasGlobalesForm
         serviceProvider = serviceCollection.BuildServiceProvider();
         _listadoClientes = new();
         _listadoEmpleados = new();
+        _listadoProyectos = new();
+        _listadoMuestras = new();
+        _listadoEnsayosMuestras = new();
     }
 
     public T? GetService<T>()
@@ -38,47 +43,28 @@ public class DependenciasGlobalesForm
     private ObservableCollection<Empleado> _listadoEmpleados;
     public ObservableCollection<Empleado> ListadoEmpleados => _listadoEmpleados;
 
-    public void FillListadoClientes()
-    {
-        try
-        {
-            Dispatcher.CurrentDispatcher.Invoke(async () =>
-            {
-                var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
-                var repositorioCliente = unitOfWork.ClienteRepository;
-                var listado = await repositorioCliente.GetAllAsync();
-                ListadoClientes.Clear();
-                if (listado.Count <= 0) return;
-                foreach (var cliente in listado)
-                {
-                    ListadoClientes.Add(cliente);
-                }
-            });
-            
-        }
-        catch (Exception e)
-        {
-           Logger.Error(e, "Error al cargar la lista de Clientes");
-        }
-    }
+    private ObservableCollection<Proyecto> _listadoProyectos;
+    public ObservableCollection<Proyecto> ListadoProyectos => _listadoProyectos;
 
-    public void FillListadoEmpleados()
+    private ObservableCollection<Muestra> _listadoMuestras;
+    public ObservableCollection<Muestra> ListadoMuestras => _listadoMuestras;
+
+    private ObservableCollection<Ensayo> _listadoEnsayosMuestras;
+    public ObservableCollection<Ensayo> ListadoEnsayosMuestras => _listadoEnsayosMuestras;
+
+    public async void FillListadoClientes()
     {
         try
         {
-            Dispatcher.CurrentDispatcher.Invoke(async () =>
+            var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
+            var repositorioCliente = unitOfWork.ClienteRepository;
+            var listado = await repositorioCliente.GetAllAsync();
+            ListadoClientes.Clear();
+            if (listado.Count <= 0) return;
+            foreach (var cliente in listado)
             {
-                var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
-                var empleadoRepository = unitOfWork.EmpleadoRepository;
-                var listado = await empleadoRepository.GetAllAsync();
-                ListadoEmpleados.Clear();
-                if (listado.Count <= 0) return;
-                foreach (var empleado in listado)
-                {
-                    ListadoEmpleados.Add(empleado);
-                }
-            });
-            
+                ListadoClientes.Add(cliente);
+            }
         }
         catch (Exception e)
         {
@@ -86,6 +72,59 @@ public class DependenciasGlobalesForm
         }
     }
 
+    public async void FillListadoEmpleados()
+    {
+        try
+        {
+            var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
+            var empleadoRepository = unitOfWork.EmpleadoRepository;
+            var listado = await empleadoRepository.GetAllAsync();
+            ListadoEmpleados.Clear();
+            if (listado.Count <= 0) return;
+            foreach (var empleado in listado)
+            {
+                ListadoEmpleados.Add(empleado);
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.Error(e, "Error al cargar la lista de Empleados");
+        }
+    }
+
+    public async void FillListadoProyectos()
+    {
+        try
+        {
+            var proyectoRepository = DependenciasGlobales.Instance.GetService<IProyectoRepository>();
+            var listado = await proyectoRepository.FindByDateList();
+            ListadoProyectos.Clear();
+            if (listado.Count <= 0) return;
+            foreach (var proyecto in listado)
+            {
+                ListadoProyectos.Add(proyecto);
+            }
+        }
+        catch (Exception e)
+        {
+            Logger.Error(e, "Error al cargar la lista de Proyectos");
+        }
+    }
+
+    public async Task FillListadoMuestras(int idProyectos)
+    {
+        var muestraRepository = DependenciasGlobales.Instance.GetService<IMuestraRepository>();
+        var listado = await muestraRepository.GetMuestraByProyecto(idProyectos);
+        ListadoMuestras.Clear();
+        if (listado.Count <= 0) return;
+        foreach (var muestra in listado)
+        {
+            ListadoMuestras.Add(muestra);
+        }
+    }
+
+
     public ClienteDto? SelectedCliente { get; set; }
     public EmpleadoDto? SelectedEmpleado { get; set; }
+    public ProyectoDto? SelectedProyecto { get; set; }
 }

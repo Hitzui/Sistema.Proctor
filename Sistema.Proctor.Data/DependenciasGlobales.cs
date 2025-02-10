@@ -19,6 +19,9 @@ public class DependenciasGlobales
 
         // Registrar tus servicios y repositorios aquí
         serviceCollection.AddSingleton<IUnitOfWork, UnitOfWork>();
+        serviceCollection.AddSingleton<IProyectoRepository, ProyectoRepository>();
+        serviceCollection.AddSingleton<IMuestraRepository, MuestraRepository>();
+        serviceCollection.AddSingleton<IEnsayoRepository, EnsayoRepository>();
         serviceCollection.AddSingleton<DataContextProctor>();
         // Agrega más servicios y repositorios según sea necesario
 

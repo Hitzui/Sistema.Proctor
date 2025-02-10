@@ -1,8 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityDeveloper Version="7.2.21.0">
-  <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" AppConnectionStringName="ProctorConnectionString" ConnectionStringInAppConfig="True" RegenareteConnectionStringInAppConfig="True" TargetFramework="Net80" DetectTPTInheritance="True" EntityFrameworkCoreVersion="Version7" DetectFunctionBasedColumnDefault="True">
-    <Connection ConnectionString="persistsecurityinfo=True;server=72.167.79.215;user id=k81xm6zglxxb;password=Dicesa2023*;database=dicesa" Provider="MySql.Data.MySqlClient" />
-    <Generation />
+  <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" AppConnectionStringName="DefaultConnection" ConnectionStringInAppConfig="True" RegenareteConnectionStringInAppConfig="True" TargetFramework="Net80" DetectTPTInheritance="True" EntityFrameworkCoreVersion="Version7" DetectFunctionBasedColumnDefault="True">
+    <Connection ConnectionString="persistsecurityinfo=True;server=localhost;user id=root;password=root1.2Blandon;database=dicesa" Provider="MySql.Data.MySqlClient" />
+    <Generation>
+      <GeneratedFiles>
+        <File Name="DataModelProctor.DataContextProctor.cs" />
+        <File Name="DataModelProctor.Parametro.cs" />
+        <File Name="DataModelProctor.TipoFalla.cs" />
+        <File Name="DataModelProctor.UnidadMedida.cs" />
+        <File Name="DataModelProctor.Empleado.cs" />
+        <File Name="DataModelProctor.Proyecto.cs" />
+        <File Name="DataModelProctor.Ensayo.cs" />
+        <File Name="DataModelProctor.Muestra.cs" />
+        <File Name="DataModelProctor.Cliente.cs" />
+        <File Name="DataModelProctor.Usuario.cs" />
+        <File Name="DataModelProctor.ResultadosProctor.cs" />
+        <File Name="DataModelProctor.EnsayoProctor.cs" />
+        <File Name="DataModelProctor.TipoEspeciman.cs" />
+        <File Name="DataModelProctor.TamanoEspeciman.cs" />
+        <File Name="DataModelProctor.Resultado.cs" />
+        <File Name="DataModelProctor.Entry.cs" />
+        <File Name="DataModelProctor.TipoEnsayo.cs" />
+      </GeneratedFiles>
+    </Generation>
     <DatabaseFirstNamingRules>
       <EntitySet PluralizationName="Pluralize" />
       <Class UseSchemaAsPrefix="False" PluralizeCollectionNavigationPropertyName="True" AddConstraintColumnsToNavigationPropertyName="False" RemoveUnderscores="True" AddUnderscores="False" RemoveInvalidCharacters="True" CodeCase="FirstLetterUppercase" AddPrefix="" AddSuffix="" RemovePrefixes="" RemoveSuffixes="" PluralizationName="Singularize" />
