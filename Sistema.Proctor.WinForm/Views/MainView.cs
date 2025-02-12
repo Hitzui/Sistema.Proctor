@@ -128,12 +128,7 @@ namespace Sistema.Proctor.WinForm.Views
                 if (form is not EnsayosProyecto formEnsayoProyectos) continue;
                 try
                 {
-                    var page = new XtraTabPage();
-                    page.Text = "Ensayo Proctor";
-                    page.Controls.Clear();
-                    page.Controls.Add(new ProctorControl());
-                    page.ShowCloseButton = DefaultBoolean.True;
-                    formEnsayoProyectos.xtraTabControlEnsayos.TabPages.Add(page);
+                    formEnsayoProyectos.AddTabPageProctor("Ensayo Proctor");
                 }
                 catch (Exception exception)
                 {

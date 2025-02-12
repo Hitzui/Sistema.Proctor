@@ -217,47 +217,47 @@
     <property name="Idensayo" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="313bdfca-a800-4030-bbdf-02ca4f1da6c8">
       <column name="idensayo" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
-    <property name="AguaAgregada" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="84ed5e82-3757-4b78-9a47-cd340db412b8">
-      <column name="agua_agregada" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="AguaAgregada" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="84ed5e82-3757-4b78-9a47-cd340db412b8">
+      <column name="agua_agregada" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="PesoMoldeMaterialHumedo" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="9fd0118c-55b7-4efa-9fe1-69a34be7242e">
-      <column name="peso_molde_material_humedo" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="PesoMoldeMaterialHumedo" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="9fd0118c-55b7-4efa-9fe1-69a34be7242e">
+      <column name="peso_molde_material_humedo" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="PesoMolde" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="e30be05d-721e-4484-ba39-b9ded932a1d2">
-      <column name="peso_molde" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="PesoMolde" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="e30be05d-721e-4484-ba39-b9ded932a1d2">
+      <column name="peso_molde" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="PesoMaterialHumedo" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d7d78e14-b51b-40cc-b931-f21ea74121f7">
-      <column name="peso_material_humedo" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="PesoMaterialHumedo" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d7d78e14-b51b-40cc-b931-f21ea74121f7">
+      <column name="peso_material_humedo" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="VolumenMolde" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="3c623b27-2dcc-4ede-97a8-14d5077fd9eb">
-      <column name="volumen_molde" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="VolumenMolde" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="3c623b27-2dcc-4ede-97a8-14d5077fd9eb">
+      <column name="volumen_molde" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="DensidadHumeda" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="8955e972-fc8b-4d2c-bc23-2b563f270663">
-      <column name="densidad_humeda" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="DensidadHumeda" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="8955e972-fc8b-4d2c-bc23-2b563f270663">
+      <column name="densidad_humeda" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
     <property name="TaraNumero" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="e1c04851-cea4-4ed9-bb8b-ada5d9da5520">
       <column name="tara_numero" default="NULL" not-null="False" length="50" sql-type="varchar" p1:unicode="False" />
     </property>
-    <property name="TaraMaterialHumedo" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="08f5f319-190f-4598-b2e2-6c2babf3914b">
-      <column name="tara_material_humedo" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="TaraMaterialHumedo" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="08f5f319-190f-4598-b2e2-6c2babf3914b">
+      <column name="tara_material_humedo" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="TaraMaterialSeco" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="3bd18eeb-dec5-43d1-8680-98ac3169fb25">
-      <column name="tara_material_seco" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="TaraMaterialSeco" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="3bd18eeb-dec5-43d1-8680-98ac3169fb25">
+      <column name="tara_material_seco" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="PesoAgua" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f0edd510-00d4-4cfe-b33e-be3760f1887f">
-      <column name="peso_agua" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="PesoAgua" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f0edd510-00d4-4cfe-b33e-be3760f1887f">
+      <column name="peso_agua" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="PesoTara" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5b34bbdb-8654-4731-80a8-e17c3519b8b7">
-      <column name="peso_tara" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="PesoTara" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5b34bbdb-8654-4731-80a8-e17c3519b8b7">
+      <column name="peso_tara" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="PesoSueloSeco" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7e7e2f45-4e12-450b-9e89-398de3a46796">
-      <column name="peso_suelo_seco" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="PesoSueloSeco" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7e7e2f45-4e12-450b-9e89-398de3a46796">
+      <column name="peso_suelo_seco" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="ContenidoHumedad" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="978edcfa-36c2-4253-afaf-af3bf0fc93cd">
-      <column name="contenido_humedad" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="ContenidoHumedad" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="978edcfa-36c2-4253-afaf-af3bf0fc93cd">
+      <column name="contenido_humedad" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
-    <property name="DensidadSeca" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d8d7381c-cf99-48fa-bb04-f72612d31353">
-      <column name="densidad_seca" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
+    <property name="DensidadSeca" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d8d7381c-cf99-48fa-bb04-f72612d31353">
+      <column name="densidad_seca" default="NULL" not-null="False" precision="10" scale="4" sql-type="decimal" p1:unicode="False" />
     </property>
   </class>
   <class name="EnsayoProctor" entity-set="EnsayoProctors" table="ensayo_proctor" schema="dicesa" p1:Guid="9d7026aa-b540-4fa8-93eb-6c581df3d7c4">
@@ -285,10 +285,10 @@
     <property name="TemperaturaSecado" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="c996557f-c272-4dab-942b-6a19addac613">
       <column name="temperatura_secado" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
     </property>
-    <property name="DiametroMoldeCm" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5e1b15c7-a070-4f0f-8fed-c68c290e5dff">
+    <property name="DiametroMoldeCm" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5e1b15c7-a070-4f0f-8fed-c68c290e5dff">
       <column name="diametro_molde_cm" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
     </property>
-    <property name="AlturaMoldeCm" type="Single" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5292d36c-c80c-43df-a4d0-f3b15ed6433c">
+    <property name="AlturaMoldeCm" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5292d36c-c80c-43df-a4d0-f3b15ed6433c">
       <column name="altura_molde_cm" default="NULL" not-null="False" sql-type="float" p1:unicode="False" />
     </property>
     <property name="NumCapas" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="1eaa73bf-2d03-46d4-9438-4d3db3ed0342">
