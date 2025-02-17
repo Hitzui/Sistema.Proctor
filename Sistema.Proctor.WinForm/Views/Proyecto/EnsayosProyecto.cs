@@ -1,31 +1,27 @@
 ﻿using DevExpress.XtraEditors;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using DevExpress.Utils;
-using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraTab;
+using DevExpress.XtraTreeList.Menu;
 using Sistema.Proctor.Data;
-using Microsoft.EntityFrameworkCore;
+using NLog;
 using Sistema.Proctor.Data.Dto;
 using Sistema.Proctor.Data.Entities;
 using Sistema.Proctor.Data.Repositories;
 using Sistema.Proctor.WinForm.Data;
+using Sistema.Proctor.WinForm.Dto;
 using Sistema.Proctor.WinForm.Views.Proyecto.Proctor;
 
 namespace Sistema.Proctor.WinForm.Views.Proyecto
 {
     public partial class EnsayosProyecto : DevExpress.XtraEditors.XtraForm
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private readonly IEnsayoRepository EnsayoRepository;
         public XtraTabControl xtraTabControlEnsayos;
         private Panel panelIzquierdo;
+        private List<EnsayoProctor> ListEnsayoProctor = new List<EnsayoProctor>();
+        private EnsayoRecordDto? SelectedEnsayoRecordDto;
+
         public EnsayosProyecto()
         {
             InitializeComponent();
@@ -71,7 +67,8 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
                 treeListEnsayos.BeginUnboundLoad();
                 foreach (var muestra in findAll)
                 {
-                    var muestraNode = treeListEnsayos.AppendNode(new object[] { muestra.CodigoIngreso }, null);
+                    var muestraDto = new MuestraDto().GetMuestraDto(muestra);
+                    var muestraNode = treeListEnsayos.AppendNode(new object[] { muestraDto }, null);
                     var ensayos = await EnsayoRepository.GetEnsayosByMuestra(muestra.Idmuestra);
                     foreach (var ensayo in ensayos)
                     {
@@ -99,11 +96,20 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
                 // Aquí puedes acceder al nodo seleccionado
                 var selectedNode = e.Node;
                 var selectedValue = selectedNode.GetValue(0); // Obtener el valor de la primera columna
-                if (selectedValue is EnsayoRecordDto ensayoRecordDto)
+                switch (selectedValue)
                 {
-
+                    case MuestraDto muestraDto:
+                        DependenciasGlobalesForm.Instance.SelectedIdMuestra = muestraDto.Idmuestra;
+                        SelectedEnsayoRecordDto = null;
+                        break;
+                    case EnsayoRecordDto ensayoRecordDto:
+                        SelectedEnsayoRecordDto = ensayoRecordDto;
+                        DependenciasGlobalesForm.Instance.SelectedIdMuestra = ensayoRecordDto.IdMuestra;
+                        break;
+                    default:
+                        DependenciasGlobalesForm.Instance.SelectedIdMuestra = 0;
+                        break;
                 }
-
             }
         }
 
@@ -113,36 +119,84 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
             mdiParent.ribbonPageEnsayos.Visible = false;
         }
 
-        private void xtraTabControlEnsayos_CustomHeaderButtonClick(object sender, DevExpress.XtraTab.ViewInfo.CustomHeaderButtonEventArgs e)
+        public void AddTabPageProctor(string tabName, EnsayoProctor? ensayoProctor)
         {
-            if (e.Button.Kind == ButtonPredefines.Close)
-            {
-                xtraTabControlEnsayos.TabPages.Remove(e.ActivePage as XtraTabPage);
-            }
-        }
-
-        public void AddTabPageProctor(string tabName)
-        {
-            // Verifica si el control ya existe
-            if (xtraTabControlEnsayos == null)
-            {
-                XtraMessageBox.Show("El control xtraTabControlEnsayos no está inicializado.");
-                return;
-            }
-
             // Crear y agregar la nueva pestaña
             var newPage = new XtraTabPage
             {
                 Text = tabName,
                 ShowCloseButton = DefaultBoolean.True
             };
-
+            ensayoProctor ??= new EnsayoProctor();
+           
+            ListEnsayoProctor.Add(ensayoProctor);
             // Agregar el control deseado a la pestaña
-            newPage.Controls.Add(new ProctorControl()
+            newPage.Controls.Add(new ProctorControl(ensayoProctor)
             {
                 Dock = DockStyle.Fill
             });
             xtraTabControlEnsayos.TabPages.Add(newPage);
+        }
+
+        private async void FindEnsayos(int tipoEnsayo)
+        {
+            try
+            {
+                if (SelectedEnsayoRecordDto is null)
+                {
+                    return;
+                }
+                var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
+
+                var muestraRepository = unitOfWork.MuestrasRepository;
+                var tipoEnsayoRepository = unitOfWork.TipoEnsayoRepository;
+                var ensayoProctorRepository = unitOfWork.EnsayosProctorRepository;
+                var ensayoRepository = unitOfWork.EnsayosRepository;
+                var resultadoProctorRepository = unitOfWork.ResultadosProctorRepository;
+                var findTipoEnsayo = await tipoEnsayoRepository.GetByIdAsync(tipoEnsayo);
+                if (findTipoEnsayo is null)
+                {
+                    XtraMessageBox.Show("No se encontró el tipo de ensayo","Abrir ensayo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+
+                if (findTipoEnsayo.Descripcion=="Proctor")
+                {
+                    var findEnsayoProctor = await ensayoProctorRepository.GetByCriteriaAsync(proctor =>
+                        proctor.Idmuestra == SelectedEnsayoRecordDto.IdMuestra);
+                    if (findEnsayoProctor.Count <= 0) return;
+                    xtraTabControlEnsayos.TabPages.Clear();
+                    foreach (var ensayoProctor in findEnsayoProctor)
+                    {
+                        AddTabPageProctor("Proctor", ensayoProctor);
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e, "Error al recuperar los ensayos");
+            }
+        }
+
+        private void treeListEnsayos_PopupMenuShowing(object sender, DevExpress.XtraTreeList.PopupMenuShowingEventArgs e)
+        {
+            if (e.MenuType == TreeListMenuType.Node)
+            {
+                e.ShowCustomMenu(popupMenuEnsayos);
+            }
+        }
+
+        private void barManager1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (e.Item== barButtonItemVerEnsayo)
+            {
+                if (SelectedEnsayoRecordDto is null)
+                {
+                    return;
+                }
+                FindEnsayos(SelectedEnsayoRecordDto.IdTipoEnsayo);
+            }
         }
     }
 }

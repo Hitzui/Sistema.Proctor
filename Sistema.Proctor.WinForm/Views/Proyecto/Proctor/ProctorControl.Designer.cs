@@ -56,6 +56,7 @@
             layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
             tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             tabResultadosProctor = new DevExpress.XtraTab.XtraTabControl();
+            tabPageGrafico = new DevExpress.XtraTab.XtraTabPage();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).BeginInit();
@@ -87,6 +88,7 @@
             ((System.ComponentModel.ISupportInitialize)tablePanel1).BeginInit();
             tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)tabResultadosProctor).BeginInit();
+            tabResultadosProctor.SuspendLayout();
             SuspendLayout();
             // 
             // layoutControl1
@@ -102,7 +104,7 @@
             layoutControl1.Name = "layoutControl1";
             layoutControl1.Root = Root;
             tablePanel1.SetRow(layoutControl1, 0);
-            layoutControl1.Size = new Size(491, 204);
+            layoutControl1.Size = new Size(491, 208);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
             // 
@@ -169,7 +171,7 @@
             Root.GroupBordersVisible = false;
             Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem5, layoutControlItem6 });
             Root.Name = "Root";
-            Root.Size = new Size(491, 204);
+            Root.Size = new Size(491, 208);
             Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -209,7 +211,7 @@
             layoutControlItem6.Control = textEdit6;
             layoutControlItem6.Location = new Point(0, 136);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new Size(465, 42);
+            layoutControlItem6.Size = new Size(465, 46);
             layoutControlItem6.Text = "Temperatura Secado (°C)";
             // 
             // layoutControl2
@@ -225,7 +227,7 @@
             layoutControl2.Name = "layoutControl2";
             layoutControl2.Root = layoutControlGroup1;
             tablePanel1.SetRow(layoutControl2, 0);
-            layoutControl2.Size = new Size(491, 204);
+            layoutControl2.Size = new Size(491, 208);
             layoutControl2.TabIndex = 1;
             layoutControl2.Text = "layoutControl2";
             // 
@@ -281,7 +283,7 @@
             layoutControlGroup1.GroupBordersVisible = false;
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem4, layoutControlItem7, layoutControlItem8, layoutControlItem9, layoutControlItem10 });
             layoutControlGroup1.Name = "layoutControlGroup1";
-            layoutControlGroup1.Size = new Size(491, 204);
+            layoutControlGroup1.Size = new Size(491, 208);
             layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem4
@@ -321,7 +323,7 @@
             layoutControlItem10.Control = textEdit10;
             layoutControlItem10.Location = new Point(0, 136);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new Size(465, 42);
+            layoutControlItem10.Size = new Size(465, 46);
             layoutControlItem10.Text = "Proctor";
             // 
             // tablePanel1
@@ -332,22 +334,31 @@
             tablePanel1.Dock = DockStyle.Top;
             tablePanel1.Location = new Point(0, 0);
             tablePanel1.Name = "tablePanel1";
-            tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
-            tablePanel1.Size = new Size(1022, 237);
+            tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 100F) });
+            tablePanel1.Size = new Size(1022, 241);
             tablePanel1.TabIndex = 2;
             tablePanel1.UseSkinIndents = true;
             // 
             // tabResultadosProctor
             // 
-            tabResultadosProctor.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InActiveTabPageHeader;
+            tabResultadosProctor.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InTabControlHeader;
             tabResultadosProctor.CustomHeaderButtons.AddRange(new DevExpress.XtraTab.Buttons.CustomHeaderButton[] { new DevExpress.XtraTab.Buttons.CustomHeaderButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus) });
             tabResultadosProctor.Dock = DockStyle.Fill;
-            tabResultadosProctor.Location = new Point(0, 237);
+            tabResultadosProctor.Location = new Point(0, 241);
             tabResultadosProctor.Name = "tabResultadosProctor";
-            tabResultadosProctor.Size = new Size(1022, 381);
+            tabResultadosProctor.SelectedTabPage = tabPageGrafico;
+            tabResultadosProctor.Size = new Size(1022, 377);
             tabResultadosProctor.TabIndex = 3;
+            tabResultadosProctor.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { tabPageGrafico });
             tabResultadosProctor.CloseButtonClick += tabResultadosProctor_CloseButtonClick;
             tabResultadosProctor.CustomHeaderButtonClick += tabResultadosProctor_CustomHeaderButtonClick;
+            // 
+            // tabPageGrafico
+            // 
+            tabPageGrafico.Name = "tabPageGrafico";
+            tabPageGrafico.ShowCloseButton = DevExpress.Utils.DefaultBoolean.False;
+            tabPageGrafico.Size = new Size(1020, 346);
+            tabPageGrafico.Text = "Grafico";
             // 
             // ProctorControl
             // 
@@ -389,6 +400,7 @@
             ((System.ComponentModel.ISupportInitialize)tablePanel1).EndInit();
             tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)tabResultadosProctor).EndInit();
+            tabResultadosProctor.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -421,5 +433,6 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraTab.XtraTabControl tabResultadosProctor;
         private BindingSource ensayoProctorBindingSource;
+        private DevExpress.XtraTab.XtraTabPage tabPageGrafico;
     }
 }

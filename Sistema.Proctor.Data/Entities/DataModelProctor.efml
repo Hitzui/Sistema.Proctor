@@ -92,8 +92,8 @@
     </property>
   </class>
   <class name="Ensayo" entity-set="Ensayos" table="ensayo" schema="dicesa" p1:Guid="4c5ade6b-2c38-410c-839b-c818945b9697">
-    <id name="Idensayo" type="Int64" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="52c1c6f8-5230-4baa-a5e9-de1d1f82be82">
-      <column name="idensayo" not-null="True" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    <id name="Idensayo" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="52c1c6f8-5230-4baa-a5e9-de1d1f82be82">
+      <column name="idensayo" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </id>
     <property name="EdadReal" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="6b300633-7eb1-4c16-8661-53f8dfb21bea">
       <column name="edad_real" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
@@ -139,17 +139,14 @@
     <property name="DescripcionMaterial" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="0f50d7cf-427c-482d-8864-a524407ee7fb">
       <column name="descripcion_material" default="NULL" not-null="False" sql-type="text" p1:unicode="False" />
     </property>
-    <property name="Idcliente" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="71b5719d-f379-4fbd-a72d-4fd60d942935">
-      <column name="idcliente" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
-    </property>
-    <property name="Idempleado" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d7702445-7efa-4465-9d45-9be7c25bf50c">
-      <column name="idempleado" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
-    </property>
     <property name="FechaEnsayo" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="0ab09af5-e08f-48d3-b342-496883066f70">
       <column name="fecha_ensayo" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
     </property>
     <property name="CoordeandasZ" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="9cc2fa62-7b3f-4ffb-8720-365c5dbfa81f">
       <column name="coordeandas_z" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Idempleado" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f248b11d-7e8f-47cb-b134-147d4a2a40d6">
+      <column name="idempleado" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
     <property name="CodigoIngreso" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="de09840b-3fe4-43dd-9430-41ae44e5469c">
       <column name="codigo_ingreso" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
@@ -264,6 +261,9 @@
     <id name="Idensayo" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="df653229-da59-483b-a97e-f60150c54ef1">
       <column name="idensayo" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </id>
+    <property name="Idempleado" type="Int32" p1:ValidateRequired="true" p1:Guid="6d1e1056-f989-4419-a8fd-60def57fb82c">
+      <column name="idempleado" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
     <property name="Idmuestra" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="28cc0abd-4682-49ba-b28f-b54fe8ea9dc0">
       <column name="idmuestra" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
@@ -466,38 +466,6 @@
         <property name="Idempleado" />
       </end2>
     </association>
-    <association name="Cliente_Muestra" cardinality="OneToMany" p1:Guid="2cfaca09-a1e8-41da-b697-56841c0cf9fb">
-      <end1 multiplicity="ZeroOrOne" name="Cliente" class="Muestra" relation-class="Cliente" constrained="True" lazy="False" p1:Guid="2bf33766-eb90-4042-b9c9-4d1a14666a9b">
-        <property name="Idcliente" />
-      </end1>
-      <end2 multiplicity="Many" name="Muestras" class="Cliente" relation-class="Muestra" lazy="False" p1:Guid="44bd4fa4-d861-4e43-8fab-8e7a83a64318">
-        <property name="Idcliente" />
-      </end2>
-    </association>
-    <association name="Empleado_Muestra" cardinality="OneToMany" p1:Guid="94d75f85-4615-4007-ba25-116826721f11">
-      <end1 multiplicity="ZeroOrOne" name="Empleado" class="Muestra" relation-class="Empleado" constrained="True" lazy="False" p1:Guid="0fd42f91-5054-4196-bb1e-0cb8444976c7">
-        <property name="Idempleado" />
-      </end1>
-      <end2 multiplicity="Many" name="Muestras" class="Empleado" relation-class="Muestra" lazy="False" p1:Guid="a1c84289-9865-407a-83f8-d122763bffc2">
-        <property name="Idempleado" />
-      </end2>
-    </association>
-    <association name="Proyecto_Muestra" cardinality="OneToMany" on-delete="Restrict" p1:Guid="b76a30f0-aae6-4a74-aca8-6ba979a7650d">
-      <end1 multiplicity="ZeroOrOne" name="Proyecto" class="Muestra" relation-class="Proyecto" constrained="True" lazy="False" p1:Guid="18c61576-1e9b-44c9-baa6-f73e2fe5697e">
-        <property name="Idproyecto" />
-      </end1>
-      <end2 multiplicity="Many" name="Muestras" class="Proyecto" relation-class="Muestra" lazy="False" p1:Guid="80a07d6f-4616-4878-a7c6-a96d931c24d4">
-        <property name="Idproyecto" />
-      </end2>
-    </association>
-    <association name="EnsayoProctor_ResultadosProctor" cardinality="OneToMany" on-delete="Restrict" p1:Guid="9f802daf-8f0f-4cae-9e3c-8da294bdfbf0">
-      <end1 multiplicity="ZeroOrOne" name="EnsayoProctor" class="ResultadosProctor" relation-class="EnsayoProctor" constrained="True" lazy="False" p1:Guid="288d3ecf-aef8-4a3e-a60b-d29c4b369306">
-        <property name="Idensayo" />
-      </end1>
-      <end2 multiplicity="Many" name="ResultadosProctors" class="EnsayoProctor" relation-class="ResultadosProctor" lazy="False" p1:Guid="f7b9462b-25c9-4731-a326-e411de49eb61">
-        <property name="Idensayo" />
-      </end2>
-    </association>
     <association name="TipoFalla_Resultado" cardinality="OneToMany" on-delete="Restrict" p1:Guid="7714e1cf-07d0-4eb6-a490-c6b5bddfcdf9">
       <end1 multiplicity="One" name="TipoFalla" class="Resultado" relation-class="TipoFalla" constrained="True" lazy="False" p1:Guid="c4d5c49a-2d16-4b6c-96c5-fbfd1859f97f">
         <property name="IdTipoFalla" />
@@ -560,6 +528,22 @@
       </end1>
       <end2 multiplicity="Many" name="Ensayos" class="TipoEnsayo" relation-class="Ensayo" lazy="False" p1:Guid="fcf04a99-655c-4b2e-a3a5-350d3cde0f08">
         <property name="Idtipoensayo" />
+      </end2>
+    </association>
+    <association name="Empleado_EnsayoProctor" cardinality="OneToMany" p1:Guid="aead0b88-035c-460e-b4ba-b47803bd7c85">
+      <end1 multiplicity="One" name="Empleado" class="EnsayoProctor" relation-class="Empleado" constrained="True" lazy="False" p1:Guid="ee2e4f2f-a455-4610-aac0-c0e84ff4da2a">
+        <property name="Idempleado" />
+      </end1>
+      <end2 multiplicity="Many" name="EnsayoProctors" class="Empleado" relation-class="EnsayoProctor" lazy="False" p1:Guid="173e69d3-5792-4e6d-9172-e7e46a6e4cb9">
+        <property name="Idempleado" />
+      </end2>
+    </association>
+    <association name="EnsayoProctor_ResultadosProctor" cardinality="OneToMany" p1:Guid="5ec36910-ef25-4b10-b469-bed927638bbb">
+      <end1 multiplicity="ZeroOrOne" name="EnsayoProctor" class="ResultadosProctor" relation-class="EnsayoProctor" constrained="True" lazy="False" p1:Guid="e1d4c8cd-627b-45a9-83a5-c964513ee68f">
+        <property name="Idensayo" />
+      </end1>
+      <end2 multiplicity="Many" name="ResultadosProctors" class="EnsayoProctor" relation-class="ResultadosProctor" lazy="False" p1:Guid="bf3b3ba0-18ab-48f0-8c3c-c615632f9fbf">
+        <property name="Idensayo" />
       </end2>
     </association>
   </associations>

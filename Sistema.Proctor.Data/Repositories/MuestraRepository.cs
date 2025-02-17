@@ -20,4 +20,9 @@ public class MuestraRepository : Repository<Muestra>, IMuestraRepository
             .Include(muestra => muestra.Ensayos)
             .ToListAsync();
     }
+
+    public async Task AddMuestraTask(Muestra muestra)
+    {
+        await _dataContext.AddAsync(muestra);
+    }
 }

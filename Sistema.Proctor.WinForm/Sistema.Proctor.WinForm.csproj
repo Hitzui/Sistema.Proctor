@@ -9,10 +9,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="AutoMapper" Version="13.0.1" />
+      <PackageReference Include="AutoMapper" Version="14.0.0" />
       <PackageReference Include="DevExpress.Win.Design" Version="24.2.3" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
+      <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
       <PackageReference Include="NLog" Version="5.4.0" />
+      <PackageReference Include="NLog.Extensions.Logging" Version="5.4.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -38,8 +40,8 @@
       <None Update="appsettings.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="nlog.config">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <None Update="NLog.config">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
 

@@ -1,28 +1,25 @@
 ﻿using DevExpress.XtraBars;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using DevExpress.Utils;
-using DevExpress.XtraBars.Navigation;
+using DevExpress.XtraCharts;
 using DevExpress.XtraEditors;
 using DevExpress.XtraTab;
-using Sistema.Proctor.Data;
+using MathNet.Numerics;
+using NLog;
 using Sistema.Proctor.WinForm.Data;
 using Sistema.Proctor.WinForm.Views.Cliente;
 using Sistema.Proctor.WinForm.Views.Empleado;
 using Sistema.Proctor.WinForm.Views.Proyecto;
+using Sistema.Proctor.WinForm.Views.Proyecto.Muestra;
 using Sistema.Proctor.WinForm.Views.Proyecto.Proctor;
+using Control = System.Windows.Forms.Control;
+using Series = DevExpress.XtraCharts.Series;
 
 namespace Sistema.Proctor.WinForm.Views
 {
     public partial class MainView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         public MainView()
         {
             InitializeComponent();
@@ -123,18 +120,83 @@ namespace Sistema.Proctor.WinForm.Views
 
         private void barButtonItemAgregarProctor_ItemClick(object sender, ItemClickEventArgs e)
         {
-            foreach (var form in MdiChildren)
+            var formEnsayoProyectos = MdiChildren.OfType<EnsayosProyecto>().FirstOrDefault();
+            if (formEnsayoProyectos is null) return;
+            try
             {
-                if (form is not EnsayosProyecto formEnsayoProyectos) continue;
-                try
-                {
-                    formEnsayoProyectos.AddTabPageProctor("Ensayo Proctor");
-                }
-                catch (Exception exception)
-                {
-                    XtraMessageBox.Show(exception.Message);
-                }
+                formEnsayoProyectos.AddTabPageProctor("Ensayo Proctor",null);
+            }
+            catch (Exception exception)
+            {
+                XtraMessageBox.Show(exception.Message);
+            }
+
+        }
+
+        private void barButtonItemGenerarGrafico_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var formEnsayoProyectos = MdiChildren.OfType<EnsayosProyecto>().FirstOrDefault();
+            if (formEnsayoProyectos == null) return;
+
+            try
+            {
+                var selectedTabPage = formEnsayoProyectos.xtraTabControlEnsayos.SelectedTabPage;
+                var proctorControl = selectedTabPage.Controls.OfType<ProctorControl>().FirstOrDefault();
+                proctorControl?.btnGenerarGrafico_Click();
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, "Error al guardar generar grafico proctor");
+            }
+        }
+
+        private void barButtonItemGuardarEnsayoProctor_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var formEnsayoProyectos = MdiChildren.OfType<EnsayosProyecto>().FirstOrDefault();
+            if (formEnsayoProyectos == null) return;
+
+            try
+            {
+                var selectedTabPage = formEnsayoProyectos.xtraTabControlEnsayos.SelectedTabPage;
+                var proctorControl = selectedTabPage.Controls.OfType<ProctorControl>().FirstOrDefault();
+                proctorControl?.btnGuardarEnsayoProctor_Click();
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, "Error al guardar Ensayo proctor");
+            }
+        }
+
+        private void barButtonItemAgregarMuestra_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (DependenciasGlobalesForm.Instance.SelectedProyecto is null)
+            {
+                XtraMessageBox.Show("Seleccione un proyecto para añadir muestras", "Muestra", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
+            }
+
+            var frmMuestras = new AgregarMuestra();
+            frmMuestras.ShowDialog();
+        }
+
+        private async void barButtonItemAbrirProyecto_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                if (DependenciasGlobalesForm.Instance.SelectedProyecto is null)
+                {
+                    XtraMessageBox.Show("Seleccione un proyecto para abrir", "Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                splashScreenManager1.ShowWaitForm();
+                var selectedProyectoIdproyecto = DependenciasGlobalesForm.Instance.SelectedProyecto.Idproyecto;
+                await DependenciasGlobalesForm.Instance.FillListadoMuestras(selectedProyectoIdproyecto);
+                AbrirFormularioHijo<EnsayosProyecto>();
+                splashScreenManager1.CloseWaitForm();
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, "Error al abrir el formulario de proyectos");
             }
         }
     }

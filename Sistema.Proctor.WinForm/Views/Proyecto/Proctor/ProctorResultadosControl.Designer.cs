@@ -139,6 +139,7 @@
             // txtPesoMoldeMaterialHumedo
             // 
             txtPesoMoldeMaterialHumedo.DataBindings.Add(new Binding("EditValue", resultadosProctorBindingSource, "PesoMoldeMaterialHumedo", true));
+            txtPesoMoldeMaterialHumedo.DataBindings.Add(new Binding("Text", resultadosProctorBindingSource, "PesoMoldeMaterialHumedo", true));
             txtPesoMoldeMaterialHumedo.EnterMoveNextControl = true;
             txtPesoMoldeMaterialHumedo.Location = new Point(232, 52);
             txtPesoMoldeMaterialHumedo.Name = "txtPesoMoldeMaterialHumedo";
@@ -148,7 +149,6 @@
             txtPesoMoldeMaterialHumedo.StyleController = layoutControl1;
             txtPesoMoldeMaterialHumedo.TabIndex = 5;
             txtPesoMoldeMaterialHumedo.EditValueChanged += txtPesoMoldeMaterialHumedo_EditValueChanged;
-            txtPesoMoldeMaterialHumedo.TextChanged += txtPesoMoldeMaterialHumedo_EditValueChanged;
             // 
             // txtPesoMolde
             // 

@@ -127,4 +127,5 @@ public class DependenciasGlobalesForm
     public ClienteDto? SelectedCliente { get; set; }
     public EmpleadoDto? SelectedEmpleado { get; set; }
     public ProyectoDto? SelectedProyecto { get; set; }
+    public int SelectedIdMuestra { get; set; } = 0;
 }

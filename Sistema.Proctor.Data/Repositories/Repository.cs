@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sistema.Proctor.Data.Entities;
+using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Sistema.Proctor.Data.Repositories;
 
@@ -22,23 +24,40 @@ public class Repository<T> : IRepository<T> where T : class
         return _context.Set<T>().FindAsync(id);
     }
 
-    public async Task AddAsync(T entity)
+    public ValueTask<EntityEntry<T>> AddAsync(T entity)
     {
-        await _context.Set<T>().AddAsync(entity);
+        return _context.AddAsync(entity);
     }
 
     public void Update(T entity)
     {
-        _context.Set<T>().Update(entity);
+        _context.Update(entity);
     }
 
     public void Delete(T entity)
     {
-        _context.Set<T>().Remove(entity);
+        _context.Remove(entity);
     }
 
-    public async Task SaveAsync()
+    public Task SaveAsync()
     {
-        await _context.SaveChangesAsync();
+        return _context.SaveChangesAsync();
+    }
+
+    // Método para consultar por criterio
+    public Task<List<T>> GetByCriteriaAsync(Expression<Func<T, bool>> criteria)
+    {
+        return _context.Set<T>().Where(criteria).AsNoTracking().ToListAsync();
+    }
+
+    // Método para obtener un solo elemento por criterio
+    public Task<T?> GetFirstByCriteriaAsync(Expression<Func<T, bool>> criteria)
+    {
+        return _context.Set<T>().AsNoTracking().FirstOrDefaultAsync(criteria);
+    }
+
+    public Task AddRangeAsync(List<T> range)
+    {
+        return _context.AddRangeAsync(range);
     }
 }

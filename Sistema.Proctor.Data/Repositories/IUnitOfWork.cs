@@ -1,35 +1,44 @@
-﻿using Sistema.Proctor.Data.Entities;
+﻿using NLog;
+using Sistema.Proctor.Data.Entities;
 
 namespace Sistema.Proctor.Data.Repositories;
 
 public interface IUnitOfWork
 {
-
+    IMuestraRepository MuestrasRepository { get; }
     IRepository<Cliente> ClienteRepository { get; }
     IRepository<Empleado> EmpleadoRepository { get; }
     IRepository<EnsayoProctor> EnsayosProctorRepository { get; }
-    IRepository<Ensayo> EnsayosRepository { get; }
+    IRepository<ResultadosProctor> ResultadosProctorRepository { get; }
+    IRepository<TipoEnsayo> TipoEnsayoRepository { get; }
+    IEnsayoRepository EnsayosRepository { get; }
     Task<int> CompleteAsync();
 }
 
 public class UnitOfWork : IUnitOfWork
 {
     private readonly DataContextProctor _Context;
-    private bool _Disposed;
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
     public UnitOfWork(DataContextProctor context)
     {
         _Context = context;
         ClienteRepository = new Repository<Cliente>(_Context);
         EmpleadoRepository = new Repository<Empleado>(_Context);
         EnsayosProctorRepository = new Repository<EnsayoProctor>(_Context);
-        EnsayosRepository = new Repository<Ensayo>(_Context);
+        EnsayosRepository = new EnsayoRepository(_Context);
+        ResultadosProctorRepository = new Repository<ResultadosProctor>(_Context);
+        MuestrasRepository = new MuestraRepository(_Context);
+        TipoEnsayoRepository = new Repository<TipoEnsayo>(_Context);
     }
 
     public IRepository<Cliente> ClienteRepository { get; }
     public IMuestraRepository MuestrasRepository { get; }
     public IRepository<Empleado> EmpleadoRepository { get; }
     public IRepository<EnsayoProctor> EnsayosProctorRepository { get; }
-    public IRepository<Ensayo> EnsayosRepository { get; }
+    public IRepository<ResultadosProctor> ResultadosProctorRepository { get; }
+    public IEnsayoRepository EnsayosRepository { get; }
+    public IRepository<TipoEnsayo> TipoEnsayoRepository { get; }
 
     public async Task<int> CompleteAsync()
     {
@@ -50,5 +59,4 @@ public class UnitOfWork : IUnitOfWork
             _Context.ChangeTracker.Clear();
         }
     }
-
 }
