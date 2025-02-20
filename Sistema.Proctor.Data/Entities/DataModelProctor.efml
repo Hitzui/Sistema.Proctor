@@ -90,6 +90,18 @@
     <property name="Idcliente" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f738f5eb-0434-463a-9510-46a115dd896c">
       <column name="idcliente" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
+    <property name="CreatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="00e7c582-bd8e-4673-829d-111ca4ff6186">
+      <column name="created_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="8e4c05ba-824b-4085-b466-625a1a284ae6">
+      <column name="created_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="c3db11ab-505b-454e-96ae-7c1f4c16325b">
+      <column name="updated_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="95d0f523-eb09-4ab9-a788-6ad375b19019">
+      <column name="updated_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
   </class>
   <class name="Ensayo" entity-set="Ensayos" table="ensayo" schema="dicesa" p1:Guid="4c5ade6b-2c38-410c-839b-c818945b9697">
     <id name="Idensayo" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="52c1c6f8-5230-4baa-a5e9-de1d1f82be82">
@@ -151,6 +163,18 @@
     <property name="CodigoIngreso" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="de09840b-3fe4-43dd-9430-41ae44e5469c">
       <column name="codigo_ingreso" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
     </property>
+    <property name="CreatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="95ba37ea-3e5a-4230-b2c8-7cea97aca2af">
+      <column name="created_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="ef1c469b-c6c1-4567-a67c-f66097ba120d">
+      <column name="created_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f690b93b-1fec-4058-b8bd-8aa74d456585">
+      <column name="updated_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="667c17a7-3035-4847-b80a-1a03cd9f0835">
+      <column name="updated_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
   </class>
   <class name="Cliente" entity-set="Clientes" table="cliente" schema="dicesa" p1:Guid="9f228a92-62cb-4c53-8bf7-6f0dc312fbda">
     <id name="Idcliente" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="689d39f2-2497-4d9d-ae0e-bf1c6b21be04">
@@ -189,6 +213,18 @@
     <property name="Telefono" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="39925a0c-f0fc-4761-8df5-a7ce95ec334c">
       <column name="telefono" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
     </property>
+    <property name="CreatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="63b322f5-ec91-41c8-a7c4-85a7172547b6">
+      <column name="created_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="60b5736d-036a-4467-8e45-acd356024fd0">
+      <column name="created_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="162dc692-a2d6-433d-bc0a-6175e16ebcb5">
+      <column name="updated_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="c125e005-55ac-472e-9b0f-a413d085038c">
+      <column name="updated_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
   </class>
   <class name="Usuario" entity-set="Usuarios" table="usuario" schema="dicesa" p1:Guid="4446a093-6d23-4dc3-b48d-28c4c4500160">
     <id name="Idusuario" type="Int64" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="43f7b6d2-98eb-44a6-b59c-2d4a4cc215da">
@@ -205,6 +241,18 @@
     </property>
     <property name="Password" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="8a52a250-ad96-43f3-a248-3c038dd00a84">
       <column name="`password`" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Titulo" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="6ad8909b-fa3b-4a1b-bb87-f98358400a46">
+      <column name="titulo" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Username" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="dd94e379-0ddc-4757-95e2-5cb24655caa7">
+      <column name="username" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ff544021-2252-43e5-8487-80f7f8a13ec1">
+      <column name="created_at" default="current_timestamp()" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="efd186c2-e8b4-49db-a7fd-595ada1f2633">
+      <column name="updated_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
     </property>
   </class>
   <class name="ResultadosProctor" entity-set="ResultadosProctors" table="resultados_proctor" schema="dicesa" p1:Guid="df23ce7d-4a1b-48f4-8295-73e51eb4bffe">
@@ -299,6 +347,24 @@
     </property>
     <property name="TipoProctor" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="2ead904f-e4c6-4168-9242-e4b142f1dfc2">
       <column name="tipo_proctor" default="NULL" not-null="False" length="250" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="DensidadMaxima" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="8bf1c6a0-bccd-4a81-90f7-ed7b32d63fbd">
+      <column name="densidad_maxima" default="0.0000" not-null="False" precision="18" scale="4" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="HumedadOptima" type="Decimal" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="96264334-2bcc-41f5-baf2-33499d996ade">
+      <column name="humedad_optima" default="0.0000" not-null="False" precision="18" scale="4" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="CreatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f02b11fd-fcc7-4f36-a675-09b73871b478">
+      <column name="created_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="aa8a8a05-7fb9-414b-a0b6-5057aac3ea0b">
+      <column name="created_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="6ece90cd-5662-44fe-bf0e-5afa13ac0dde">
+      <column name="updated_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="87fa2e88-c8e8-4967-a2e5-f99064a7990c">
+      <column name="updated_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
     </property>
   </class>
   <class name="TipoEspeciman" entity-set="TipoEspecimen" table="tipo_especimen" schema="dicesa" p1:Guid="a3191bb7-79fd-4adb-a86f-8ceddc2ee7f1">

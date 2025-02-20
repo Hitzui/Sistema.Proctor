@@ -11,10 +11,11 @@ using System.Windows.Forms;
 
 namespace Sistema.Proctor.WinForm.Views.Template
 {
-    public partial class EditForm : DevExpress.XtraEditors.XtraForm
+    public partial class EditForm : XtraForm
     {
         protected bool IsNew;
-        public EditForm()
+
+        protected EditForm()
         {
             InitializeComponent();
         }

@@ -34,6 +34,14 @@ public class ProyectoDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXD
 
     private int? _Idcliente;
 
+    private int? _CreatedBy;
+
+    private DateTime _CreatedAt;
+
+    private int? _UpdatedBy;
+
+    private DateTime _UpdatedAt;
+
     private Cliente _Cliente;
 
     private IList<Muestra> _Muestras;
@@ -218,6 +226,74 @@ public class ProyectoDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXD
                 this.SendPropertyChanging("Idcliente");
                 this._Idcliente = value;
                 this.SendPropertyChanged("Idcliente");
+            }
+        }
+    }
+
+    public int? CreatedBy
+    {
+        get
+        {
+            return this._CreatedBy;
+        }
+        set
+        {
+            if (this._CreatedBy != value)
+            {
+                this.SendPropertyChanging("CreatedBy");
+                this._CreatedBy = value;
+                this.SendPropertyChanged("CreatedBy");
+            }
+        }
+    }
+
+    public DateTime CreatedAt
+    {
+        get
+        {
+            return this._CreatedAt;
+        }
+        set
+        {
+            if (this._CreatedAt != value)
+            {
+                this.SendPropertyChanging("CreatedAt");
+                this._CreatedAt = value;
+                this.SendPropertyChanged("CreatedAt");
+            }
+        }
+    }
+
+    public int? UpdatedBy
+    {
+        get
+        {
+            return this._UpdatedBy;
+        }
+        set
+        {
+            if (this._UpdatedBy != value)
+            {
+                this.SendPropertyChanging("UpdatedBy");
+                this._UpdatedBy = value;
+                this.SendPropertyChanged("UpdatedBy");
+            }
+        }
+    }
+
+    public DateTime UpdatedAt
+    {
+        get
+        {
+            return this._UpdatedAt;
+        }
+        set
+        {
+            if (this._UpdatedAt != value)
+            {
+                this.SendPropertyChanging("UpdatedAt");
+                this._UpdatedAt = value;
+                this.SendPropertyChanged("UpdatedAt");
             }
         }
     }

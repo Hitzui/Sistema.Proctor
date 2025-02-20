@@ -94,7 +94,7 @@
 
         #endregion
         protected DevExpress.Utils.Layout.StackPanel stackPanelFooter;
-        protected DevExpress.XtraEditors.SimpleButton btnCancelar;
-        protected DevExpress.XtraEditors.SimpleButton btnGuardar;
+        public DevExpress.XtraEditors.SimpleButton btnCancelar;
+        public DevExpress.XtraEditors.SimpleButton btnGuardar;
     }
 }

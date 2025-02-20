@@ -1,15 +1,21 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Drawing;
+using DevExpress.XtraEditors;
 using DevExpress.Utils;
 using DevExpress.XtraTab;
 using DevExpress.XtraTab.ViewInfo;
 using Sistema.Proctor.Data.Entities;
 using Sistema.Proctor.WinForm.Data;
 using DevExpress.XtraCharts;
+using DevExpress.XtraPrinting.Drawing;
+using DevExpress.XtraReports.UI;
 using MathNet.Numerics;
 using NLog;
 using Sistema.Proctor.Data;
 using Sistema.Proctor.Data.Repositories;
-using Control = System.Windows.Forms.Control;
+using Sistema.Proctor.WinForm.Views.Proyecto.Reportes;
+using DashStyle = DevExpress.XtraCharts.DashStyle;
+using FillMode = DevExpress.XtraCharts.FillMode;
+using Series = DevExpress.XtraCharts.Series;
 
 namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
 {
@@ -75,9 +81,11 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
             {
                 var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
                 var resultadosProctorRepository = unitOfWork.ResultadosProctorRepository;
-                if (_EnsayoProctor.Idensayo>0)
+                if (_EnsayoProctor.Idensayo > 0)
                 {
-                    var resultados = await resultadosProctorRepository.GetByCriteriaAsync(proctor => proctor.Idensayo==_EnsayoProctor.Idensayo);
+                    var resultados =
+                        await resultadosProctorRepository.GetByCriteriaAsync(proctor =>
+                            proctor.Idensayo == _EnsayoProctor.Idensayo);
                     foreach (var resultadosProctor in resultados)
                     {
                         AddPage(resultadosProctor);
@@ -145,7 +153,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                 }
 
                 var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
-
+                var usuario = DependenciasGlobalesForm.Instance.Usuario;
                 var muestraRepository = unitOfWork.MuestrasRepository;
                 var tipoEnsayoRepository = unitOfWork.TipoEnsayoRepository;
                 var ensayoProctorRepository = unitOfWork.EnsayosProctorRepository;
@@ -189,22 +197,49 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                     };
                     await ensayoRepository.AddAsync(ensayo);
                 }
+                var humedadOptimaList = new List<double>();
+                var densidadMaximaList = new List<double>();
 
                 _EnsayoProctor.Idempleado = muestra.Idempleado ?? 0;
                 _EnsayoProctor.Idmuestra = muestra.Idmuestra;
                 _EnsayoProctor.Norma = "ASTM D698";
-                var ensayoProctorEntry = await ensayoProctorRepository.AddAsync(_EnsayoProctor);
-                _EnsayoProctor = ensayoProctorEntry.Entity;
+                if (_EnsayoProctor.Idensayo>0)
+                {
+                    _EnsayoProctor.UpdatedBy = Convert.ToInt32(usuario.Idusuario);
+                    ensayoProctorRepository.Update(_EnsayoProctor);
+                }
+                else
+                {
+                    _EnsayoProctor.CreatedBy = Convert.ToInt32(usuario.Idusuario);
+                    _EnsayoProctor.UpdatedBy = Convert.ToInt32(usuario.Idusuario);
+                    var ensayoProctorEntry = await ensayoProctorRepository.AddAsync(_EnsayoProctor);
+                    _EnsayoProctor = ensayoProctorEntry.Entity;
+                }
+                
 
                 ResultadosProctorList.RemoveAll(proctor =>
                     proctor.DensidadSeca != null && proctor.DensidadSeca.Value.CompareTo(decimal.Zero) <= 0);
                 foreach (var resultadosProctor in ResultadosProctorList)
                 {
                     resultadosProctor.EnsayoProctor = _EnsayoProctor;
+                    // Add values to the lists
+                    humedadOptimaList.Add((double)(resultadosProctor.AguaAgregada ?? decimal.Zero));
+                    densidadMaximaList.Add((double)(resultadosProctor.DensidadSeca ?? decimal.Zero));
                 }
-
-
-                await resultadoProctorRepository.AddRangeAsync(ResultadosProctorList);
+                // Ajuste polinómico de grado 5
+                var coeficientes = Fit.Polynomial(humedadOptimaList.ToArray(), densidadMaximaList.ToArray(), ResultadosProctorList.Count-1);
+                (var humedadOptima, var densidadMax) = Formulas.EncontrarMaximo(coeficientes, humedadOptimaList.Min(), densidadMaximaList.Max());
+                _EnsayoProctor.DensidadMaxima = (decimal)densidadMax;
+                _EnsayoProctor.HumedadOptima = (decimal)humedadOptima;
+                if (_EnsayoProctor.Idensayo>0)
+                {
+                    resultadoProctorRepository.UpdateRangeAsync(ResultadosProctorList);
+                }
+                else
+                {
+                    await resultadoProctorRepository.AddRangeAsync(ResultadosProctorList);
+                }
+                
                 await unitOfWork.CompleteAsync();
             }
             catch (Exception e)
@@ -232,10 +267,13 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                 densidad.Add((double)(resultadosProctor.DensidadSeca ?? decimal.Zero));
             }
 
-            var chart = new ChartControl();
+            var chart = new ChartControl()
+            {
+                Size = new Size(1300, 900)
+            };
 
             // Ajuste polinómico de grado 5
-            var coeficientes = Fit.Polynomial(humedad.ToArray(), densidad.ToArray(), 3);
+            var coeficientes = Fit.Polynomial(humedad.ToArray(), densidad.ToArray(), ResultadosProctorList.Count-1);
 
             // Encontrar la humedad óptima y la densidad máxima
             (var humedadOptima, var densidadMax) = Formulas.EncontrarMaximo(coeficientes, humedad.Min(), humedad.Max());
@@ -296,14 +334,121 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
             var lineProctor = new ConstantLine("D Max", densidadMax);
             lineProctor.Color = Color.Red;
             lineProctor.LineStyle.DashStyle = DashStyle.Dot;
-            lineProctor.Title.Text = @$"Densidad Máxima: {densidadMax:F2}%";
+            lineProctor.Title.Text = @$"Densidad Máxima: {densidadMax:F2} kg/m3";
             diagram.AxisY.ConstantLines.Add(lineProctor);
 
             // Configurar el gráfico
             chart.Dock = DockStyle.Fill;
+            //var directorio = DependenciasGlobalesForm.Instance.CrearDirectorioEnDocumentos("GraficoProctor");
+            //var fileName =
+            //    $"{DateTime.Now.Year}{DateTime.Now.Month}{DateTime.Now.DayOfYear}{DateTime.Now.TimeOfDay.TotalMinutes}";
+            //ImageOfChart = $"{directorio}/{fileName}.png";
+            //chart.ExportToImage(ImageOfChart, DXImageFormat.Png);
             tabPageGrafico.Controls.Clear();
             tabPageGrafico.Controls.Add(chart);
             tabResultadosProctor.SelectedTabPage = tabPageGrafico;
+        }
+
+
+        public async void PrintReport()
+        {
+            btnGenerarGrafico_Click();
+            var humedad = new List<double>();
+            var densidad = new List<double>();
+
+            foreach (var resultadosProctor in ResultadosProctorList)
+            {
+                // Add values to the lists
+                humedad.Add((double)(resultadosProctor.AguaAgregada ?? decimal.Zero));
+                densidad.Add((double)(resultadosProctor.DensidadSeca ?? decimal.Zero));
+            }
+
+            var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
+            var resultadosEnsayoProctorRepository = unitOfWork.ResultadosEnsayoProctorRepository;
+            var resultados = await resultadosEnsayoProctorRepository.GetResultadosEnsayoProctor(10);
+            var reporteResultadosEnsayoProctor = new ReporteResultadosEnsayoProctor();
+
+            var graficoProctor = reporteResultadosEnsayoProctor.graficoProctor;
+            // Ajuste polinómico de grado 5
+            var coeficientes = Fit.Polynomial(humedad.ToArray(), densidad.ToArray(), ResultadosProctorList.Count-1);
+
+            // Encontrar la humedad óptima y la densidad máxima
+            (var humedadOptima, var densidadMax) = Formulas.EncontrarMaximo(coeficientes, humedad.Min(), humedad.Max());
+
+
+            // Crear serie de puntos originales
+            var seriePuntos = new Series("Puntos de Ensayo", ViewType.Point);
+            var seriePuntosView = (PointSeriesView)seriePuntos.View;
+            seriePuntosView.PointMarkerOptions.Size = 8;
+            for (var i = 0; i < humedad.Count; i++)
+                seriePuntos.Points.Add(new SeriesPoint(humedad[i], densidad[i]));
+
+            // Crear serie de curva ajustada
+            var serieCurva = new Series("Curva Ajustada", ViewType.Spline);
+            var serieCurvaView = (LineSeriesView)serieCurva.View;
+            serieCurvaView.MarkerVisibility= DefaultBoolean.False;
+            for (var x = humedad.Min(); x <= humedad.Max(); x += 0.05)
+            {
+                var y = Formulas.EvaluatePolynomial(coeficientes, x);
+                serieCurva.Points.Add(new SeriesPoint(x, y));
+            }
+
+            // Punto máximo de la curva
+            var puntoMaximo = new Series("Óptimo de Compactación", ViewType.Point);
+            puntoMaximo.Points.Add(new SeriesPoint(humedadOptima, densidadMax));
+            puntoMaximo.View.Color = Color.Red;
+            var puntoMaximoView = (PointSeriesView)puntoMaximo.View;
+            puntoMaximoView.PointMarkerOptions.Size = 10;
+
+            // Configurar el ChartControl
+            graficoProctor.Series.Clear();
+            seriePuntos.LabelsVisibility = DefaultBoolean.False;
+            serieCurva.LabelsVisibility = DefaultBoolean.False;
+            puntoMaximo.LabelsVisibility = DefaultBoolean.False;
+            graficoProctor.Series.AddRange(seriePuntos, serieCurva, puntoMaximo);
+            graficoProctor.Legend.Visibility = DefaultBoolean.False;
+            // Configurar ejes
+            var diagram = (XYDiagram)graficoProctor.Diagram;
+            // Ajustar el rango del eje X
+            var xMin = humedad.Min() - 1; // Mínimo de X con margen
+            var xMax = humedad.Max() + 1; // Máximo de X con margen
+            diagram.AxisX.VisualRange.SetMinMaxValues(xMin, xMax);
+            diagram.AxisX.WholeRange.SetMinMaxValues(xMin, xMax);
+
+            // Ajustar el rango del eje Y
+            var dxFont = new DXFont("Arial", 9, DXFontStyle.Regular);
+            var yMin = densidad.Min() - 50; // Mínimo de Y con margen
+            var yMax = densidad.Max() + 50; // Máximo de Y con margen
+            diagram.AxisY.VisualRange.SetMinMaxValues(yMin, yMax);
+            diagram.AxisY.WholeRange.SetMinMaxValues(yMin, yMax);
+            diagram.AxisX.Title.Text = @"Humedad (%)";
+            diagram.AxisY.Title.Text = @"Densidad Seca (kg/m³)";
+            diagram.AxisX.Title.Visibility = DefaultBoolean.True;
+            diagram.AxisY.Title.Visibility = DefaultBoolean.True;
+            diagram.AxisX.Title.DXFont = dxFont;
+            diagram.AxisY.Title.DXFont = dxFont;
+
+            // Mejorar visualización de la cuadrícula
+            diagram.AxisX.GridLines.Visible = true;
+            diagram.AxisY.GridLines.Visible = true;
+
+            // Agregar marcador de línea en el punto máximo humedadOptima
+            var lineHumedad = new ConstantLine(@"H Óptimo", humedadOptima);
+            lineHumedad.Color = Color.Red;
+            lineHumedad.LineStyle.DashStyle = DashStyle.Dot;
+            lineHumedad.Title.Text = @$"Humedad Óptima: {humedadOptima:F2}%";
+            diagram.AxisX.ConstantLines.Add(lineHumedad);
+
+            // Agregar marcador de línea en el punto máximo densidadMax
+            var lineProctor = new ConstantLine("D Max", densidadMax);
+            lineProctor.Color = Color.Red;
+            lineProctor.LineStyle.DashStyle = DashStyle.Dot;
+            lineProctor.Title.Text = @$"Densidad Máxima: {densidadMax:F2} kg/m3";
+            diagram.AxisY.ConstantLines.Add(lineProctor);
+            reporteResultadosEnsayoProctor.DataSource = resultados;
+
+            var designTool = new ReportPrintTool(reporteResultadosEnsayoProctor);
+            designTool.ShowRibbonPreview();
         }
     }
 }

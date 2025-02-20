@@ -39,6 +39,7 @@
             barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             barDockControlRight = new DevExpress.XtraBars.BarDockControl();
+            splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(Cliente.WaitForm1), true, true);
             ((System.ComponentModel.ISupportInitialize)treeListEnsayos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)popupMenuEnsayos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
@@ -96,7 +97,7 @@
             // 
             barDockControlBottom.CausesValidation = false;
             barDockControlBottom.Dock = DockStyle.Bottom;
-            barDockControlBottom.Location = new Point(0, 647);
+            barDockControlBottom.Location = new Point(0, 645);
             barDockControlBottom.Manager = barManager1;
             barDockControlBottom.Size = new Size(1089, 0);
             // 
@@ -106,7 +107,7 @@
             barDockControlLeft.Dock = DockStyle.Left;
             barDockControlLeft.Location = new Point(0, 0);
             barDockControlLeft.Manager = barManager1;
-            barDockControlLeft.Size = new Size(0, 647);
+            barDockControlLeft.Size = new Size(0, 645);
             // 
             // barDockControlRight
             // 
@@ -114,13 +115,17 @@
             barDockControlRight.Dock = DockStyle.Right;
             barDockControlRight.Location = new Point(1089, 0);
             barDockControlRight.Manager = barManager1;
-            barDockControlRight.Size = new Size(0, 647);
+            barDockControlRight.Size = new Size(0, 645);
+            // 
+            // splashScreenManager1
+            // 
+            splashScreenManager1.ClosingDelay = 500;
             // 
             // EnsayosProyecto
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1089, 647);
+            ClientSize = new Size(1089, 645);
             Controls.Add(treeListEnsayos);
             Controls.Add(barDockControlLeft);
             Controls.Add(barDockControlRight);
@@ -149,5 +154,6 @@
         private DevExpress.XtraBars.BarDockControl barDockControlBottom;
         private DevExpress.XtraBars.BarDockControl barDockControlLeft;
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
     }
 }

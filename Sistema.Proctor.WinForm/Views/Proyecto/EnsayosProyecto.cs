@@ -20,7 +20,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
         public XtraTabControl xtraTabControlEnsayos;
         private Panel panelIzquierdo;
         private List<EnsayoProctor> ListEnsayoProctor = new List<EnsayoProctor>();
-        private EnsayoRecordDto? SelectedEnsayoRecordDto;
+        public EnsayoRecordDto? SelectedEnsayoRecordDto;
 
         public EnsayosProyecto()
         {
@@ -138,10 +138,11 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
             xtraTabControlEnsayos.TabPages.Add(newPage);
         }
 
-        private async void FindEnsayos(int tipoEnsayo)
+        public async void FindEnsayos(int tipoEnsayo)
         {
             try
             {
+                splashScreenManager1.ShowWaitForm();
                 if (SelectedEnsayoRecordDto is null)
                 {
                     return;
@@ -172,6 +173,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
                     }
 
                 }
+                splashScreenManager1.CloseWaitForm();
             }
             catch (Exception e)
             {

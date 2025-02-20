@@ -16,19 +16,19 @@ namespace Sistema.Proctor.WinForm.Views.Cliente
         public ClienteEdit()
         {
             InitializeComponent();
-            btnGuardar.Click += btnGuardar_Click;
         }
 
         private void LoadValues()
         {
-            if (DependenciasGlobalesForm.Instance.SelectedCliente is null)
+            var instanceSelectedCliente = DependenciasGlobalesForm.Instance.SelectedCliente;
+            if (instanceSelectedCliente is null)
             {
                 _Cliente = new ClienteDto();
                 IsNew = true;
             }
             else
             {
-                _Cliente = DependenciasGlobalesForm.Instance.SelectedCliente;
+                _Cliente = instanceSelectedCliente;
                 IsNew = false;
             }
 
@@ -99,6 +99,11 @@ namespace Sistema.Proctor.WinForm.Views.Cliente
             {
                 Logger.Error(ex, "Error al guardar Cliente Try Superior");
             }
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

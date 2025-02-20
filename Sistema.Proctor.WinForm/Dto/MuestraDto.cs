@@ -32,6 +32,14 @@ public class MuestraDto: INotifyPropertyChanged, IDXDataErrorInfo
 
     private string _CodigoIngreso;
 
+    private int? _CreatedBy;
+
+    private DateTime _CreatedAt;
+
+    private int? _UpdatedBy;
+
+    private DateTime _UpdatedAt;
+
     private Proyecto? _Proyecto;
 
     private Empleado? _Empleado;
@@ -133,6 +141,30 @@ public class MuestraDto: INotifyPropertyChanged, IDXDataErrorInfo
     {
         get => _CodigoIngreso;
         set => SetField(ref _CodigoIngreso, value);
+    }
+
+    public int? CreatedBy
+    {
+        get => _CreatedBy;
+        set => SetField(ref _CreatedBy, value);
+    }
+
+    public DateTime CreatedAt
+    {
+        get => _CreatedAt;
+        set => SetField(ref _CreatedAt, value);
+    }
+
+    public int? UpdatedBy
+    {
+        get => _UpdatedBy;
+        set => SetField(ref _UpdatedBy, value);
+    }
+
+    public DateTime UpdatedAt
+    {
+        get => _UpdatedAt;
+        set => SetField(ref _UpdatedAt, value);
     }
 
     public Proyecto? Proyecto

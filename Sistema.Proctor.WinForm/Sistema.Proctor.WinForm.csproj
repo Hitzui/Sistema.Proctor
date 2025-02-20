@@ -1,52 +1,94 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <OutputType>WinExe</OutputType>
-        <TargetFramework>net9.0-windows7.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <UseWindowsForms>true</UseWindowsForms>
-        <ImplicitUsings>enable</ImplicitUsings>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <PackageReference Include="AutoMapper" Version="14.0.0" />
-      <PackageReference Include="DevExpress.Win.Design" Version="24.2.3" />
-      <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
-      <PackageReference Include="NLog" Version="5.4.0" />
-      <PackageReference Include="NLog.Extensions.Logging" Version="5.4.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Sistema.Proctor.Data\Sistema.Proctor.Data.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Update="Properties\Resources.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>Resources.resx</DependentUpon>
-      </Compile>
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Update="Properties\Resources.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Update="appsettings.json">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </None>
-      <None Update="NLog.config">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="logs\" />
-    </ItemGroup>
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.17763.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="DevExpress.Reporting.Core" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Win.Design" Version="24.2.3" />
+    <PackageReference Include="DevExpress.Win.Reporting" Version="24.2.3" />
+    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
+    <PackageReference Include="NLog" Version="5.4.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.4.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sistema.Proctor.Data\Sistema.Proctor.Data.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Forms\Base\FormAssets.cs" />
+    <Compile Update="Editors\Base\ButtonBase.cs" />
+    <Compile Update="Editors\Base\ButtonImageOptionsBase.cs" />
+    <EmbeddedResource Include="Assets\HTML\FixedDialog.html" />
+    <EmbeddedResource Include="Assets\CSS\FixedDialog.css" />
+    <EmbeddedResource Include="Assets\HTML\LoginFormLayout.html" />
+    <EmbeddedResource Include="Assets\CSS\LoginFormLayout.css" />
+    <Compile Update="Editors\Button.cs" />
+    <Compile Update="Assets\Toolbox\Root.cs" />
+    <EmbeddedResource Include="Assets\Toolbox\Button.bmp" />
+    <EmbeddedResource Include="Assets\HTML\Button.html" />
+    <EmbeddedResource Include="Assets\CSS\Button.css" />
+    <Compile Update="Utilities\HtmlCssAsset.cs" />
+    <Compile Update="Images\UIElements.cs" />
+    <EmbeddedResource Include="Assets\SVG\UIElements\Check.svg" />
+    <EmbeddedResource Include="Assets\SVG\UIElements\Close.svg" />
+    <EmbeddedResource Include="Assets\SVG\UIElements\Copy.svg" />
+    <EmbeddedResource Include="Assets\SVG\UIElements\DropDown.svg" />
+    <EmbeddedResource Include="Assets\SVG\UIElements\Hide.svg" />
+    <EmbeddedResource Include="Assets\SVG\UIElements\Info.svg" />
+    <EmbeddedResource Include="Assets\SVG\UIElements\Search.svg" />
+    <EmbeddedResource Include="Assets\SVG\UIElements\Show.svg" />
+    <Compile Update="Editors\EmailBox.cs" />
+    <EmbeddedResource Include="Assets\Toolbox\EmailBox.bmp" />
+    <EmbeddedResource Include="Assets\HTML\EmailBox.html" />
+    <EmbeddedResource Include="Assets\CSS\EmailBox.css" />
+    <Compile Update="Utilities\Email.cs" />
+    <Compile Update="Images\DataEntry.cs" />
+    <EmbeddedResource Include="Assets\SVG\DataEntry\Card.svg" />
+    <EmbeddedResource Include="Assets\SVG\DataEntry\Customers.svg" />
+    <EmbeddedResource Include="Assets\SVG\DataEntry\Email.svg" />
+    <EmbeddedResource Include="Assets\SVG\DataEntry\Employees.svg" />
+    <EmbeddedResource Include="Assets\SVG\DataEntry\Key.svg" />
+    <EmbeddedResource Include="Assets\SVG\DataEntry\Opportunities.svg" />
+    <EmbeddedResource Include="Assets\SVG\DataEntry\Phone.svg" />
+    <EmbeddedResource Include="Assets\SVG\DataEntry\Products.svg" />
+    <EmbeddedResource Include="Assets\SVG\DataEntry\Sales.svg" />
+    <EmbeddedResource Include="Assets\SVG\DataEntry\Tasks.svg" />
+    <EmbeddedResource Include="Assets\SVG\DataEntry\World.svg" />
+    <Compile Update="Editors\PasswordBox.cs" />
+    <EmbeddedResource Include="Assets\Toolbox\PasswordBox.bmp" />
+    <EmbeddedResource Include="Assets\HTML\PasswordBox.html" />
+    <EmbeddedResource Include="Assets\CSS\PasswordBox.css" />
+    <Compile Update="Utilities\Password.cs" />
+    <Compile Update="Components\StrengthIndicator.cs" />
+    <Compile Update="Components\Base\ProgressIndicatorBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="logs\" />
+  </ItemGroup>
 </Project>

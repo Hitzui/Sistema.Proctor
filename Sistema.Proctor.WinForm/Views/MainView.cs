@@ -84,6 +84,12 @@ namespace Sistema.Proctor.WinForm.Views
             addEmpleado.ShowDialog();
         }
 
+        private void barButtonItemEditarEmpleado_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var addEmpleado = new EmpleadoEdit();
+            addEmpleado.ShowDialog();
+        }
+
         private void barButtonItemEliminarEmpleado_ItemClick(object sender, ItemClickEventArgs e)
         {
             var empleadoList = new EmpleadoList();
@@ -124,7 +130,7 @@ namespace Sistema.Proctor.WinForm.Views
             if (formEnsayoProyectos is null) return;
             try
             {
-                formEnsayoProyectos.AddTabPageProctor("Ensayo Proctor",null);
+                formEnsayoProyectos.AddTabPageProctor("Ensayo Proctor", null);
             }
             catch (Exception exception)
             {
@@ -197,6 +203,47 @@ namespace Sistema.Proctor.WinForm.Views
             catch (Exception exception)
             {
                 Logger.Error(exception, "Error al abrir el formulario de proyectos");
+            }
+        }
+
+        private void barButtonItemReporteResultadosProctor_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var formEnsayoProyectos = MdiChildren.OfType<EnsayosProyecto>().FirstOrDefault();
+            if (formEnsayoProyectos == null) return;
+
+            try
+            {
+                var selectedTabPage = formEnsayoProyectos.xtraTabControlEnsayos.SelectedTabPage;
+                var proctorControl = selectedTabPage.Controls.OfType<ProctorControl>().FirstOrDefault();
+                if (proctorControl == null)
+                {
+                    XtraMessageBox.Show("No se ha seleccionado un ensayo proctor", "Proctor", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                proctorControl.PrintReport();
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, "Error al guardar Ensayo proctor");
+            }
+        }
+
+        private void barButtonItemAbrirEnsayoProctor_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var formEnsayoProyectos = MdiChildren.OfType<EnsayosProyecto>().FirstOrDefault();
+            if (formEnsayoProyectos == null) return;
+
+            try
+            {
+                var selectedEnsayoRecordDto = formEnsayoProyectos.SelectedEnsayoRecordDto;
+                if (selectedEnsayoRecordDto is not null)
+                {
+                    formEnsayoProyectos.FindEnsayos(selectedEnsayoRecordDto.IdTipoEnsayo);
+                }
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, "Error al guardar Ensayo proctor");
             }
         }
     }

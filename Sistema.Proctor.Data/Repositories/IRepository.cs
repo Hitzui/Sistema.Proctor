@@ -15,4 +15,5 @@ public interface IRepository<T> where T : class
     Task<List<T>> GetByCriteriaAsync(Expression<Func<T, bool>> criteria);
     Task<T?> GetFirstByCriteriaAsync(Expression<Func<T, bool>> criteria);
     Task AddRangeAsync(List<T> range);
+    void UpdateRangeAsync(List<T> range);
 }

@@ -44,6 +44,9 @@
             barButtonItemGenerarGrafico = new DevExpress.XtraBars.BarButtonItem();
             barButtonItemGuardarEnsayoProctor = new DevExpress.XtraBars.BarButtonItem();
             barButtonItemAgregarMuestra = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemAbrirProyecto = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemReporteResultadosProctor = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemAbrirEnsayoProctor = new DevExpress.XtraBars.BarButtonItem();
             ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -55,19 +58,19 @@
             ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(Cliente.WaitForm1), true, true);
-            barButtonItemAbrirProyecto = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemEditarEmpleado = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
             SuspendLayout();
             // 
             // ribbon
             // 
             ribbon.ExpandCollapseItem.Id = 0;
-            ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, barButtonItemListaClientes, barButtonItemAddCliente, barButtonItemEditarCliente, barButtonItemEliminarCliente, barButtonItem1, barButtonItemAgregarEmpleado, barButtonItemEliminarEmpleado, barButtonItemListaProyectos, barButtonItemCrearProyecto, barButtonItemAgregarProctor, barButtonItemClose, barButtonItemGenerarGrafico, barButtonItemGuardarEnsayoProctor, barButtonItemAgregarMuestra, barButtonItemAbrirProyecto });
+            ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, barButtonItemListaClientes, barButtonItemAddCliente, barButtonItemEditarCliente, barButtonItemEliminarCliente, barButtonItem1, barButtonItemAgregarEmpleado, barButtonItemEliminarEmpleado, barButtonItemListaProyectos, barButtonItemCrearProyecto, barButtonItemAgregarProctor, barButtonItemClose, barButtonItemGenerarGrafico, barButtonItemGuardarEnsayoProctor, barButtonItemAgregarMuestra, barButtonItemAbrirProyecto, barButtonItemReporteResultadosProctor, barButtonItemAbrirEnsayoProctor, barButtonItemEditarEmpleado });
             ribbon.Location = new Point(0, 0);
-            ribbon.MaxItemId = 16;
+            ribbon.MaxItemId = 19;
             ribbon.Name = "ribbon";
             ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { ribbonPage1, ribbonPageProyectos, ribbonPageEnsayos });
-            ribbon.Size = new Size(950, 201);
+            ribbon.Size = new Size(950, 171);
             ribbon.StatusBar = ribbonStatusBar;
             // 
             // barButtonItemListaClientes
@@ -186,6 +189,30 @@
             barButtonItemAgregarMuestra.Name = "barButtonItemAgregarMuestra";
             barButtonItemAgregarMuestra.ItemClick += barButtonItemAgregarMuestra_ItemClick;
             // 
+            // barButtonItemAbrirProyecto
+            // 
+            barButtonItemAbrirProyecto.Caption = "Abrir Proyecto";
+            barButtonItemAbrirProyecto.Id = 15;
+            barButtonItemAbrirProyecto.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemAbrirProyecto.ImageOptions.SvgImage");
+            barButtonItemAbrirProyecto.Name = "barButtonItemAbrirProyecto";
+            barButtonItemAbrirProyecto.ItemClick += barButtonItemAbrirProyecto_ItemClick;
+            // 
+            // barButtonItemReporteResultadosProctor
+            // 
+            barButtonItemReporteResultadosProctor.Caption = "Reporte";
+            barButtonItemReporteResultadosProctor.Id = 16;
+            barButtonItemReporteResultadosProctor.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemReporteResultadosProctor.ImageOptions.SvgImage");
+            barButtonItemReporteResultadosProctor.Name = "barButtonItemReporteResultadosProctor";
+            barButtonItemReporteResultadosProctor.ItemClick += barButtonItemReporteResultadosProctor_ItemClick;
+            // 
+            // barButtonItemAbrirEnsayoProctor
+            // 
+            barButtonItemAbrirEnsayoProctor.Caption = "Abrir Ensayo";
+            barButtonItemAbrirEnsayoProctor.Id = 17;
+            barButtonItemAbrirEnsayoProctor.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemAbrirEnsayoProctor.ImageOptions.SvgImage");
+            barButtonItemAbrirEnsayoProctor.Name = "barButtonItemAbrirEnsayoProctor";
+            barButtonItemAbrirEnsayoProctor.ItemClick += barButtonItemAbrirEnsayoProctor_ItemClick;
+            // 
             // ribbonPage1
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, ribbonPageGroup2 });
@@ -205,6 +232,7 @@
             // 
             ribbonPageGroup2.ItemLinks.Add(barButtonItem1);
             ribbonPageGroup2.ItemLinks.Add(barButtonItemAgregarEmpleado);
+            ribbonPageGroup2.ItemLinks.Add(barButtonItemEditarEmpleado);
             ribbonPageGroup2.ItemLinks.Add(barButtonItemEliminarEmpleado);
             ribbonPageGroup2.Name = "ribbonPageGroup2";
             ribbonPageGroup2.Text = "Empleado";
@@ -241,8 +269,10 @@
             // ribbonPageGroup4
             // 
             ribbonPageGroup4.ItemLinks.Add(barButtonItemAgregarProctor);
+            ribbonPageGroup4.ItemLinks.Add(barButtonItemAbrirEnsayoProctor);
             ribbonPageGroup4.ItemLinks.Add(barButtonItemGenerarGrafico);
             ribbonPageGroup4.ItemLinks.Add(barButtonItemGuardarEnsayoProctor);
+            ribbonPageGroup4.ItemLinks.Add(barButtonItemReporteResultadosProctor);
             ribbonPageGroup4.Name = "ribbonPageGroup4";
             ribbonPageGroup4.Text = "Proctor";
             // 
@@ -254,22 +284,22 @@
             // 
             // ribbonStatusBar
             // 
-            ribbonStatusBar.Location = new Point(0, 683);
+            ribbonStatusBar.Location = new Point(0, 689);
             ribbonStatusBar.Name = "ribbonStatusBar";
             ribbonStatusBar.Ribbon = ribbon;
-            ribbonStatusBar.Size = new Size(950, 37);
+            ribbonStatusBar.Size = new Size(950, 31);
             // 
             // splashScreenManager1
             // 
             splashScreenManager1.ClosingDelay = 500;
             // 
-            // barButtonItemAbrirProyecto
+            // barButtonItemEditarEmpleado
             // 
-            barButtonItemAbrirProyecto.Caption = "Abrir Proyecto";
-            barButtonItemAbrirProyecto.Id = 15;
-            barButtonItemAbrirProyecto.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItem2.ImageOptions.SvgImage");
-            barButtonItemAbrirProyecto.Name = "barButtonItemAbrirProyecto";
-            barButtonItemAbrirProyecto.ItemClick += barButtonItemAbrirProyecto_ItemClick;
+            barButtonItemEditarEmpleado.Caption = "Editar";
+            barButtonItemEditarEmpleado.Id = 18;
+            barButtonItemEditarEmpleado.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItem2.ImageOptions.SvgImage");
+            barButtonItemEditarEmpleado.Name = "barButtonItemEditarEmpleado";
+            barButtonItemEditarEmpleado.ItemClick += barButtonItemEditarEmpleado_ItemClick;
             // 
             // MainView
             // 
@@ -320,5 +350,8 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemAgregarMuestra;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
         private DevExpress.XtraBars.BarButtonItem barButtonItemAbrirProyecto;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemReporteResultadosProctor;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemAbrirEnsayoProctor;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemEditarEmpleado;
     }
 }

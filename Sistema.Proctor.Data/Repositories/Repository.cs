@@ -31,7 +31,26 @@ public class Repository<T> : IRepository<T> where T : class
 
     public void Update(T entity)
     {
-        _context.Update(entity);
+        // Obtiene la clave primaria de la entidad
+        var entityType = _context.Model.FindEntityType(typeof(T));
+        var key = entityType.FindPrimaryKey();
+        var keyProperties = key.Properties.Select(p => p.Name).ToList();
+
+        // Obtiene los valores de la clave primaria de la entidad
+        var keyValues = keyProperties.Select(k => typeof(T).GetProperty(k).GetValue(entity)).ToArray();
+
+        var local = _context.Set<T>().Find(keyValues);
+
+        if (local != null)
+        {
+            // Actualiza los valores de la entidad existente
+            _context.Entry(local).CurrentValues.SetValues(entity);
+        }
+        else
+        {
+            // Si no está siendo rastreada, la actualizamos
+            _context.Update(entity);
+        }
     }
 
     public void Delete(T entity)
@@ -59,5 +78,10 @@ public class Repository<T> : IRepository<T> where T : class
     public Task AddRangeAsync(List<T> range)
     {
         return _context.AddRangeAsync(range);
+    }
+
+    public void UpdateRangeAsync(List<T> range)
+    {
+        _context.UpdateRange(range);
     }
 }

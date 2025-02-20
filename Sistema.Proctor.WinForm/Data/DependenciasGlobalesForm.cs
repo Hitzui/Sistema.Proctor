@@ -1,5 +1,10 @@
 ﻿using System.Collections.ObjectModel;
+using System.IO;
+using System.Security.AccessControl;
+using System.Security.Principal;
 using System.Windows.Threading;
+using DevExpress.XtraEditors;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using Sistema.Proctor.Data;
@@ -29,7 +34,6 @@ public class DependenciasGlobalesForm
         _listadoEmpleados = new();
         _listadoProyectos = new();
         _listadoMuestras = new();
-        _listadoEnsayosMuestras = new();
     }
 
     public T? GetService<T>()
@@ -49,14 +53,19 @@ public class DependenciasGlobalesForm
     private ObservableCollection<Muestra> _listadoMuestras;
     public ObservableCollection<Muestra> ListadoMuestras => _listadoMuestras;
 
-    private ObservableCollection<Ensayo> _listadoEnsayosMuestras;
-    public ObservableCollection<Ensayo> ListadoEnsayosMuestras => _listadoEnsayosMuestras;
+    public string GetConnectionString(string connectionStringName)
+    {
+        var configurationBuilder =
+            new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: true, reloadOnChange: false);
+        var configuration = configurationBuilder.Build();
+        return configuration.GetConnectionString(connectionStringName);
+    }
 
     public async void FillListadoClientes()
     {
         try
         {
-            var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
+            using IUnitOfWork unitOfWork = new UnitOfWork();
             var repositorioCliente = unitOfWork.ClienteRepository;
             var listado = await repositorioCliente.GetAllAsync();
             ListadoClientes.Clear();
@@ -76,7 +85,7 @@ public class DependenciasGlobalesForm
     {
         try
         {
-            var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
+            using IUnitOfWork unitOfWork = new UnitOfWork();
             var empleadoRepository = unitOfWork.EmpleadoRepository;
             var listado = await empleadoRepository.GetAllAsync();
             ListadoEmpleados.Clear();
@@ -96,7 +105,8 @@ public class DependenciasGlobalesForm
     {
         try
         {
-            var proyectoRepository = DependenciasGlobales.Instance.GetService<IProyectoRepository>();
+            using IUnitOfWork unitOfWork = new UnitOfWork();
+            var proyectoRepository = unitOfWork.ProyectoRepository;
             var listado = await proyectoRepository.FindByDateList();
             ListadoProyectos.Clear();
             if (listado.Count <= 0) return;
@@ -113,7 +123,8 @@ public class DependenciasGlobalesForm
 
     public async Task FillListadoMuestras(int idProyectos)
     {
-        var muestraRepository = DependenciasGlobales.Instance.GetService<IMuestraRepository>();
+        using IUnitOfWork unitOfWork = new UnitOfWork();
+        var muestraRepository = unitOfWork.MuestrasRepository;
         var listado = await muestraRepository.GetMuestraByProyecto(idProyectos);
         ListadoMuestras.Clear();
         if (listado.Count <= 0) return;
@@ -123,9 +134,31 @@ public class DependenciasGlobalesForm
         }
     }
 
+    public string CrearDirectorioEnDocumentos(string namePath)
+    {
+        // Obtener la ruta de la carpeta "Documentos" del usuario
+        var rutaDocumentos = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+        var rutaDirectorio = Path.Combine(rutaDocumentos, namePath);
+
+
+        if (!Directory.Exists(rutaDirectorio))
+        {
+            Directory.CreateDirectory(rutaDirectorio);
+        }
+
+        var attributes = File.GetAttributes(rutaDirectorio);
+        if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+        {
+            
+        }
+
+
+        return rutaDirectorio;
+    }
 
     public ClienteDto? SelectedCliente { get; set; }
     public EmpleadoDto? SelectedEmpleado { get; set; }
     public ProyectoDto? SelectedProyecto { get; set; }
-    public int SelectedIdMuestra { get; set; } = 0;
+    public int SelectedIdMuestra { get; set; }
+    public Usuario Usuario { get; set; }
 }

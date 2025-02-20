@@ -59,12 +59,14 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Muestra
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
+                var usuario = DependenciasGlobalesForm.Instance.Usuario;
                 _Muestra = muestraDtoBindingSource.DataSource as MuestraDto;
                 _Muestra.Idproyecto = selectedProyecto.Idproyecto;
                 var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
                 var muestraRepository = unitOfWork.MuestrasRepository; 
                 var muestra = _Muestra.GetMuestra();
+                muestra.CreatedBy = Convert.ToInt32(usuario.Idusuario);
+                muestra.UpdatedBy = Convert.ToInt32(usuario.Idusuario);
                 await muestraRepository.AddAsync(muestra);
                 var completeAsync = await unitOfWork.CompleteAsync();
                 if (completeAsync>0)

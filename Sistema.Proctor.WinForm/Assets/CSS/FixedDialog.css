@@ -1,0 +1,16 @@
+﻿.caption {
+	display: flex;
+	flex-direction: row;
+	align-content: center;
+}
+
+.title {
+	color: @ControlText;
+	flex-grow: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	align-self: center;
+	font-size: 14px;
+	margin-left: 16px;
+}

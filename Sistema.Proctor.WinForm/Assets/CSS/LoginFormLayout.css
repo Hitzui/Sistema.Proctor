@@ -1,0 +1,40 @@
+﻿body {
+    height: 100%;
+    display: flex;
+}
+
+.container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 32px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.editor {
+    margin-bottom: 8px;
+}
+
+.button {
+    width: 84px;
+    align-self: center;
+}
+
+.link-recovery {
+    align-self: flex-start;
+}
+
+.link-register {
+    margin-left: 8px;
+}

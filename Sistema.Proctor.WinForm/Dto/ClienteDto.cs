@@ -34,6 +34,13 @@ public class ClienteDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXDa
 
     private string _Telefono;
 
+    private int? _CreatedBy;
+
+    private DateTime _CreatedAt;
+
+    private int? _UpdatedBy;
+
+    private DateTime _UpdatedAt;
 
     public ClienteDto()
     {
@@ -217,6 +224,73 @@ public class ClienteDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXDa
             }
         }
     }
+    public int? CreatedBy
+        {
+            get
+            {
+                return this._CreatedBy;
+            }
+            set
+            {
+                if (this._CreatedBy != value)
+                {
+                    this.SendPropertyChanging("CreatedBy");
+                    this._CreatedBy = value;
+                    this.SendPropertyChanged("CreatedBy");
+                }
+            }
+        }
+
+        public DateTime CreatedAt
+        {
+            get
+            {
+                return this._CreatedAt;
+            }
+            set
+            {
+                if (this._CreatedAt != value)
+                {
+                    this.SendPropertyChanging("CreatedAt");
+                    this._CreatedAt = value;
+                    this.SendPropertyChanged("CreatedAt");
+                }
+            }
+        }
+
+        public int? UpdatedBy
+        {
+            get
+            {
+                return this._UpdatedBy;
+            }
+            set
+            {
+                if (this._UpdatedBy != value)
+                {
+                    this.SendPropertyChanging("UpdatedBy");
+                    this._UpdatedBy = value;
+                    this.SendPropertyChanged("UpdatedBy");
+                }
+            }
+        }
+
+        public DateTime UpdatedAt
+        {
+            get
+            {
+                return this._UpdatedAt;
+            }
+            set
+            {
+                if (this._UpdatedAt != value)
+                {
+                    this.SendPropertyChanging("UpdatedAt");
+                    this._UpdatedAt = value;
+                    this.SendPropertyChanged("UpdatedAt");
+                }
+            }
+        }
 
 
     #region Extensibility Method Definitions

@@ -3,7 +3,7 @@ using Sistema.Proctor.Data.Entities;
 
 namespace Sistema.Proctor.Data.Repositories;
 
-public interface IUnitOfWork
+public interface IUnitOfWork : IDisposable
 {
     IMuestraRepository MuestrasRepository { get; }
     IRepository<Cliente> ClienteRepository { get; }
@@ -12,17 +12,21 @@ public interface IUnitOfWork
     IRepository<ResultadosProctor> ResultadosProctorRepository { get; }
     IRepository<TipoEnsayo> TipoEnsayoRepository { get; }
     IEnsayoRepository EnsayosRepository { get; }
+    IResultadosEnsayoProctorRepository ResultadosEnsayoProctorRepository { get; }
+    IProyectoRepository ProyectoRepository { get; }
+    IUsuarioRepository UsuarioRepository { get; }
     Task<int> CompleteAsync();
+    void ClearTracking();
 }
 
-public class UnitOfWork : IUnitOfWork
+public class UnitOfWork : IUnitOfWork, IAsyncDisposable
 {
     private readonly DataContextProctor _Context;
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-    public UnitOfWork(DataContextProctor context)
+    public UnitOfWork()
     {
-        _Context = context;
+        _Context = new DataContextProctor();
         ClienteRepository = new Repository<Cliente>(_Context);
         EmpleadoRepository = new Repository<Empleado>(_Context);
         EnsayosProctorRepository = new Repository<EnsayoProctor>(_Context);
@@ -30,6 +34,9 @@ public class UnitOfWork : IUnitOfWork
         ResultadosProctorRepository = new Repository<ResultadosProctor>(_Context);
         MuestrasRepository = new MuestraRepository(_Context);
         TipoEnsayoRepository = new Repository<TipoEnsayo>(_Context);
+        ResultadosEnsayoProctorRepository = new ResultadosEnsayoProctorRepository(_Context);
+        ProyectoRepository = new ProyectoRepository(_Context);
+        UsuarioRepository = new UsuarioRepository(_Context);
     }
 
     public IRepository<Cliente> ClienteRepository { get; }
@@ -39,6 +46,9 @@ public class UnitOfWork : IUnitOfWork
     public IRepository<ResultadosProctor> ResultadosProctorRepository { get; }
     public IEnsayoRepository EnsayosRepository { get; }
     public IRepository<TipoEnsayo> TipoEnsayoRepository { get; }
+    public IResultadosEnsayoProctorRepository ResultadosEnsayoProctorRepository { get; }
+    public IProyectoRepository ProyectoRepository { get; }
+    public IUsuarioRepository UsuarioRepository { get; }
 
     public async Task<int> CompleteAsync()
     {
@@ -58,5 +68,20 @@ public class UnitOfWork : IUnitOfWork
         {
             _Context.ChangeTracker.Clear();
         }
+    }
+
+    public void ClearTracking()
+    {
+        _Context.ChangeTracker.Clear();
+    }
+
+    public void Dispose()
+    {
+        _Context.Dispose();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await _Context.DisposeAsync();
     }
 }

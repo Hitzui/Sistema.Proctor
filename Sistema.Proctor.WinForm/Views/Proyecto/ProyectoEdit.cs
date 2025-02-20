@@ -14,6 +14,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private Sistema.Proctor.Data.Entities.Cliente? SelectedCliente;
         private bool isNew;
+
         public ProyectoEdit()
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
             {
                 return;
             }
+
             SelectedCliente = DependenciasGlobalesForm.Instance.SelectedCliente.GetCliente();
             txtClienteDescripcion.Text = SelectedCliente.NombreComercial;
         }
@@ -42,7 +44,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
                 {
                     txtClienteDescripcion.Text = SelectedCliente.NombreComercial;
                 }
-                
+
                 isNew = false;
             }
             else
@@ -61,7 +63,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
             {
                 var res = XtraMessageBox.Show("¿Guardar los datos del proyecto?", "Guardar", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
-                if (res== DialogResult.No)
+                if (res == DialogResult.No)
                 {
                     return;
                 }
@@ -74,21 +76,32 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
 
                 if (SelectedCliente is null)
                 {
-                    XtraMessageBox.Show("NO ha seleccionado un cliente, intente nuevamente", "Error", MessageBoxButtons.OK,
+                    XtraMessageBox.Show("NO ha seleccionado un cliente, intente nuevamente", "Error",
+                        MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                     return;
                 }
 
                 if (proyectoDtoBindingSource.Current is not ProyectoDto proyecto) return;
-                var proyectoRepository = DependenciasGlobales.Instance.GetService<IProyectoRepository>()!;
-                proyecto.Cliente = SelectedCliente;
+                using IUnitOfWork unitOfWork = new UnitOfWork();
+                var proyectoRepository = unitOfWork.ProyectoRepository;
+
+                var saveProyecto = proyecto.GetProyecto();
+                var usuario = DependenciasGlobalesForm.Instance.Usuario;
+                
                 if (isNew)
                 {
-                    await proyectoRepository.AddAsync(proyecto.GetProyecto());
+                    saveProyecto.Cliente = SelectedCliente;
+                    saveProyecto.CreatedBy = (int?)usuario.Idusuario;
+                    saveProyecto.UpdatedBy = (int?)usuario.Idusuario;
+                    await proyectoRepository.AddAsync(saveProyecto);
                 }
                 else
                 {
-                    proyectoRepository.Update(proyecto.GetProyecto());
+                    saveProyecto.Idcliente = SelectedCliente.Idcliente;
+                    saveProyecto.UpdatedBy = (int?)usuario.Idusuario;
+                    saveProyecto.UpdatedAt = DateTime.Now;
+                    proyectoRepository.Update(saveProyecto);
                 }
 
                 try

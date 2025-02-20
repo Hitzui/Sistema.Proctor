@@ -5,7 +5,7 @@ namespace Sistema.Proctor.Data.Repositories;
 
 public class ProyectoRepository : Repository<Proyecto>, IProyectoRepository
 {
-    private DataContextProctor _DataContextProctor;
+    private readonly DataContextProctor _DataContextProctor;
 
     public ProyectoRepository(DataContextProctor dataContextProctor) : base(dataContextProctor)
     {
@@ -15,6 +15,7 @@ public class ProyectoRepository : Repository<Proyecto>, IProyectoRepository
     public Task<List<Proyecto>> FindByDateList()
     {
         return _DataContextProctor.Proyectos
+            .AsNoTracking()
             .Include(proyecto => proyecto.Cliente)
             .AsNoTracking()
             .Where(proyecto => proyecto.Activo)
