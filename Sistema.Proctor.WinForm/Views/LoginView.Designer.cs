@@ -40,12 +40,15 @@
             errorProvider1 = new ErrorProvider(components);
             splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(Cliente.WaitForm1), true, true);
             panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            cmbSucursales = new DevExpress.XtraEditors.ComboBoxEdit();
+            labelControl4 = new DevExpress.XtraEditors.LabelControl();
             pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)txtPassword).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtEmail).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)panelControl1).BeginInit();
             panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)cmbSucursales.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -65,7 +68,7 @@
             // 
             txtPassword.EditorSize = DevExpress.XtraEditors.Internal.HtmlTextBoxBase.EditSize.Large;
             txtPassword.EnterMoveNextControl = true;
-            txtPassword.Location = new Point(41, 403);
+            txtPassword.Location = new Point(40, 370);
             txtPassword.Name = "txtPassword";
             txtPassword.Placeholder = "Ingrese contraseña";
             txtPassword.Size = new Size(340, 30);
@@ -75,7 +78,7 @@
             // 
             txtEmail.EditorSize = DevExpress.XtraEditors.Internal.HtmlTextBoxBase.EditSize.Large;
             txtEmail.EnterMoveNextControl = true;
-            txtEmail.Location = new Point(41, 301);
+            txtEmail.Location = new Point(40, 268);
             txtEmail.Name = "txtEmail";
             txtEmail.Placeholder = "Ingrese correo electrónico";
             txtEmail.Size = new Size(340, 30);
@@ -87,7 +90,7 @@
             labelControl2.Appearance.ForeColor = Color.DimGray;
             labelControl2.Appearance.Options.UseFont = true;
             labelControl2.Appearance.Options.UseForeColor = true;
-            labelControl2.Location = new Point(41, 279);
+            labelControl2.Location = new Point(40, 246);
             labelControl2.Name = "labelControl2";
             labelControl2.Size = new Size(36, 16);
             labelControl2.TabIndex = 5;
@@ -99,7 +102,7 @@
             labelControl3.Appearance.ForeColor = Color.DimGray;
             labelControl3.Appearance.Options.UseFont = true;
             labelControl3.Appearance.Options.UseForeColor = true;
-            labelControl3.Location = new Point(41, 381);
+            labelControl3.Location = new Point(40, 348);
             labelControl3.Name = "labelControl3";
             labelControl3.Size = new Size(65, 16);
             labelControl3.TabIndex = 6;
@@ -111,7 +114,7 @@
             btnIngresar.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
             btnIngresar.Appearance.Options.UseBackColor = true;
             btnIngresar.Appearance.Options.UseFont = true;
-            btnIngresar.Location = new Point(41, 487);
+            btnIngresar.Location = new Point(41, 517);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(339, 36);
             btnIngresar.TabIndex = 7;
@@ -125,7 +128,7 @@
             btnSalir.Appearance.Options.UseBackColor = true;
             btnSalir.Appearance.Options.UseFont = true;
             btnSalir.DialogResult = DialogResult.Cancel;
-            btnSalir.Location = new Point(41, 549);
+            btnSalir.Location = new Point(41, 579);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(339, 36);
             btnSalir.TabIndex = 8;
@@ -141,6 +144,8 @@
             // 
             // panelControl1
             // 
+            panelControl1.Controls.Add(cmbSucursales);
+            panelControl1.Controls.Add(labelControl4);
             panelControl1.Controls.Add(pictureBox1);
             panelControl1.Controls.Add(labelControl1);
             panelControl1.Controls.Add(labelControl2);
@@ -154,6 +159,24 @@
             panelControl1.Name = "panelControl1";
             panelControl1.Size = new Size(443, 627);
             panelControl1.TabIndex = 9;
+            // 
+            // cmbSucursales
+            // 
+            cmbSucursales.EnterMoveNextControl = true;
+            cmbSucursales.Location = new Point(42, 444);
+            cmbSucursales.Name = "cmbSucursales";
+            cmbSucursales.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cmbSucursales.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            cmbSucursales.Size = new Size(338, 22);
+            cmbSucursales.TabIndex = 11;
+            // 
+            // labelControl4
+            // 
+            labelControl4.Location = new Point(42, 425);
+            labelControl4.Name = "labelControl4";
+            labelControl4.Size = new Size(97, 13);
+            labelControl4.TabIndex = 10;
+            labelControl4.Text = "Seleccionar Sucursal";
             // 
             // pictureBox1
             // 
@@ -186,12 +209,14 @@
             Name = "LoginView";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Iniciar Sesión";
+            Load += LoginView_Load;
             ((System.ComponentModel.ISupportInitialize)txtPassword).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtEmail).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ((System.ComponentModel.ISupportInitialize)panelControl1).EndInit();
             panelControl1.ResumeLayout(false);
             panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)cmbSucursales.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -209,5 +234,7 @@
         private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private PictureBox pictureBox1;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbSucursales;
+        private DevExpress.XtraEditors.LabelControl labelControl4;
     }
 }

@@ -18,33 +18,27 @@ using System.Linq.Expressions;
 
 namespace Sistema.Proctor.Data.Entities
 {
-    public partial class Cliente : INotifyPropertyChanging, INotifyPropertyChanged {
+    public partial class Empresa : INotifyPropertyChanging, INotifyPropertyChanged {
 
         private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(System.String.Empty);
 
-        private int _Idcliente;
-
-        private string _Celular;
-
-        private string _Ciudad;
-
-        private string _Contacto;
-
-        private string _Departamento;
-
-        private string _Direccion;
-
-        private string _Email;
-
-        private DateTime? _FIngreso;
-
-        private string _NombreAbreviado;
+        private int _Idempresa;
 
         private string _NombreComercial;
 
-        private string _Ruc;
+        private string _NombreAbreviado;
+
+        private byte[] _Logo;
+
+        private string _Email;
 
         private string _Telefono;
+
+        private string _Celular;
+
+        private string _Direccion;
+
+        private string _Representante;
 
         private int? _CreatedBy;
 
@@ -54,163 +48,30 @@ namespace Sistema.Proctor.Data.Entities
 
         private DateTime _UpdatedAt;
 
-        private IList<Proyecto> _Proyectos;
+        private bool? _Activa;
 
-        public Cliente()
+        private bool? _Selected;
+
+        public Empresa()
         {
-            this._Proyectos = new List<Proyecto>();
+            this._Activa = false;
+            this._Selected = false;
             OnCreated();
         }
 
-        public int Idcliente
+        public int Idempresa
         {
             get
             {
-                return this._Idcliente;
+                return this._Idempresa;
             }
             set
             {
-                if (this._Idcliente != value)
+                if (this._Idempresa != value)
                 {
-                    this.SendPropertyChanging("Idcliente");
-                    this._Idcliente = value;
-                    this.SendPropertyChanged("Idcliente");
-                }
-            }
-        }
-
-        public string Celular
-        {
-            get
-            {
-                return this._Celular;
-            }
-            set
-            {
-                if (this._Celular != value)
-                {
-                    this.SendPropertyChanging("Celular");
-                    this._Celular = value;
-                    this.SendPropertyChanged("Celular");
-                }
-            }
-        }
-
-        public string Ciudad
-        {
-            get
-            {
-                return this._Ciudad;
-            }
-            set
-            {
-                if (this._Ciudad != value)
-                {
-                    this.SendPropertyChanging("Ciudad");
-                    this._Ciudad = value;
-                    this.SendPropertyChanged("Ciudad");
-                }
-            }
-        }
-
-        public string Contacto
-        {
-            get
-            {
-                return this._Contacto;
-            }
-            set
-            {
-                if (this._Contacto != value)
-                {
-                    this.SendPropertyChanging("Contacto");
-                    this._Contacto = value;
-                    this.SendPropertyChanged("Contacto");
-                }
-            }
-        }
-
-        public string Departamento
-        {
-            get
-            {
-                return this._Departamento;
-            }
-            set
-            {
-                if (this._Departamento != value)
-                {
-                    this.SendPropertyChanging("Departamento");
-                    this._Departamento = value;
-                    this.SendPropertyChanged("Departamento");
-                }
-            }
-        }
-
-        public string Direccion
-        {
-            get
-            {
-                return this._Direccion;
-            }
-            set
-            {
-                if (this._Direccion != value)
-                {
-                    this.SendPropertyChanging("Direccion");
-                    this._Direccion = value;
-                    this.SendPropertyChanged("Direccion");
-                }
-            }
-        }
-
-        public string Email
-        {
-            get
-            {
-                return this._Email;
-            }
-            set
-            {
-                if (this._Email != value)
-                {
-                    this.SendPropertyChanging("Email");
-                    this._Email = value;
-                    this.SendPropertyChanged("Email");
-                }
-            }
-        }
-
-        public DateTime? FIngreso
-        {
-            get
-            {
-                return this._FIngreso;
-            }
-            set
-            {
-                if (this._FIngreso != value)
-                {
-                    this.SendPropertyChanging("FIngreso");
-                    this._FIngreso = value;
-                    this.SendPropertyChanged("FIngreso");
-                }
-            }
-        }
-
-        public string NombreAbreviado
-        {
-            get
-            {
-                return this._NombreAbreviado;
-            }
-            set
-            {
-                if (this._NombreAbreviado != value)
-                {
-                    this.SendPropertyChanging("NombreAbreviado");
-                    this._NombreAbreviado = value;
-                    this.SendPropertyChanged("NombreAbreviado");
+                    this.SendPropertyChanging("Idempresa");
+                    this._Idempresa = value;
+                    this.SendPropertyChanged("Idempresa");
                 }
             }
         }
@@ -232,19 +93,53 @@ namespace Sistema.Proctor.Data.Entities
             }
         }
 
-        public string Ruc
+        public string NombreAbreviado
         {
             get
             {
-                return this._Ruc;
+                return this._NombreAbreviado;
             }
             set
             {
-                if (this._Ruc != value)
+                if (this._NombreAbreviado != value)
                 {
-                    this.SendPropertyChanging("Ruc");
-                    this._Ruc = value;
-                    this.SendPropertyChanged("Ruc");
+                    this.SendPropertyChanging("NombreAbreviado");
+                    this._NombreAbreviado = value;
+                    this.SendPropertyChanged("NombreAbreviado");
+                }
+            }
+        }
+
+        public byte[] Logo
+        {
+            get
+            {
+                return this._Logo;
+            }
+            set
+            {
+                if (this._Logo != value)
+                {
+                    this.SendPropertyChanging("Logo");
+                    this._Logo = value;
+                    this.SendPropertyChanged("Logo");
+                }
+            }
+        }
+
+        public string Email
+        {
+            get
+            {
+                return this._Email;
+            }
+            set
+            {
+                if (this._Email != value)
+                {
+                    this.SendPropertyChanging("Email");
+                    this._Email = value;
+                    this.SendPropertyChanged("Email");
                 }
             }
         }
@@ -262,6 +157,57 @@ namespace Sistema.Proctor.Data.Entities
                     this.SendPropertyChanging("Telefono");
                     this._Telefono = value;
                     this.SendPropertyChanged("Telefono");
+                }
+            }
+        }
+
+        public string Celular
+        {
+            get
+            {
+                return this._Celular;
+            }
+            set
+            {
+                if (this._Celular != value)
+                {
+                    this.SendPropertyChanging("Celular");
+                    this._Celular = value;
+                    this.SendPropertyChanged("Celular");
+                }
+            }
+        }
+
+        public string Direccion
+        {
+            get
+            {
+                return this._Direccion;
+            }
+            set
+            {
+                if (this._Direccion != value)
+                {
+                    this.SendPropertyChanging("Direccion");
+                    this._Direccion = value;
+                    this.SendPropertyChanged("Direccion");
+                }
+            }
+        }
+
+        public string Representante
+        {
+            get
+            {
+                return this._Representante;
+            }
+            set
+            {
+                if (this._Representante != value)
+                {
+                    this.SendPropertyChanging("Representante");
+                    this._Representante = value;
+                    this.SendPropertyChanged("Representante");
                 }
             }
         }
@@ -334,15 +280,37 @@ namespace Sistema.Proctor.Data.Entities
             }
         }
 
-        public virtual IList<Proyecto> Proyectos
+        public bool? Activa
         {
             get
             {
-                return this._Proyectos;
+                return this._Activa;
             }
             set
             {
-                this._Proyectos = value;
+                if (this._Activa != value)
+                {
+                    this.SendPropertyChanging("Activa");
+                    this._Activa = value;
+                    this.SendPropertyChanged("Activa");
+                }
+            }
+        }
+
+        public bool? Selected
+        {
+            get
+            {
+                return this._Selected;
+            }
+            set
+            {
+                if (this._Selected != value)
+                {
+                    this.SendPropertyChanging("Selected");
+                    this._Selected = value;
+                    this.SendPropertyChanged("Selected");
+                }
             }
         }
 
@@ -352,13 +320,13 @@ namespace Sistema.Proctor.Data.Entities
 
         public override bool Equals(object obj)
         {
-          Cliente toCompare = obj as Cliente;
+          Empresa toCompare = obj as Empresa;
           if (toCompare == null)
           {
             return false;
           }
 
-          if (!Object.Equals(this.Idcliente, toCompare.Idcliente))
+          if (!Object.Equals(this.Idempresa, toCompare.Idempresa))
             return false;
 
           return true;
@@ -367,7 +335,7 @@ namespace Sistema.Proctor.Data.Entities
         public override int GetHashCode()
         {
           int hashCode = 13;
-          hashCode = (hashCode * 7) + Idcliente.GetHashCode();
+          hashCode = (hashCode * 7) + Idempresa.GetHashCode();
           return hashCode;
         }
 

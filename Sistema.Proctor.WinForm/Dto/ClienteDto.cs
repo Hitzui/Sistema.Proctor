@@ -348,7 +348,7 @@ public class ClienteDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXDa
     {
         if (propertyName == "Direccion" && Direccion == "" ||
             propertyName == "Email" && Email == "" ||
-            propertyName == "RUC" && Email == "" ||
+            propertyName == "RUC" && Ruc == "" ||
             propertyName == "NombreAbreviado" && NombreAbreviado == "" ||
             propertyName == "NombreComercial" && NombreComercial == "")
         {

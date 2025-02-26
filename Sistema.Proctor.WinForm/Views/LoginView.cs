@@ -2,8 +2,10 @@
 using DevExpress.XtraEditors;
 using NLog;
 using Sistema.Proctor.Data;
+using Sistema.Proctor.Data.Entities;
 using Sistema.Proctor.Data.Repositories;
 using Sistema.Proctor.WinForm.Data;
+using Sistema.Proctor.WinForm.Dto;
 
 namespace Sistema.Proctor.WinForm.Views
 {
@@ -55,11 +57,36 @@ namespace Sistema.Proctor.WinForm.Views
                 splashScreenManager1.CloseWaitForm();
                 XtraMessageBox.Show("Inicio de sesión correcto. Bienvenido al Sistema de Gestion de laboratorio", "Ingresar", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DependenciasGlobalesForm.Instance.Usuario = usuario;
+                DependenciasGlobalesForm.Instance.SelectedSucursal = (EmpresaDto)cmbSucursales.SelectedItem;
                 DialogResult = DialogResult.Yes;
             }
             catch (Exception exception)
             {
                 Logger.Error(exception);
+            }
+        }
+
+        private async void LoginView_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                using IUnitOfWork unitOfWork = new UnitOfWork();
+                var empresaRepository = unitOfWork.EmpresaRepository;
+                var listado = await empresaRepository.GetListByActiva();
+                if (listado.Count > 0)
+                {
+                    foreach (var empresa in listado)
+                    {
+                        var empresaDto = new EmpresaDto().GetEmpresaDto(empresa);
+                        cmbSucursales.Properties.Items.Add(empresaDto);
+                    }
+
+                    cmbSucursales.SelectedIndex = 0;
+                }
+            }
+            catch (Exception exception)
+            {
+                await XtraMessageBox.ShowAsync(exception.Message);
             }
         }
     }

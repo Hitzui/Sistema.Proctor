@@ -22,4 +22,7 @@ public record ResultadosEnsayoProctorDto(
     string DescripcionProyecto,
     string NombreCliente,
     string NombresEmpleado
-);
+)
+{
+    public string NombreTranscribio { get; set; } = "";
+}

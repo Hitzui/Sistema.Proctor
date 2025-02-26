@@ -126,16 +126,16 @@
             this.xrTableRow14 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell14 = new DevExpress.XtraReports.UI.XRTableCell();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.xrPanel2 = new DevExpress.XtraReports.UI.XRPanel();
             this.xrTable9 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow51 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell76 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell77 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell78 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell79 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrPanel2 = new DevExpress.XtraReports.UI.XRPanel();
             this.xrLabel11 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrPanel1 = new DevExpress.XtraReports.UI.XRPanel();
-            this.xrLabel10 = new DevExpress.XtraReports.UI.XRLabel();
+            this.lblRepresentante = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel9 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrTable8 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow49 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -154,9 +154,9 @@
             this.objectDataSource1 = new DevExpress.DataAccess.ObjectBinding.ObjectDataSource(this.components);
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
-            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
+            this.lblNombreSucursal = new DevExpress.XtraReports.UI.XRLabel();
+            this.lblDireccionSucursal = new DevExpress.XtraReports.UI.XRLabel();
+            this.lblEmailSucursal = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel5 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
@@ -239,7 +239,7 @@
             // TopMargin
             // 
             this.TopMargin.Dpi = 254F;
-            this.TopMargin.HeightF = 55.5625F;
+            this.TopMargin.HeightF = 69.99433F;
             this.TopMargin.Name = "TopMargin";
             this.TopMargin.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 254F);
             this.TopMargin.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
@@ -913,7 +913,6 @@
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrTable9,
             this.xrPanel2,
             this.xrPanel1,
             this.xrTable8,
@@ -921,20 +920,34 @@
             this.xrTable6,
             this.graficoProctor});
             this.ReportFooter.Dpi = 254F;
-            this.ReportFooter.HeightF = 838.4695F;
+            this.ReportFooter.HeightF = 958.2952F;
             this.ReportFooter.KeepTogether = true;
             this.ReportFooter.Name = "ReportFooter";
+            // 
+            // xrPanel2
+            // 
+            this.xrPanel2.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
+            | DevExpress.XtraPrinting.BorderSide.Right) 
+            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrPanel2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrTable9,
+            this.xrLabel11});
+            this.xrPanel2.Dpi = 254F;
+            this.xrPanel2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 748.027F);
+            this.xrPanel2.Name = "xrPanel2";
+            this.xrPanel2.SizeF = new System.Drawing.SizeF(1436.563F, 210.2682F);
+            this.xrPanel2.StylePriority.UseBorders = false;
             // 
             // xrTable9
             // 
             this.xrTable9.Dpi = 254F;
             this.xrTable9.Font = new DevExpress.Drawing.DXFont("Arial", 9F);
-            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(10.60417F, 666.6309F);
+            this.xrTable9.LocationFloat = new DevExpress.Utils.PointFloat(13.22919F, 10.75317F);
             this.xrTable9.Name = "xrTable9";
             this.xrTable9.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable9.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow51});
-            this.xrTable9.SizeF = new System.Drawing.SizeF(1412.73F, 85.85425F);
+            this.xrTable9.SizeF = new System.Drawing.SizeF(1398.334F, 85.85425F);
             this.xrTable9.StylePriority.UseFont = false;
             // 
             // xrTableRow51
@@ -950,11 +963,13 @@
             // 
             // xrTableCell76
             // 
+            this.xrTableCell76.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell76.Dpi = 254F;
             this.xrTableCell76.Multiline = true;
             this.xrTableCell76.Name = "xrTableCell76";
+            this.xrTableCell76.StylePriority.UseBorders = false;
             this.xrTableCell76.Text = "Verificación de datos:";
-            this.xrTableCell76.Weight = 0.78635351983850887D;
+            this.xrTableCell76.Weight = 0.74951785358276235D;
             // 
             // xrTableCell77
             // 
@@ -967,9 +982,11 @@
             // 
             // xrTableCell78
             // 
+            this.xrTableCell78.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrTableCell78.Dpi = 254F;
             this.xrTableCell78.Multiline = true;
             this.xrTableCell78.Name = "xrTableCell78";
+            this.xrTableCell78.StylePriority.UseBorders = false;
             this.xrTableCell78.Text = "Transcrito y revisado por:";
             this.xrTableCell78.Weight = 0.65083006009962086D;
             // 
@@ -977,30 +994,19 @@
             // 
             this.xrTableCell79.Borders = DevExpress.XtraPrinting.BorderSide.Bottom;
             this.xrTableCell79.Dpi = 254F;
+            this.xrTableCell79.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[NombreTranscribio]")});
             this.xrTableCell79.Multiline = true;
             this.xrTableCell79.Name = "xrTableCell79";
             this.xrTableCell79.StylePriority.UseBorders = false;
-            this.xrTableCell79.Weight = 1.304967810701805D;
-            // 
-            // xrPanel2
-            // 
-            this.xrPanel2.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
-            | DevExpress.XtraPrinting.BorderSide.Right) 
-            | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrPanel2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrLabel11});
-            this.xrPanel2.Dpi = 254F;
-            this.xrPanel2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 626.8274F);
-            this.xrPanel2.Name = "xrPanel2";
-            this.xrPanel2.SizeF = new System.Drawing.SizeF(1436.563F, 210.2681F);
-            this.xrPanel2.StylePriority.UseBorders = false;
+            this.xrTableCell79.Weight = 1.2353580566244202D;
             // 
             // xrLabel11
             // 
             this.xrLabel11.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrLabel11.Dpi = 254F;
             this.xrLabel11.Font = new DevExpress.Drawing.DXFont("Arial", 9F);
-            this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(0F, 129.4185F);
+            this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(13.22917F, 126.8483F);
             this.xrLabel11.Multiline = true;
             this.xrLabel11.Name = "xrLabel11";
             this.xrLabel11.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -1015,37 +1021,37 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrPanel1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrLabel10,
+            this.lblRepresentante,
             this.xrLabel9});
             this.xrPanel1.Dpi = 254F;
-            this.xrPanel1.LocationFloat = new DevExpress.Utils.PointFloat(1439.563F, 626.8274F);
+            this.xrPanel1.LocationFloat = new DevExpress.Utils.PointFloat(1439.563F, 748.027F);
             this.xrPanel1.Name = "xrPanel1";
             this.xrPanel1.SizeF = new System.Drawing.SizeF(576.437F, 210.2682F);
             this.xrPanel1.StylePriority.UseBorders = false;
             // 
-            // xrLabel10
+            // lblRepresentante
             // 
-            this.xrLabel10.Dpi = 254F;
-            this.xrLabel10.Font = new DevExpress.Drawing.DXFont("Arial", 9F);
-            this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(0F, 151.8482F);
-            this.xrLabel10.Multiline = true;
-            this.xrLabel10.Name = "xrLabel10";
-            this.xrLabel10.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel10.SizeF = new System.Drawing.SizeF(576.437F, 58.41992F);
-            this.xrLabel10.StylePriority.UseFont = false;
-            this.xrLabel10.StylePriority.UseTextAlignment = false;
-            this.xrLabel10.Text = "Ing Juan Carlos Vargas R.";
-            this.xrLabel10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.lblRepresentante.Dpi = 254F;
+            this.lblRepresentante.Font = new DevExpress.Drawing.DXFont("Arial", 9F);
+            this.lblRepresentante.LocationFloat = new DevExpress.Utils.PointFloat(10.58313F, 126.8483F);
+            this.lblRepresentante.Multiline = true;
+            this.lblRepresentante.Name = "lblRepresentante";
+            this.lblRepresentante.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.lblRepresentante.SizeF = new System.Drawing.SizeF(543.8538F, 58.41992F);
+            this.lblRepresentante.StylePriority.UseFont = false;
+            this.lblRepresentante.StylePriority.UseTextAlignment = false;
+            this.lblRepresentante.Text = "Ing Juan Carlos Vargas R.";
+            this.lblRepresentante.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // xrLabel9
             // 
             this.xrLabel9.Dpi = 254F;
             this.xrLabel9.Font = new DevExpress.Drawing.DXFont("Arial", 9F);
-            this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(0F, 10.75317F);
+            this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(10.58313F, 10.75323F);
             this.xrLabel9.Multiline = true;
             this.xrLabel9.Name = "xrLabel9";
             this.xrLabel9.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel9.SizeF = new System.Drawing.SizeF(576.437F, 55.56244F);
+            this.xrLabel9.SizeF = new System.Drawing.SizeF(540.854F, 55.56244F);
             this.xrLabel9.StylePriority.UseFont = false;
             this.xrLabel9.StylePriority.UseTextAlignment = false;
             this.xrLabel9.Text = "REPRESENTANTE DYSCONCSA";
@@ -1057,6 +1063,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable8.Dpi = 254F;
+            this.xrTable8.Font = new DevExpress.Drawing.DXFont("Times New Roman", 8.5F);
             this.xrTable8.LocationFloat = new DevExpress.Utils.PointFloat(1436.563F, 427.1535F);
             this.xrTable8.Name = "xrTable8";
             this.xrTable8.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
@@ -1065,6 +1072,7 @@
             this.xrTableRow50});
             this.xrTable8.SizeF = new System.Drawing.SizeF(579.4369F, 127F);
             this.xrTable8.StylePriority.UseBorders = false;
+            this.xrTable8.StylePriority.UseFont = false;
             // 
             // xrTableRow49
             // 
@@ -1114,6 +1122,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTable7.Dpi = 254F;
+            this.xrTable7.Font = new DevExpress.Drawing.DXFont("Times New Roman", 8.5F);
             this.xrTable7.LocationFloat = new DevExpress.Utils.PointFloat(1436.563F, 196.966F);
             this.xrTable7.Name = "xrTable7";
             this.xrTable7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
@@ -1122,6 +1131,7 @@
             this.xrTableRow48});
             this.xrTable7.SizeF = new System.Drawing.SizeF(576.437F, 127F);
             this.xrTable7.StylePriority.UseBorders = false;
+            this.xrTable7.StylePriority.UseFont = false;
             // 
             // xrTableRow47
             // 
@@ -1168,12 +1178,14 @@
             // xrTable6
             // 
             this.xrTable6.Dpi = 254F;
+            this.xrTable6.Font = new DevExpress.Drawing.DXFont("Times New Roman", 8.5F);
             this.xrTable6.LocationFloat = new DevExpress.Utils.PointFloat(1436.563F, 54.09101F);
             this.xrTable6.Name = "xrTable6";
             this.xrTable6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable6.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow46});
             this.xrTable6.SizeF = new System.Drawing.SizeF(576.437F, 97.89584F);
+            this.xrTable6.StylePriority.UseFont = false;
             // 
             // xrTableRow46
             // 
@@ -1189,7 +1201,7 @@
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell71.Dpi = 254F;
-            this.xrTableCell71.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.xrTableCell71.Font = new DevExpress.Drawing.DXFont("Arial", 9F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell71.Multiline = true;
             this.xrTableCell71.Name = "xrTableCell71";
             this.xrTableCell71.StylePriority.UseBorders = false;
@@ -1202,14 +1214,13 @@
             // graficoProctor
             // 
             this.graficoProctor.AnchorHorizontal = ((DevExpress.XtraReports.UI.HorizontalAnchorStyles)((DevExpress.XtraReports.UI.HorizontalAnchorStyles.Left | DevExpress.XtraReports.UI.HorizontalAnchorStyles.Right)));
-            this.graficoProctor.AnchorVertical = ((DevExpress.XtraReports.UI.VerticalAnchorStyles)((DevExpress.XtraReports.UI.VerticalAnchorStyles.Top | DevExpress.XtraReports.UI.VerticalAnchorStyles.Bottom)));
             this.graficoProctor.BorderColor = System.Drawing.Color.Black;
             this.graficoProctor.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.graficoProctor.Dpi = 254F;
             this.graficoProctor.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.graficoProctor.Name = "graficoProctor";
             this.graficoProctor.SeriesSerializable = new DevExpress.XtraCharts.Series[0];
-            this.graficoProctor.SizeF = new System.Drawing.SizeF(1436.563F, 626.8275F);
+            this.graficoProctor.SizeF = new System.Drawing.SizeF(1423.688F, 748.0269F);
             // 
             // objectDataSource1
             // 
@@ -1331,9 +1342,9 @@
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPictureBox1,
-            this.xrLabel1,
-            this.xrLabel2,
-            this.xrLabel3,
+            this.lblNombreSucursal,
+            this.lblDireccionSucursal,
+            this.lblEmailSucursal,
             this.xrLabel4,
             this.xrLabel5,
             this.xrLabel6,
@@ -1354,44 +1365,44 @@
             this.xrPictureBox1.SizeF = new System.Drawing.SizeF(420.6875F, 173.0376F);
             this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
-            // xrLabel1
+            // lblNombreSucursal
             // 
-            this.xrLabel1.AnchorHorizontal = ((DevExpress.XtraReports.UI.HorizontalAnchorStyles)((DevExpress.XtraReports.UI.HorizontalAnchorStyles.Left | DevExpress.XtraReports.UI.HorizontalAnchorStyles.Right)));
-            this.xrLabel1.Dpi = 254F;
-            this.xrLabel1.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.xrLabel1.Name = "xrLabel1";
-            this.xrLabel1.SizeF = new System.Drawing.SizeF(2016F, 68.79168F);
-            this.xrLabel1.StylePriority.UseFont = false;
-            this.xrLabel1.StylePriority.UseTextAlignment = false;
-            this.xrLabel1.Text = "DISEÑO Y SUPERVISION, CONTROL DE CALIDAD, S.A. ";
-            this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.lblNombreSucursal.AnchorHorizontal = ((DevExpress.XtraReports.UI.HorizontalAnchorStyles)((DevExpress.XtraReports.UI.HorizontalAnchorStyles.Left | DevExpress.XtraReports.UI.HorizontalAnchorStyles.Right)));
+            this.lblNombreSucursal.Dpi = 254F;
+            this.lblNombreSucursal.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.lblNombreSucursal.LocationFloat = new DevExpress.Utils.PointFloat(420.6875F, 0F);
+            this.lblNombreSucursal.Name = "lblNombreSucursal";
+            this.lblNombreSucursal.SizeF = new System.Drawing.SizeF(1598.313F, 68.79168F);
+            this.lblNombreSucursal.StylePriority.UseFont = false;
+            this.lblNombreSucursal.StylePriority.UseTextAlignment = false;
+            this.lblNombreSucursal.Text = "DISEÑO Y SUPERVISION, CONTROL DE CALIDAD, S.A. ";
+            this.lblNombreSucursal.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
-            // xrLabel2
+            // lblDireccionSucursal
             // 
-            this.xrLabel2.AnchorHorizontal = ((DevExpress.XtraReports.UI.HorizontalAnchorStyles)((DevExpress.XtraReports.UI.HorizontalAnchorStyles.Left | DevExpress.XtraReports.UI.HorizontalAnchorStyles.Right)));
-            this.xrLabel2.Dpi = 254F;
-            this.xrLabel2.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 68.79166F);
-            this.xrLabel2.Name = "xrLabel2";
-            this.xrLabel2.SizeF = new System.Drawing.SizeF(2016F, 60.85421F);
-            this.xrLabel2.StylePriority.UseFont = false;
-            this.xrLabel2.StylePriority.UseTextAlignment = false;
-            this.xrLabel2.Text = "De Los Semaforos del Seminario 1 Cuadra al Norte 1 Cuadra al Oeste.";
-            this.xrLabel2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.lblDireccionSucursal.AnchorHorizontal = ((DevExpress.XtraReports.UI.HorizontalAnchorStyles)((DevExpress.XtraReports.UI.HorizontalAnchorStyles.Left | DevExpress.XtraReports.UI.HorizontalAnchorStyles.Right)));
+            this.lblDireccionSucursal.Dpi = 254F;
+            this.lblDireccionSucursal.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.lblDireccionSucursal.LocationFloat = new DevExpress.Utils.PointFloat(420.6875F, 68.79163F);
+            this.lblDireccionSucursal.Name = "lblDireccionSucursal";
+            this.lblDireccionSucursal.SizeF = new System.Drawing.SizeF(1598.313F, 60.85422F);
+            this.lblDireccionSucursal.StylePriority.UseFont = false;
+            this.lblDireccionSucursal.StylePriority.UseTextAlignment = false;
+            this.lblDireccionSucursal.Text = "De Los Semaforos del Seminario 1 Cuadra al Norte 1 Cuadra al Oeste.";
+            this.lblDireccionSucursal.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
-            // xrLabel3
+            // lblEmailSucursal
             // 
-            this.xrLabel3.AnchorHorizontal = ((DevExpress.XtraReports.UI.HorizontalAnchorStyles)((DevExpress.XtraReports.UI.HorizontalAnchorStyles.Left | DevExpress.XtraReports.UI.HorizontalAnchorStyles.Right)));
-            this.xrLabel3.Dpi = 254F;
-            this.xrLabel3.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 129.6459F);
-            this.xrLabel3.Name = "xrLabel3";
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(2016F, 43.39168F);
-            this.xrLabel3.StylePriority.UseFont = false;
-            this.xrLabel3.StylePriority.UseTextAlignment = false;
-            this.xrLabel3.Text = "dysconcsa@gmail.com / www.dysconcsa.net";
-            this.xrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.lblEmailSucursal.AnchorHorizontal = ((DevExpress.XtraReports.UI.HorizontalAnchorStyles)((DevExpress.XtraReports.UI.HorizontalAnchorStyles.Left | DevExpress.XtraReports.UI.HorizontalAnchorStyles.Right)));
+            this.lblEmailSucursal.Dpi = 254F;
+            this.lblEmailSucursal.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
+            this.lblEmailSucursal.LocationFloat = new DevExpress.Utils.PointFloat(420.6875F, 129.6459F);
+            this.lblEmailSucursal.Name = "lblEmailSucursal";
+            this.lblEmailSucursal.SizeF = new System.Drawing.SizeF(1598.313F, 43.39169F);
+            this.lblEmailSucursal.StylePriority.UseFont = false;
+            this.lblEmailSucursal.StylePriority.UseTextAlignment = false;
+            this.lblEmailSucursal.Text = "dysconcsa@gmail.com / www.dysconcsa.net";
+            this.lblEmailSucursal.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // xrLabel4
             // 
@@ -1401,7 +1412,7 @@
             this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 173.0376F);
             this.xrLabel4.Multiline = true;
             this.xrLabel4.Name = "xrLabel4";
-            this.xrLabel4.SizeF = new System.Drawing.SizeF(2016F, 84.66667F);
+            this.xrLabel4.SizeF = new System.Drawing.SizeF(2019F, 84.66667F);
             this.xrLabel4.StylePriority.UseFont = false;
             this.xrLabel4.StylePriority.UseTextAlignment = false;
             this.xrLabel4.Text = " DI-PR-32 \"DETERMINACION DE LAS CARACTERISTICAS DE COMPACTACION DEL SUELO POR LOS" +
@@ -1463,7 +1474,7 @@
             this.xrLine2.Dpi = 254F;
             this.xrLine2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 374.5442F);
             this.xrLine2.Name = "xrLine2";
-            this.xrLine2.SizeF = new System.Drawing.SizeF(2016F, 26.67001F);
+            this.xrLine2.SizeF = new System.Drawing.SizeF(2019F, 26.67001F);
             // 
             // PageHeader
             // 
@@ -1482,7 +1493,7 @@
             this.xrLine1.Dpi = 254F;
             this.xrLine1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 298.9792F);
             this.xrLine1.Name = "xrLine1";
-            this.xrLine1.SizeF = new System.Drawing.SizeF(2016F, 29.31586F);
+            this.xrLine1.SizeF = new System.Drawing.SizeF(2019F, 29.31586F);
             // 
             // xrTable3
             // 
@@ -2192,7 +2203,7 @@
             this.objectDataSource1});
             this.DataSource = this.objectDataSource1;
             this.Dpi = 254F;
-            this.Margins = new DevExpress.Drawing.DXMargins(82F, 61F, 55.5625F, 128.9308F);
+            this.Margins = new DevExpress.Drawing.DXMargins(82F, 58F, 69.99433F, 128.9308F);
             this.PageHeight = 2794;
             this.PageWidth = 2159;
             this.ReportUnit = DevExpress.XtraReports.UI.ReportUnit.TenthsOfAMillimeter;
@@ -2285,10 +2296,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell30;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow29;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell29;
-        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel1;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel2;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel3;
         private DevExpress.XtraReports.UI.XRLabel xrLabel4;
         private DevExpress.XtraReports.UI.XRLabel xrLabel5;
         private DevExpress.XtraReports.UI.XRLabel xrLabel6;
@@ -2369,15 +2376,19 @@
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow46;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell71;
         private DevExpress.XtraReports.UI.XRPanel xrPanel1;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel10;
         private DevExpress.XtraReports.UI.XRLabel xrLabel9;
+        private DevExpress.XtraReports.UI.XRPanel xrPanel2;
         private DevExpress.XtraReports.UI.XRTable xrTable9;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow51;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell76;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell77;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell78;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell79;
-        private DevExpress.XtraReports.UI.XRPanel xrPanel2;
         private DevExpress.XtraReports.UI.XRLabel xrLabel11;
+        public DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
+        public DevExpress.XtraReports.UI.XRLabel lblNombreSucursal;
+        public DevExpress.XtraReports.UI.XRLabel lblDireccionSucursal;
+        public DevExpress.XtraReports.UI.XRLabel lblEmailSucursal;
+        public DevExpress.XtraReports.UI.XRLabel lblRepresentante;
     }
 }

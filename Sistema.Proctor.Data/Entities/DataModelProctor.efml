@@ -515,6 +515,53 @@
       <column name="descripcion" not-null="True" length="255" sql-type="varchar" p1:unicode="False" />
     </property>
   </class>
+  <class name="Empresa" entity-set="Empresas" table="empresa" schema="dicesa" p1:Guid="e6bdb474-1e79-48e5-b351-deb5fdab9efe">
+    <id name="Idempresa" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="5c10bc78-9ad2-4df1-abd7-6d1d2d8131e5">
+      <column name="idempresa" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="NombreComercial" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="a09f5694-0904-48f9-9f89-abdfdd3b73a2">
+      <column name="nombre_comercial" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="NombreAbreviado" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="38e498d8-a06c-47bb-9a5e-bafb6aeb97bc">
+      <column name="nombre_abreviado" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Logo" type="Blob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="9e51d0fc-d5b6-41f4-9320-1bf642a8931a">
+      <column name="logo" default="NULL" not-null="False" sql-type="longblob" p1:unicode="False" />
+    </property>
+    <property name="Email" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="263388d8-8d7e-43fa-83b4-5506ecb956c0">
+      <column name="email" default="NULL" not-null="False" length="50" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Telefono" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="b2ca52e4-6fbd-40d1-9f50-12e08021de15">
+      <column name="telefono" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Celular" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="d20af7d3-1f10-43d5-89b3-967cbd5a481a">
+      <column name="celular" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Direccion" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="38038758-7131-4ddf-a825-e0f0e02e98dc">
+      <column name="direccion" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="Representante" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="2237869d-ca4b-4702-a297-5c8bc4e0d4b3">
+      <column name="representante" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="CreatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="44ce543e-e2d5-4e68-a098-6be0fb83f4bd">
+      <column name="created_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="ad0b88ff-34ac-4ce7-b196-cef996b67073">
+      <column name="created_at" default="current_timestamp()" not-null="True" sql-type="timestamp" p1:unicode="False" />
+    </property>
+    <property name="UpdatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="afaec7db-83cb-4377-86c4-2812751620e8">
+      <column name="updated_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="UpdatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="325bf407-5fa6-47be-97c4-41233f1d565e">
+      <column name="updated_at" default="current_timestamp()" not-null="True" sql-type="timestamp" p1:unicode="False" />
+    </property>
+    <property name="Activa" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="0161fac8-ca82-444b-9b1f-c772ab677665">
+      <column name="activa" default="0" not-null="False" precision="1" scale="0" sql-type="tinyint" p1:unicode="False" />
+    </property>
+    <property name="Selected" type="Boolean" p1:nullable="True" p1:ValidateRequired="false" p1:Guid="fe96b8a9-e89e-4934-83a1-5bc84fa86861">
+      <column name="selected" default="0" not-null="False" precision="1" scale="0" sql-type="tinyint" p1:unicode="False" />
+    </property>
+  </class>
   <associations>
     <association name="Cliente_Proyecto" cardinality="OneToMany" p1:Guid="a22ce68f-548c-4df5-981e-3710b55beae3">
       <end1 multiplicity="ZeroOrOne" name="Cliente" class="Proyecto" relation-class="Cliente" constrained="True" lazy="False" p1:Guid="e108c82e-375b-4181-9bb9-cbaba62cfcee">

@@ -1,4 +1,5 @@
-﻿using DevExpress.Drawing;
+﻿using System.IO;
+using DevExpress.Drawing;
 using DevExpress.XtraEditors;
 using DevExpress.Utils;
 using DevExpress.XtraTab;
@@ -30,8 +31,11 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
         {
             InitializeComponent();
             _EnsayoProctor = ensayoProctor;
-            _EnsayoProctor.DiametroMoldeCm = 15.2m;
-            _EnsayoProctor.AlturaMoldeCm = 12.0m;
+            if (_EnsayoProctor.Idensayo<=0)
+            {
+                _EnsayoProctor.DiametroMoldeCm = 15.2m;
+                _EnsayoProctor.AlturaMoldeCm = 12.0m;
+            }
             ensayoProctorBindingSource.DataSource = _EnsayoProctor;
             _Counter = 0;
         }
@@ -107,6 +111,9 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
             if (tabResultadosProctor.TabPages.Count <= 0) return;
             if (e is not ClosePageButtonEventArgs arg) return;
             var xtraTabPage = arg.Page as XtraTabPage;
+            var indexOf = tabResultadosProctor.TabPages.IndexOf(xtraTabPage);
+            XtraMessageBox.Show($"Indice {indexOf}");
+            ResultadosProctorList.RemoveAt(indexOf-1);
             tabResultadosProctor.TabPages.Remove(xtraTabPage);
         }
 
@@ -152,7 +159,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                     return;
                 }
 
-                var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
+                using IUnitOfWork unitOfWork = new UnitOfWork();
                 var usuario = DependenciasGlobalesForm.Instance.Usuario;
                 var muestraRepository = unitOfWork.MuestrasRepository;
                 var tipoEnsayoRepository = unitOfWork.TipoEnsayoRepository;
@@ -206,6 +213,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                 if (_EnsayoProctor.Idensayo>0)
                 {
                     _EnsayoProctor.UpdatedBy = Convert.ToInt32(usuario.Idusuario);
+                    _EnsayoProctor.UpdatedAt = DateTime.Now;
                     ensayoProctorRepository.Update(_EnsayoProctor);
                 }
                 else
@@ -221,7 +229,10 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                     proctor.DensidadSeca != null && proctor.DensidadSeca.Value.CompareTo(decimal.Zero) <= 0);
                 foreach (var resultadosProctor in ResultadosProctorList)
                 {
-                    resultadosProctor.EnsayoProctor = _EnsayoProctor;
+                    if (resultadosProctor.Idensayo == 0)
+                    {
+                        resultadosProctor.EnsayoProctor = _EnsayoProctor;
+                    }
                     // Add values to the lists
                     humedadOptimaList.Add((double)(resultadosProctor.AguaAgregada ?? decimal.Zero));
                     densidadMaximaList.Add((double)(resultadosProctor.DensidadSeca ?? decimal.Zero));
@@ -233,7 +244,10 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                 _EnsayoProctor.HumedadOptima = (decimal)humedadOptima;
                 if (_EnsayoProctor.Idensayo>0)
                 {
-                    resultadoProctorRepository.UpdateRangeAsync(ResultadosProctorList);
+                    foreach (var resultadosProctor in ResultadosProctorList)
+                    {
+                        resultadoProctorRepository.Update(resultadosProctor);
+                    }
                 }
                 else
                 {
@@ -280,12 +294,12 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
 
 
             // Crear serie de puntos originales
-            var seriePuntos = new DevExpress.XtraCharts.Series("Puntos de Ensayo", ViewType.Point);
+            var seriePuntos = new Series("Puntos de Ensayo", ViewType.Point);
             for (var i = 0; i < humedad.Count; i++)
                 seriePuntos.Points.Add(new SeriesPoint(humedad[i], densidad[i]));
 
             // Crear serie de curva ajustada
-            var serieCurva = new DevExpress.XtraCharts.Series("Curva Ajustada", ViewType.Spline);
+            var serieCurva = new Series("Curva Ajustada", ViewType.Spline);
             for (var x = humedad.Min(); x <= humedad.Max(); x += 0.05)
             {
                 var y = Formulas.EvaluatePolynomial(coeficientes, x);
@@ -293,7 +307,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
             }
 
             // Punto máximo de la curva
-            var puntoMaximo = new DevExpress.XtraCharts.Series("Óptimo de Compactación", ViewType.Point);
+            var puntoMaximo = new Series("Óptimo de Compactación", ViewType.Point);
             puntoMaximo.Points.Add(new SeriesPoint(humedadOptima, densidadMax));
             puntoMaximo.View.Color = Color.Red;
 
@@ -365,7 +379,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
 
             var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
             var resultadosEnsayoProctorRepository = unitOfWork.ResultadosEnsayoProctorRepository;
-            var resultados = await resultadosEnsayoProctorRepository.GetResultadosEnsayoProctor(10);
+            var resultados = await resultadosEnsayoProctorRepository.GetResultadosEnsayoProctor(_EnsayoProctor.Idensayo);
             var reporteResultadosEnsayoProctor = new ReporteResultadosEnsayoProctor();
 
             var graficoProctor = reporteResultadosEnsayoProctor.graficoProctor;
@@ -445,8 +459,23 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
             lineProctor.LineStyle.DashStyle = DashStyle.Dot;
             lineProctor.Title.Text = @$"Densidad Máxima: {densidadMax:F2} kg/m3";
             diagram.AxisY.ConstantLines.Add(lineProctor);
+            foreach (var resultadosEnsayoProctorDto in resultados)
+            {
+                resultadosEnsayoProctorDto.NombreTranscribio = DependenciasGlobalesForm.Instance.Usuario.Nombre;
+            }
             reporteResultadosEnsayoProctor.DataSource = resultados;
+            var sucursal = DependenciasGlobalesForm.Instance.SelectedSucursal;
+            if (sucursal.Logo.Length>0)
+            {
+                reporteResultadosEnsayoProctor.xrPictureBox1.ImageSource = null;
+                using var memory = new MemoryStream(sucursal.Logo);
+                reporteResultadosEnsayoProctor.xrPictureBox1.ImageSource = new ImageSource(DXImage.FromStream(memory));
+            }
 
+            reporteResultadosEnsayoProctor.lblDireccionSucursal.Text = sucursal.Direccion;
+            reporteResultadosEnsayoProctor.lblNombreSucursal.Text = sucursal.NombreComercial;
+            reporteResultadosEnsayoProctor.lblEmailSucursal.Text = sucursal.Email;
+            reporteResultadosEnsayoProctor.lblRepresentante.Text = sucursal.Representante;
             var designTool = new ReportPrintTool(reporteResultadosEnsayoProctor);
             designTool.ShowRibbonPreview();
         }

@@ -47,9 +47,14 @@
             barButtonItemAbrirProyecto = new DevExpress.XtraBars.BarButtonItem();
             barButtonItemReporteResultadosProctor = new DevExpress.XtraBars.BarButtonItem();
             barButtonItemAbrirEnsayoProctor = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemEditarEmpleado = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemListadoEmpresa = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemEditarEmpresa = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemAgregarEmpresa = new DevExpress.XtraBars.BarButtonItem();
             ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ribbonPageProyectos = new DevExpress.XtraBars.Ribbon.RibbonPage();
             ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -58,16 +63,15 @@
             ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(Cliente.WaitForm1), true, true);
-            barButtonItemEditarEmpleado = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
             SuspendLayout();
             // 
             // ribbon
             // 
             ribbon.ExpandCollapseItem.Id = 0;
-            ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, barButtonItemListaClientes, barButtonItemAddCliente, barButtonItemEditarCliente, barButtonItemEliminarCliente, barButtonItem1, barButtonItemAgregarEmpleado, barButtonItemEliminarEmpleado, barButtonItemListaProyectos, barButtonItemCrearProyecto, barButtonItemAgregarProctor, barButtonItemClose, barButtonItemGenerarGrafico, barButtonItemGuardarEnsayoProctor, barButtonItemAgregarMuestra, barButtonItemAbrirProyecto, barButtonItemReporteResultadosProctor, barButtonItemAbrirEnsayoProctor, barButtonItemEditarEmpleado });
+            ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, barButtonItemListaClientes, barButtonItemAddCliente, barButtonItemEditarCliente, barButtonItemEliminarCliente, barButtonItem1, barButtonItemAgregarEmpleado, barButtonItemEliminarEmpleado, barButtonItemListaProyectos, barButtonItemCrearProyecto, barButtonItemAgregarProctor, barButtonItemClose, barButtonItemGenerarGrafico, barButtonItemGuardarEnsayoProctor, barButtonItemAgregarMuestra, barButtonItemAbrirProyecto, barButtonItemReporteResultadosProctor, barButtonItemAbrirEnsayoProctor, barButtonItemEditarEmpleado, barButtonItemListadoEmpresa, barButtonItemEditarEmpresa, barButtonItemAgregarEmpresa });
             ribbon.Location = new Point(0, 0);
-            ribbon.MaxItemId = 19;
+            ribbon.MaxItemId = 22;
             ribbon.Name = "ribbon";
             ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { ribbonPage1, ribbonPageProyectos, ribbonPageEnsayos });
             ribbon.Size = new Size(950, 171);
@@ -213,9 +217,41 @@
             barButtonItemAbrirEnsayoProctor.Name = "barButtonItemAbrirEnsayoProctor";
             barButtonItemAbrirEnsayoProctor.ItemClick += barButtonItemAbrirEnsayoProctor_ItemClick;
             // 
+            // barButtonItemEditarEmpleado
+            // 
+            barButtonItemEditarEmpleado.Caption = "Editar";
+            barButtonItemEditarEmpleado.Id = 18;
+            barButtonItemEditarEmpleado.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemEditarEmpleado.ImageOptions.SvgImage");
+            barButtonItemEditarEmpleado.Name = "barButtonItemEditarEmpleado";
+            barButtonItemEditarEmpleado.ItemClick += barButtonItemEditarEmpleado_ItemClick;
+            // 
+            // barButtonItemListadoEmpresa
+            // 
+            barButtonItemListadoEmpresa.Caption = "Lista";
+            barButtonItemListadoEmpresa.Id = 19;
+            barButtonItemListadoEmpresa.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemListadoEmpresa.ImageOptions.SvgImage");
+            barButtonItemListadoEmpresa.Name = "barButtonItemListadoEmpresa";
+            barButtonItemListadoEmpresa.ItemClick += barButtonItemListadoEmpresa_ItemClick;
+            // 
+            // barButtonItemEditarEmpresa
+            // 
+            barButtonItemEditarEmpresa.Caption = "Editar";
+            barButtonItemEditarEmpresa.Id = 20;
+            barButtonItemEditarEmpresa.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemEditarEmpresa.ImageOptions.SvgImage");
+            barButtonItemEditarEmpresa.Name = "barButtonItemEditarEmpresa";
+            barButtonItemEditarEmpresa.ItemClick += barButtonItemEditarEmpresa_ItemClick;
+            // 
+            // barButtonItemAgregarEmpresa
+            // 
+            barButtonItemAgregarEmpresa.Caption = "Agregar";
+            barButtonItemAgregarEmpresa.Id = 21;
+            barButtonItemAgregarEmpresa.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemAgregarEmpresa.ImageOptions.SvgImage");
+            barButtonItemAgregarEmpresa.Name = "barButtonItemAgregarEmpresa";
+            barButtonItemAgregarEmpresa.ItemClick += barButtonItemAgregarEmpresa_ItemClick;
+            // 
             // ribbonPage1
             // 
-            ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, ribbonPageGroup2 });
+            ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, ribbonPageGroup2, ribbonPageGroup7 });
             ribbonPage1.Name = "ribbonPage1";
             ribbonPage1.Text = "Administrar";
             // 
@@ -236,6 +272,14 @@
             ribbonPageGroup2.ItemLinks.Add(barButtonItemEliminarEmpleado);
             ribbonPageGroup2.Name = "ribbonPageGroup2";
             ribbonPageGroup2.Text = "Empleado";
+            // 
+            // ribbonPageGroup7
+            // 
+            ribbonPageGroup7.ItemLinks.Add(barButtonItemListadoEmpresa);
+            ribbonPageGroup7.ItemLinks.Add(barButtonItemAgregarEmpresa);
+            ribbonPageGroup7.ItemLinks.Add(barButtonItemEditarEmpresa);
+            ribbonPageGroup7.Name = "ribbonPageGroup7";
+            ribbonPageGroup7.Text = "Empresa";
             // 
             // ribbonPageProyectos
             // 
@@ -293,14 +337,6 @@
             // 
             splashScreenManager1.ClosingDelay = 500;
             // 
-            // barButtonItemEditarEmpleado
-            // 
-            barButtonItemEditarEmpleado.Caption = "Editar";
-            barButtonItemEditarEmpleado.Id = 18;
-            barButtonItemEditarEmpleado.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItem2.ImageOptions.SvgImage");
-            barButtonItemEditarEmpleado.Name = "barButtonItemEditarEmpleado";
-            barButtonItemEditarEmpleado.ItemClick += barButtonItemEditarEmpleado_ItemClick;
-            // 
             // MainView
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
@@ -353,5 +389,9 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemReporteResultadosProctor;
         private DevExpress.XtraBars.BarButtonItem barButtonItemAbrirEnsayoProctor;
         private DevExpress.XtraBars.BarButtonItem barButtonItemEditarEmpleado;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemListadoEmpresa;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemEditarEmpresa;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemAgregarEmpresa;
     }
 }

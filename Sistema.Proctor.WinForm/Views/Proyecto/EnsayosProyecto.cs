@@ -16,17 +16,19 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
     public partial class EnsayosProyecto : DevExpress.XtraEditors.XtraForm
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private readonly IEnsayoRepository EnsayoRepository;
         public XtraTabControl xtraTabControlEnsayos;
         private Panel panelIzquierdo;
-        private List<EnsayoProctor> ListEnsayoProctor = new List<EnsayoProctor>();
+        private List<EnsayoProctor> ListEnsayoProctor = new();
         public EnsayoRecordDto? SelectedEnsayoRecordDto;
+        private IEnsayoRepository EnsayoRepository;
+        private readonly IUnitOfWork? UnitOfWork;
 
         public EnsayosProyecto()
         {
             InitializeComponent();
-            EnsayoRepository = DependenciasGlobales.Instance.GetService<IEnsayoRepository>();
             InitializeXtraTabControl();
+            UnitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
+            EnsayoRepository = UnitOfWork.EnsayosRepository;
         }
 
         private void InitializeXtraTabControl()
@@ -53,6 +55,8 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
         {
             if (sender is XtraTabControl { SelectedTabPage: not null } tabControl)
             {
+                var index = tabControl.SelectedTabPageIndex;
+                ListEnsayoProctor.RemoveAt(index-1);
                 tabControl.TabPages.Remove(tabControl.SelectedTabPage);
             }
         }
@@ -147,13 +151,10 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
                 {
                     return;
                 }
-                var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
-
-                var muestraRepository = unitOfWork.MuestrasRepository;
-                var tipoEnsayoRepository = unitOfWork.TipoEnsayoRepository;
-                var ensayoProctorRepository = unitOfWork.EnsayosProctorRepository;
-                var ensayoRepository = unitOfWork.EnsayosRepository;
-                var resultadoProctorRepository = unitOfWork.ResultadosProctorRepository;
+                
+                var tipoEnsayoRepository = UnitOfWork.TipoEnsayoRepository;
+                var ensayoProctorRepository = UnitOfWork.EnsayosProctorRepository;
+                EnsayoRepository = UnitOfWork.EnsayosRepository;
                 var findTipoEnsayo = await tipoEnsayoRepository.GetByIdAsync(tipoEnsayo);
                 if (findTipoEnsayo is null)
                 {
@@ -180,6 +181,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
                 Logger.Error(e, "Error al recuperar los ensayos");
             }
         }
+
 
         private void treeListEnsayos_PopupMenuShowing(object sender, DevExpress.XtraTreeList.PopupMenuShowingEventArgs e)
         {

@@ -15,6 +15,7 @@ public interface IUnitOfWork : IDisposable
     IResultadosEnsayoProctorRepository ResultadosEnsayoProctorRepository { get; }
     IProyectoRepository ProyectoRepository { get; }
     IUsuarioRepository UsuarioRepository { get; }
+    IEmpresaRepository EmpresaRepository { get; }
     Task<int> CompleteAsync();
     void ClearTracking();
 }
@@ -37,6 +38,7 @@ public class UnitOfWork : IUnitOfWork, IAsyncDisposable
         ResultadosEnsayoProctorRepository = new ResultadosEnsayoProctorRepository(_Context);
         ProyectoRepository = new ProyectoRepository(_Context);
         UsuarioRepository = new UsuarioRepository(_Context);
+        EmpresaRepository = new EmpresaRepository(_Context);
     }
 
     public IRepository<Cliente> ClienteRepository { get; }
@@ -49,7 +51,7 @@ public class UnitOfWork : IUnitOfWork, IAsyncDisposable
     public IResultadosEnsayoProctorRepository ResultadosEnsayoProctorRepository { get; }
     public IProyectoRepository ProyectoRepository { get; }
     public IUsuarioRepository UsuarioRepository { get; }
-
+    public IEmpresaRepository EmpresaRepository { get; }
     public async Task<int> CompleteAsync()
     {
         await using var transaction = await _Context.Database.BeginTransactionAsync();

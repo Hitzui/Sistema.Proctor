@@ -91,7 +91,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
                 
                 if (isNew)
                 {
-                    saveProyecto.Cliente = SelectedCliente;
+                    saveProyecto.Idcliente = SelectedCliente.Idcliente;
                     saveProyecto.CreatedBy = (int?)usuario.Idusuario;
                     saveProyecto.UpdatedBy = (int?)usuario.Idusuario;
                     await proyectoRepository.AddAsync(saveProyecto);

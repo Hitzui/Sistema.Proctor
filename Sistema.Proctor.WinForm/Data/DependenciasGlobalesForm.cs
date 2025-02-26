@@ -34,6 +34,7 @@ public class DependenciasGlobalesForm
         _listadoEmpleados = new();
         _listadoProyectos = new();
         _listadoMuestras = new();
+        _ListadoEmpresas = new();
     }
 
     public T? GetService<T>()
@@ -52,6 +53,8 @@ public class DependenciasGlobalesForm
 
     private ObservableCollection<Muestra> _listadoMuestras;
     public ObservableCollection<Muestra> ListadoMuestras => _listadoMuestras;
+    private ObservableCollection<Empresa> _ListadoEmpresas;
+    public  ObservableCollection<Empresa> ListadoEmpresas => _ListadoEmpresas;
 
     public string GetConnectionString(string connectionStringName)
     {
@@ -61,6 +64,24 @@ public class DependenciasGlobalesForm
         return configuration.GetConnectionString(connectionStringName);
     }
 
+    public async void FillListadoEmpresas()
+    {
+        try
+        {
+            using IUnitOfWork unitOfWork = new UnitOfWork();
+            var empresaRepository = unitOfWork.EmpresaRepository;
+            var listado = await empresaRepository.GetListByActiva();
+            ListadoEmpresas.Clear();
+            foreach (var empresa in listado)
+            {
+                ListadoEmpresas.Add(empresa);
+            }
+        }
+        catch (Exception exception)
+        {
+            Logger.Error(exception, "Error al cargar la lista de empresas");
+        }
+    }
     public async void FillListadoClientes()
     {
         try
@@ -161,4 +182,6 @@ public class DependenciasGlobalesForm
     public ProyectoDto? SelectedProyecto { get; set; }
     public int SelectedIdMuestra { get; set; }
     public Usuario Usuario { get; set; }
+    public Empresa? SelectedEmpresa { get; set; }
+    public EmpresaDto SelectedSucursal { get; set; }
 }

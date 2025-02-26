@@ -8,6 +8,7 @@ using NLog;
 using Sistema.Proctor.WinForm.Data;
 using Sistema.Proctor.WinForm.Views.Cliente;
 using Sistema.Proctor.WinForm.Views.Empleado;
+using Sistema.Proctor.WinForm.Views.Empresa;
 using Sistema.Proctor.WinForm.Views.Proyecto;
 using Sistema.Proctor.WinForm.Views.Proyecto.Muestra;
 using Sistema.Proctor.WinForm.Views.Proyecto.Proctor;
@@ -245,6 +246,38 @@ namespace Sistema.Proctor.WinForm.Views
             {
                 Logger.Error(exception, "Error al guardar Ensayo proctor");
             }
+        }
+
+        private void barButtonItemListadoEmpresa_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            splashScreenManager1.ShowWaitForm();
+            DependenciasGlobalesForm.Instance.FillListadoEmpresas();
+            AbrirFormularioHijo<EmpresaList>();
+            splashScreenManager1.CloseWaitForm();
+        }
+
+        private void barButtonItemAgregarEmpresa_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            splashScreenManager1.ShowWaitForm();
+            DependenciasGlobalesForm.Instance.SelectedEmpresa = null;
+            var frmAgregarEmpresa = new EmpresaEdit();
+            splashScreenManager1.CloseWaitForm();
+            frmAgregarEmpresa.ShowDialog(this);
+        }
+
+        private void barButtonItemEditarEmpresa_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            splashScreenManager1.ShowWaitForm();
+            if (DependenciasGlobalesForm.Instance.SelectedEmpresa is null)
+            {
+                splashScreenManager1.CloseWaitForm();
+                XtraMessageBox.Show("Seleccione una empresa para editar", "Empresa", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            
+            var frmAgregarEmpresa = new EmpresaEdit();
+            splashScreenManager1.CloseWaitForm();
+            frmAgregarEmpresa.ShowDialog(this);
         }
     }
 }
