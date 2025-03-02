@@ -61,9 +61,22 @@ public class DependenciasGlobalesForm
         var configurationBuilder =
             new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: true, reloadOnChange: false);
         var configuration = configurationBuilder.Build();
-        return configuration.GetConnectionString(connectionStringName);
+        return configuration.GetConnectionString(connectionStringName)!;
     }
 
+    public async Task<MuestraDto?> GetMuestraDto()
+    {
+        if (SelectedIdMuestra==0)
+        {
+            return null;
+        }
+
+        using IUnitOfWork unitOfWork = new UnitOfWork();
+        var muestraRepository = unitOfWork.MuestrasRepository;
+        var muestra = await 
+            muestraRepository.GetFirstByCriteriaAsync(muestra1 => muestra1.Idmuestra == SelectedIdMuestra);
+        return muestra is null ? null : new MuestraDto().GetMuestraDto(muestra);
+    }
     public async void FillListadoEmpresas()
     {
         try

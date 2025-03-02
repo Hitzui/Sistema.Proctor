@@ -58,7 +58,7 @@
             labelControl1.Appearance.ForeColor = Color.DarkRed;
             labelControl1.Appearance.Options.UseFont = true;
             labelControl1.Appearance.Options.UseForeColor = true;
-            labelControl1.Location = new Point(98, 212);
+            labelControl1.Location = new Point(106, 212);
             labelControl1.Name = "labelControl1";
             labelControl1.Size = new Size(230, 33);
             labelControl1.TabIndex = 0;
@@ -68,7 +68,7 @@
             // 
             txtPassword.EditorSize = DevExpress.XtraEditors.Internal.HtmlTextBoxBase.EditSize.Large;
             txtPassword.EnterMoveNextControl = true;
-            txtPassword.Location = new Point(40, 370);
+            txtPassword.Location = new Point(51, 370);
             txtPassword.Name = "txtPassword";
             txtPassword.Placeholder = "Ingrese contraseña";
             txtPassword.Size = new Size(340, 30);
@@ -78,7 +78,7 @@
             // 
             txtEmail.EditorSize = DevExpress.XtraEditors.Internal.HtmlTextBoxBase.EditSize.Large;
             txtEmail.EnterMoveNextControl = true;
-            txtEmail.Location = new Point(40, 268);
+            txtEmail.Location = new Point(51, 268);
             txtEmail.Name = "txtEmail";
             txtEmail.Placeholder = "Ingrese correo electrónico";
             txtEmail.Size = new Size(340, 30);
@@ -90,7 +90,7 @@
             labelControl2.Appearance.ForeColor = Color.DimGray;
             labelControl2.Appearance.Options.UseFont = true;
             labelControl2.Appearance.Options.UseForeColor = true;
-            labelControl2.Location = new Point(40, 246);
+            labelControl2.Location = new Point(52, 246);
             labelControl2.Name = "labelControl2";
             labelControl2.Size = new Size(36, 16);
             labelControl2.TabIndex = 5;
@@ -102,7 +102,7 @@
             labelControl3.Appearance.ForeColor = Color.DimGray;
             labelControl3.Appearance.Options.UseFont = true;
             labelControl3.Appearance.Options.UseForeColor = true;
-            labelControl3.Location = new Point(40, 348);
+            labelControl3.Location = new Point(51, 348);
             labelControl3.Name = "labelControl3";
             labelControl3.Size = new Size(65, 16);
             labelControl3.TabIndex = 6;
@@ -114,7 +114,7 @@
             btnIngresar.Appearance.Font = new Font("Tahoma", 12F, FontStyle.Bold);
             btnIngresar.Appearance.Options.UseBackColor = true;
             btnIngresar.Appearance.Options.UseFont = true;
-            btnIngresar.Location = new Point(41, 517);
+            btnIngresar.Location = new Point(52, 505);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(339, 36);
             btnIngresar.TabIndex = 7;
@@ -128,7 +128,7 @@
             btnSalir.Appearance.Options.UseBackColor = true;
             btnSalir.Appearance.Options.UseFont = true;
             btnSalir.DialogResult = DialogResult.Cancel;
-            btnSalir.Location = new Point(41, 579);
+            btnSalir.Location = new Point(52, 567);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(339, 36);
             btnSalir.TabIndex = 8;
@@ -163,7 +163,7 @@
             // cmbSucursales
             // 
             cmbSucursales.EnterMoveNextControl = true;
-            cmbSucursales.Location = new Point(42, 444);
+            cmbSucursales.Location = new Point(52, 444);
             cmbSucursales.Name = "cmbSucursales";
             cmbSucursales.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             cmbSucursales.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
@@ -172,7 +172,7 @@
             // 
             // labelControl4
             // 
-            labelControl4.Location = new Point(42, 425);
+            labelControl4.Location = new Point(51, 425);
             labelControl4.Name = "labelControl4";
             labelControl4.Size = new Size(97, 13);
             labelControl4.TabIndex = 10;

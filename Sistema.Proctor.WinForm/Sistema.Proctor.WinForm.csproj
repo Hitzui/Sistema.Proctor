@@ -94,5 +94,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="logs\" />
+    <Folder Include="Views\Proyecto\Humedad\" />
   </ItemGroup>
 </Project>

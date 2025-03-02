@@ -13,11 +13,12 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Muestra
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private MuestraDto? _Muestra;
+        public bool IsNew { get; set; }
 
-        public AgregarMuestra()
+        public AgregarMuestra(MuestraDto muestraDto)
         {
             InitializeComponent();
-            _Muestra = new MuestraDto();
+            _Muestra = muestraDto;
             muestraDtoBindingSource.DataSource = _Muestra;
             dxErrorProvider.DataSource = muestraDtoBindingSource;
             dxErrorProvider.ContainerControl = this;
@@ -62,12 +63,23 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Muestra
                 var usuario = DependenciasGlobalesForm.Instance.Usuario;
                 _Muestra = muestraDtoBindingSource.DataSource as MuestraDto;
                 _Muestra.Idproyecto = selectedProyecto.Idproyecto;
-                var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
+                using IUnitOfWork unitOfWork = new UnitOfWork();
                 var muestraRepository = unitOfWork.MuestrasRepository; 
                 var muestra = _Muestra.GetMuestra();
-                muestra.CreatedBy = Convert.ToInt32(usuario.Idusuario);
-                muestra.UpdatedBy = Convert.ToInt32(usuario.Idusuario);
-                await muestraRepository.AddAsync(muestra);
+                if (IsNew)
+                {
+                    muestra.CreatedBy = Convert.ToInt32(usuario.Idusuario);
+                    muestra.UpdatedBy = Convert.ToInt32(usuario.Idusuario);
+                    await muestraRepository.AddAsync(muestra);
+                }
+                else
+                {
+                    muestra.UpdatedAt= DateTime.Now;
+                    muestra.UpdatedBy = Convert.ToInt32(usuario.Idusuario);
+                    muestraRepository.Update(muestra);
+                }
+                
+                
                 var completeAsync = await unitOfWork.CompleteAsync();
                 if (completeAsync>0)
                 {

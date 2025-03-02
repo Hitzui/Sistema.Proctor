@@ -14,11 +14,5 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Reportes
         {
             InitializeComponent();
         }
-
-        private void sqlDataSource1_ConfigureDataConnection(object sender, DevExpress.DataAccess.Sql.ConfigureDataConnectionEventArgs e)
-        {
-            var conn = DependenciasGlobalesForm.Instance.GetConnectionString("DefaultConnectionReport");
-            e.ConnectionParameters=new CustomStringConnectionParameters(conn);
-        }
     }
 }

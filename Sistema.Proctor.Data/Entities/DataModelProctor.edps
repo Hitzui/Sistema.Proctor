@@ -22,6 +22,8 @@
         <File Name="DataModelProctor.Entry.cs" />
         <File Name="DataModelProctor.TipoEnsayo.cs" />
         <File Name="DataModelProctor.Empresa.cs" />
+        <File Name="DataModelProctor.EnsayoHumedad.cs" />
+        <File Name="DataModelProctor.ResultadoHumedad.cs" />
       </GeneratedFiles>
     </Generation>
     <DatabaseFirstNamingRules>

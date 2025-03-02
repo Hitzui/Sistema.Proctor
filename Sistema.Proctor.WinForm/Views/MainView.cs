@@ -6,6 +6,7 @@ using DevExpress.XtraTab;
 using MathNet.Numerics;
 using NLog;
 using Sistema.Proctor.WinForm.Data;
+using Sistema.Proctor.WinForm.Dto;
 using Sistema.Proctor.WinForm.Views.Cliente;
 using Sistema.Proctor.WinForm.Views.Empleado;
 using Sistema.Proctor.WinForm.Views.Empresa;
@@ -182,7 +183,8 @@ namespace Sistema.Proctor.WinForm.Views
                 return;
             }
 
-            var frmMuestras = new AgregarMuestra();
+            var frmMuestras = new AgregarMuestra(new MuestraDto());
+            frmMuestras.IsNew = true;
             frmMuestras.ShowDialog();
         }
 
@@ -274,10 +276,35 @@ namespace Sistema.Proctor.WinForm.Views
                 XtraMessageBox.Show("Seleccione una empresa para editar", "Empresa", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            
+
             var frmAgregarEmpresa = new EmpresaEdit();
             splashScreenManager1.CloseWaitForm();
             frmAgregarEmpresa.ShowDialog(this);
+        }
+
+        private async void barButtonItemEditarMuestra_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                var muestraDto = await DependenciasGlobalesForm.Instance.GetMuestraDto();
+                if (DependenciasGlobalesForm.Instance.SelectedProyecto is null)
+                {
+                    XtraMessageBox.Show("Seleccione un proyecto para añadir muestras", "Muestra", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (muestraDto is null)
+                {
+                    XtraMessageBox.Show("Seleccione una muestra para editar", "Muestra", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                var frmMuestras = new AgregarMuestra(muestraDto);
+                frmMuestras.IsNew = false;
+                frmMuestras.ShowDialog();
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, "Error al recuperar la muestra");
+            }
         }
     }
 }

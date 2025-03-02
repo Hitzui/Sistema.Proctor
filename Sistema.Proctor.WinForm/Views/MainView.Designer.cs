@@ -51,6 +51,7 @@
             barButtonItemListadoEmpresa = new DevExpress.XtraBars.BarButtonItem();
             barButtonItemEditarEmpresa = new DevExpress.XtraBars.BarButtonItem();
             barButtonItemAgregarEmpresa = new DevExpress.XtraBars.BarButtonItem();
+            barButtonItemEditarMuestra = new DevExpress.XtraBars.BarButtonItem();
             ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -63,15 +64,17 @@
             ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(Cliente.WaitForm1), true, true);
+            ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            barButtonItemAgregarHumedad = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)ribbon).BeginInit();
             SuspendLayout();
             // 
             // ribbon
             // 
             ribbon.ExpandCollapseItem.Id = 0;
-            ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, barButtonItemListaClientes, barButtonItemAddCliente, barButtonItemEditarCliente, barButtonItemEliminarCliente, barButtonItem1, barButtonItemAgregarEmpleado, barButtonItemEliminarEmpleado, barButtonItemListaProyectos, barButtonItemCrearProyecto, barButtonItemAgregarProctor, barButtonItemClose, barButtonItemGenerarGrafico, barButtonItemGuardarEnsayoProctor, barButtonItemAgregarMuestra, barButtonItemAbrirProyecto, barButtonItemReporteResultadosProctor, barButtonItemAbrirEnsayoProctor, barButtonItemEditarEmpleado, barButtonItemListadoEmpresa, barButtonItemEditarEmpresa, barButtonItemAgregarEmpresa });
+            ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] { ribbon.ExpandCollapseItem, barButtonItemListaClientes, barButtonItemAddCliente, barButtonItemEditarCliente, barButtonItemEliminarCliente, barButtonItem1, barButtonItemAgregarEmpleado, barButtonItemEliminarEmpleado, barButtonItemListaProyectos, barButtonItemCrearProyecto, barButtonItemAgregarProctor, barButtonItemClose, barButtonItemGenerarGrafico, barButtonItemGuardarEnsayoProctor, barButtonItemAgregarMuestra, barButtonItemAbrirProyecto, barButtonItemReporteResultadosProctor, barButtonItemAbrirEnsayoProctor, barButtonItemEditarEmpleado, barButtonItemListadoEmpresa, barButtonItemEditarEmpresa, barButtonItemAgregarEmpresa, barButtonItemEditarMuestra, barButtonItemAgregarHumedad });
             ribbon.Location = new Point(0, 0);
-            ribbon.MaxItemId = 22;
+            ribbon.MaxItemId = 24;
             ribbon.Name = "ribbon";
             ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] { ribbonPage1, ribbonPageProyectos, ribbonPageEnsayos });
             ribbon.Size = new Size(950, 171);
@@ -249,6 +252,14 @@
             barButtonItemAgregarEmpresa.Name = "barButtonItemAgregarEmpresa";
             barButtonItemAgregarEmpresa.ItemClick += barButtonItemAgregarEmpresa_ItemClick;
             // 
+            // barButtonItemEditarMuestra
+            // 
+            barButtonItemEditarMuestra.Caption = "Editar Muestra";
+            barButtonItemEditarMuestra.Id = 22;
+            barButtonItemEditarMuestra.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemEditarMuestra.ImageOptions.SvgImage");
+            barButtonItemEditarMuestra.Name = "barButtonItemEditarMuestra";
+            barButtonItemEditarMuestra.ItemClick += barButtonItemEditarMuestra_ItemClick;
+            // 
             // ribbonPage1
             // 
             ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup1, ribbonPageGroup2, ribbonPageGroup7 });
@@ -298,12 +309,13 @@
             // ribbonPageGroup6
             // 
             ribbonPageGroup6.ItemLinks.Add(barButtonItemAgregarMuestra);
+            ribbonPageGroup6.ItemLinks.Add(barButtonItemEditarMuestra);
             ribbonPageGroup6.Name = "ribbonPageGroup6";
             ribbonPageGroup6.Text = "Muestras";
             // 
             // ribbonPageEnsayos
             // 
-            ribbonPageEnsayos.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup4, ribbonPageGroup5 });
+            ribbonPageEnsayos.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] { ribbonPageGroup4, ribbonPageGroup8, ribbonPageGroup5 });
             ribbonPageEnsayos.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("ribbonPageEnsayos.ImageOptions.SvgImage");
             ribbonPageEnsayos.ImageOptions.SvgImageSize = new Size(16, 16);
             ribbonPageEnsayos.Name = "ribbonPageEnsayos";
@@ -336,6 +348,19 @@
             // splashScreenManager1
             // 
             splashScreenManager1.ClosingDelay = 500;
+            // 
+            // ribbonPageGroup8
+            // 
+            ribbonPageGroup8.ItemLinks.Add(barButtonItemAgregarHumedad);
+            ribbonPageGroup8.Name = "ribbonPageGroup8";
+            ribbonPageGroup8.Text = "Humedad";
+            // 
+            // barButtonItemAgregarHumedad
+            // 
+            barButtonItemAgregarHumedad.Caption = "Agregar";
+            barButtonItemAgregarHumedad.Id = 23;
+            barButtonItemAgregarHumedad.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItem2.ImageOptions.SvgImage");
+            barButtonItemAgregarHumedad.Name = "barButtonItemAgregarHumedad";
             // 
             // MainView
             // 
@@ -393,5 +418,8 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemListadoEmpresa;
         private DevExpress.XtraBars.BarButtonItem barButtonItemEditarEmpresa;
         private DevExpress.XtraBars.BarButtonItem barButtonItemAgregarEmpresa;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemEditarMuestra;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemAgregarHumedad;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup8;
     }
 }

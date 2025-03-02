@@ -32,22 +32,24 @@
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             textEdit1 = new DevExpress.XtraEditors.DateEdit();
             ensayoProctorBindingSource = new BindingSource(components);
-            textEdit2 = new DevExpress.XtraEditors.TextEdit();
-            textEdit4 = new DevExpress.XtraEditors.TextEdit();
             textEdit5 = new DevExpress.XtraEditors.TextEdit();
-            textEdit6 = new DevExpress.XtraEditors.TextEdit();
+            cmbPesoMartillo = new DevExpress.XtraEditors.ComboBoxEdit();
+            cmbTemperaturaSecado = new DevExpress.XtraEditors.ComboBoxEdit();
+            cmbNorma = new DevExpress.XtraEditors.ComboBoxEdit();
+            cmbMetotoUtilizado = new DevExpress.XtraEditors.ComboBoxEdit();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             txtDiametroMoldeCm = new DevExpress.XtraEditors.TextEdit();
             txtAlturaMoldeCm = new DevExpress.XtraEditors.TextEdit();
-            textEdit8 = new DevExpress.XtraEditors.TextEdit();
-            textEdit9 = new DevExpress.XtraEditors.TextEdit();
-            textEdit10 = new DevExpress.XtraEditors.TextEdit();
+            cmbNumeroCapas = new DevExpress.XtraEditors.ComboBoxEdit();
+            cmbGolpesPorCapa = new DevExpress.XtraEditors.ComboBoxEdit();
+            cmbTipoProctor = new DevExpress.XtraEditors.ComboBoxEdit();
             layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -57,28 +59,31 @@
             tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             tabResultadosProctor = new DevExpress.XtraTab.XtraTabControl();
             tabPageGrafico = new DevExpress.XtraTab.XtraTabPage();
+            splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(Cliente.WaitForm1), true, true, typeof(UserControl));
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)textEdit1.Properties.CalendarTimeProperties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ensayoProctorBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit2.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit4.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)textEdit5.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit6.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cmbPesoMartillo.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cmbTemperaturaSecado.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cmbNorma.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cmbMetotoUtilizado.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl2).BeginInit();
             layoutControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtDiametroMoldeCm.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtAlturaMoldeCm.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit8.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit9.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit10.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cmbNumeroCapas.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cmbGolpesPorCapa.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cmbTipoProctor.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
@@ -95,16 +100,17 @@
             // 
             tablePanel1.SetColumn(layoutControl1, 0);
             layoutControl1.Controls.Add(textEdit1);
-            layoutControl1.Controls.Add(textEdit2);
-            layoutControl1.Controls.Add(textEdit4);
             layoutControl1.Controls.Add(textEdit5);
-            layoutControl1.Controls.Add(textEdit6);
+            layoutControl1.Controls.Add(cmbPesoMartillo);
+            layoutControl1.Controls.Add(cmbTemperaturaSecado);
+            layoutControl1.Controls.Add(cmbNorma);
+            layoutControl1.Controls.Add(cmbMetotoUtilizado);
             layoutControl1.Dock = DockStyle.Fill;
-            layoutControl1.Location = new Point(17, 16);
+            layoutControl1.Location = new Point(13, 12);
             layoutControl1.Name = "layoutControl1";
             layoutControl1.Root = Root;
             tablePanel1.SetRow(layoutControl1, 0);
-            layoutControl1.Size = new Size(491, 208);
+            layoutControl1.Size = new Size(496, 216);
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
             // 
@@ -112,7 +118,7 @@
             // 
             textEdit1.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "FechaEnsayo", true));
             textEdit1.EditValue = null;
-            textEdit1.Location = new Point(155, 16);
+            textEdit1.Location = new Point(147, 12);
             textEdit1.Name = "textEdit1";
             textEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             textEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -121,7 +127,7 @@
             textEdit1.Properties.EditFormat.FormatString = "";
             textEdit1.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             textEdit1.Properties.MaskSettings.Set("mask", "");
-            textEdit1.Size = new Size(320, 28);
+            textEdit1.Size = new Size(337, 22);
             textEdit1.StyleController = layoutControl1;
             textEdit1.TabIndex = 4;
             // 
@@ -129,49 +135,62 @@
             // 
             ensayoProctorBindingSource.DataSource = typeof(Sistema.Proctor.Data.Entities.EnsayoProctor);
             // 
-            // textEdit2
-            // 
-            textEdit2.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "MetodoUtilizado", true));
-            textEdit2.Location = new Point(155, 50);
-            textEdit2.Name = "textEdit2";
-            textEdit2.Size = new Size(320, 28);
-            textEdit2.StyleController = layoutControl1;
-            textEdit2.TabIndex = 5;
-            // 
-            // textEdit4
-            // 
-            textEdit4.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "PesoMartilloLb", true));
-            textEdit4.Location = new Point(155, 84);
-            textEdit4.Name = "textEdit4";
-            textEdit4.Size = new Size(320, 28);
-            textEdit4.StyleController = layoutControl1;
-            textEdit4.TabIndex = 6;
-            // 
             // textEdit5
             // 
             textEdit5.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "PesoMaterialG", true));
-            textEdit5.Location = new Point(155, 118);
+            textEdit5.Location = new Point(147, 90);
             textEdit5.Name = "textEdit5";
-            textEdit5.Size = new Size(320, 28);
+            textEdit5.Size = new Size(337, 22);
             textEdit5.StyleController = layoutControl1;
             textEdit5.TabIndex = 7;
             // 
-            // textEdit6
+            // cmbPesoMartillo
             // 
-            textEdit6.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "TemperaturaSecado", true));
-            textEdit6.Location = new Point(155, 152);
-            textEdit6.Name = "textEdit6";
-            textEdit6.Size = new Size(320, 28);
-            textEdit6.StyleController = layoutControl1;
-            textEdit6.TabIndex = 8;
+            cmbPesoMartillo.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "PesoMartilloLb", true));
+            cmbPesoMartillo.Location = new Point(147, 64);
+            cmbPesoMartillo.Name = "cmbPesoMartillo";
+            cmbPesoMartillo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cmbPesoMartillo.Size = new Size(337, 22);
+            cmbPesoMartillo.StyleController = layoutControl1;
+            cmbPesoMartillo.TabIndex = 6;
+            // 
+            // cmbTemperaturaSecado
+            // 
+            cmbTemperaturaSecado.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "TemperaturaSecado", true));
+            cmbTemperaturaSecado.Location = new Point(147, 116);
+            cmbTemperaturaSecado.Name = "cmbTemperaturaSecado";
+            cmbTemperaturaSecado.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cmbTemperaturaSecado.Size = new Size(337, 22);
+            cmbTemperaturaSecado.StyleController = layoutControl1;
+            cmbTemperaturaSecado.TabIndex = 8;
+            // 
+            // cmbNorma
+            // 
+            cmbNorma.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "Norma", true));
+            cmbNorma.Location = new Point(147, 142);
+            cmbNorma.Name = "cmbNorma";
+            cmbNorma.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cmbNorma.Size = new Size(337, 22);
+            cmbNorma.StyleController = layoutControl1;
+            cmbNorma.TabIndex = 9;
+            // 
+            // cmbMetotoUtilizado
+            // 
+            cmbMetotoUtilizado.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "MetodoUtilizado", true));
+            cmbMetotoUtilizado.Location = new Point(147, 38);
+            cmbMetotoUtilizado.Name = "cmbMetotoUtilizado";
+            cmbMetotoUtilizado.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cmbMetotoUtilizado.Size = new Size(337, 22);
+            cmbMetotoUtilizado.StyleController = layoutControl1;
+            cmbMetotoUtilizado.TabIndex = 5;
             // 
             // Root
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem5, layoutControlItem6 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem2, layoutControlItem3, layoutControlItem5, layoutControlItem6, layoutControlItem11 });
             Root.Name = "Root";
-            Root.Size = new Size(491, 208);
+            Root.Size = new Size(496, 216);
             Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -179,64 +198,71 @@
             layoutControlItem1.Control = textEdit1;
             layoutControlItem1.Location = new Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new Size(465, 34);
+            layoutControlItem1.Size = new Size(476, 26);
             layoutControlItem1.Text = "Fecha Ensayo";
             // 
             // layoutControlItem2
             // 
-            layoutControlItem2.Control = textEdit2;
-            layoutControlItem2.Location = new Point(0, 34);
+            layoutControlItem2.Control = cmbMetotoUtilizado;
+            layoutControlItem2.Location = new Point(0, 26);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new Size(465, 34);
+            layoutControlItem2.Size = new Size(476, 26);
             layoutControlItem2.Text = "Método utilizado";
             // 
             // layoutControlItem3
             // 
-            layoutControlItem3.Control = textEdit4;
-            layoutControlItem3.Location = new Point(0, 68);
+            layoutControlItem3.Control = cmbPesoMartillo;
+            layoutControlItem3.Location = new Point(0, 52);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new Size(465, 34);
+            layoutControlItem3.Size = new Size(476, 26);
             layoutControlItem3.Text = "Peso Martillo (lb)";
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = textEdit5;
-            layoutControlItem5.Location = new Point(0, 102);
+            layoutControlItem5.Location = new Point(0, 78);
             layoutControlItem5.Name = "layoutControlItem5";
-            layoutControlItem5.Size = new Size(465, 34);
+            layoutControlItem5.Size = new Size(476, 26);
             layoutControlItem5.Text = "Peso del Material (g)";
             // 
             // layoutControlItem6
             // 
-            layoutControlItem6.Control = textEdit6;
-            layoutControlItem6.Location = new Point(0, 136);
+            layoutControlItem6.Control = cmbTemperaturaSecado;
+            layoutControlItem6.Location = new Point(0, 104);
             layoutControlItem6.Name = "layoutControlItem6";
-            layoutControlItem6.Size = new Size(465, 46);
+            layoutControlItem6.Size = new Size(476, 26);
             layoutControlItem6.Text = "Temperatura Secado (°C)";
+            // 
+            // layoutControlItem11
+            // 
+            layoutControlItem11.Control = cmbNorma;
+            layoutControlItem11.Location = new Point(0, 130);
+            layoutControlItem11.Name = "layoutControlItem11";
+            layoutControlItem11.Size = new Size(476, 66);
             // 
             // layoutControl2
             // 
             tablePanel1.SetColumn(layoutControl2, 1);
             layoutControl2.Controls.Add(txtDiametroMoldeCm);
             layoutControl2.Controls.Add(txtAlturaMoldeCm);
-            layoutControl2.Controls.Add(textEdit8);
-            layoutControl2.Controls.Add(textEdit9);
-            layoutControl2.Controls.Add(textEdit10);
+            layoutControl2.Controls.Add(cmbNumeroCapas);
+            layoutControl2.Controls.Add(cmbGolpesPorCapa);
+            layoutControl2.Controls.Add(cmbTipoProctor);
             layoutControl2.Dock = DockStyle.Fill;
-            layoutControl2.Location = new Point(514, 16);
+            layoutControl2.Location = new Point(513, 12);
             layoutControl2.Name = "layoutControl2";
             layoutControl2.Root = layoutControlGroup1;
             tablePanel1.SetRow(layoutControl2, 0);
-            layoutControl2.Size = new Size(491, 208);
+            layoutControl2.Size = new Size(496, 216);
             layoutControl2.TabIndex = 1;
             layoutControl2.Text = "layoutControl2";
             // 
             // txtDiametroMoldeCm
             // 
             txtDiametroMoldeCm.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "DiametroMoldeCm", true));
-            txtDiametroMoldeCm.Location = new Point(130, 16);
+            txtDiametroMoldeCm.Location = new Point(122, 12);
             txtDiametroMoldeCm.Name = "txtDiametroMoldeCm";
-            txtDiametroMoldeCm.Size = new Size(345, 28);
+            txtDiametroMoldeCm.Size = new Size(362, 22);
             txtDiametroMoldeCm.StyleController = layoutControl2;
             txtDiametroMoldeCm.TabIndex = 4;
             txtDiametroMoldeCm.EditValueChanged += txtDiametroMoldeCm_EditValueChanged;
@@ -244,38 +270,41 @@
             // txtAlturaMoldeCm
             // 
             txtAlturaMoldeCm.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "AlturaMoldeCm", true));
-            txtAlturaMoldeCm.Location = new Point(130, 50);
+            txtAlturaMoldeCm.Location = new Point(122, 38);
             txtAlturaMoldeCm.Name = "txtAlturaMoldeCm";
-            txtAlturaMoldeCm.Size = new Size(345, 28);
+            txtAlturaMoldeCm.Size = new Size(362, 22);
             txtAlturaMoldeCm.StyleController = layoutControl2;
             txtAlturaMoldeCm.TabIndex = 5;
             // 
-            // textEdit8
+            // cmbNumeroCapas
             // 
-            textEdit8.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "NumCapas", true));
-            textEdit8.Location = new Point(130, 84);
-            textEdit8.Name = "textEdit8";
-            textEdit8.Size = new Size(345, 28);
-            textEdit8.StyleController = layoutControl2;
-            textEdit8.TabIndex = 6;
+            cmbNumeroCapas.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "NumCapas", true));
+            cmbNumeroCapas.Location = new Point(122, 64);
+            cmbNumeroCapas.Name = "cmbNumeroCapas";
+            cmbNumeroCapas.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cmbNumeroCapas.Size = new Size(362, 22);
+            cmbNumeroCapas.StyleController = layoutControl2;
+            cmbNumeroCapas.TabIndex = 6;
             // 
-            // textEdit9
+            // cmbGolpesPorCapa
             // 
-            textEdit9.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "NumGolpes", true));
-            textEdit9.Location = new Point(130, 118);
-            textEdit9.Name = "textEdit9";
-            textEdit9.Size = new Size(345, 28);
-            textEdit9.StyleController = layoutControl2;
-            textEdit9.TabIndex = 7;
+            cmbGolpesPorCapa.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "NumGolpes", true));
+            cmbGolpesPorCapa.Location = new Point(122, 90);
+            cmbGolpesPorCapa.Name = "cmbGolpesPorCapa";
+            cmbGolpesPorCapa.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cmbGolpesPorCapa.Size = new Size(362, 22);
+            cmbGolpesPorCapa.StyleController = layoutControl2;
+            cmbGolpesPorCapa.TabIndex = 7;
             // 
-            // textEdit10
+            // cmbTipoProctor
             // 
-            textEdit10.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "TipoProctor", true));
-            textEdit10.Location = new Point(130, 152);
-            textEdit10.Name = "textEdit10";
-            textEdit10.Size = new Size(345, 28);
-            textEdit10.StyleController = layoutControl2;
-            textEdit10.TabIndex = 8;
+            cmbTipoProctor.DataBindings.Add(new Binding("EditValue", ensayoProctorBindingSource, "TipoProctor", true));
+            cmbTipoProctor.Location = new Point(122, 116);
+            cmbTipoProctor.Name = "cmbTipoProctor";
+            cmbTipoProctor.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            cmbTipoProctor.Size = new Size(362, 22);
+            cmbTipoProctor.StyleController = layoutControl2;
+            cmbTipoProctor.TabIndex = 8;
             // 
             // layoutControlGroup1
             // 
@@ -283,7 +312,7 @@
             layoutControlGroup1.GroupBordersVisible = false;
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem4, layoutControlItem7, layoutControlItem8, layoutControlItem9, layoutControlItem10 });
             layoutControlGroup1.Name = "layoutControlGroup1";
-            layoutControlGroup1.Size = new Size(491, 208);
+            layoutControlGroup1.Size = new Size(496, 216);
             layoutControlGroup1.TextVisible = false;
             // 
             // layoutControlItem4
@@ -291,39 +320,39 @@
             layoutControlItem4.Control = txtDiametroMoldeCm;
             layoutControlItem4.Location = new Point(0, 0);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new Size(465, 34);
+            layoutControlItem4.Size = new Size(476, 26);
             layoutControlItem4.Text = "Diametro Molde (cm)";
             // 
             // layoutControlItem7
             // 
             layoutControlItem7.Control = txtAlturaMoldeCm;
-            layoutControlItem7.Location = new Point(0, 34);
+            layoutControlItem7.Location = new Point(0, 26);
             layoutControlItem7.Name = "layoutControlItem7";
-            layoutControlItem7.Size = new Size(465, 34);
+            layoutControlItem7.Size = new Size(476, 26);
             layoutControlItem7.Text = "Altura Molde (cm)";
             // 
             // layoutControlItem8
             // 
-            layoutControlItem8.Control = textEdit8;
-            layoutControlItem8.Location = new Point(0, 68);
+            layoutControlItem8.Control = cmbNumeroCapas;
+            layoutControlItem8.Location = new Point(0, 52);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new Size(465, 34);
+            layoutControlItem8.Size = new Size(476, 26);
             layoutControlItem8.Text = "No. de Capas";
             // 
             // layoutControlItem9
             // 
-            layoutControlItem9.Control = textEdit9;
-            layoutControlItem9.Location = new Point(0, 102);
+            layoutControlItem9.Control = cmbGolpesPorCapa;
+            layoutControlItem9.Location = new Point(0, 78);
             layoutControlItem9.Name = "layoutControlItem9";
-            layoutControlItem9.Size = new Size(465, 34);
+            layoutControlItem9.Size = new Size(476, 26);
             layoutControlItem9.Text = "No Capas/Golpes";
             // 
             // layoutControlItem10
             // 
-            layoutControlItem10.Control = textEdit10;
-            layoutControlItem10.Location = new Point(0, 136);
+            layoutControlItem10.Control = cmbTipoProctor;
+            layoutControlItem10.Location = new Point(0, 104);
             layoutControlItem10.Name = "layoutControlItem10";
-            layoutControlItem10.Size = new Size(465, 46);
+            layoutControlItem10.Size = new Size(476, 92);
             layoutControlItem10.Text = "Proctor";
             // 
             // tablePanel1
@@ -357,8 +386,12 @@
             // 
             tabPageGrafico.Name = "tabPageGrafico";
             tabPageGrafico.ShowCloseButton = DevExpress.Utils.DefaultBoolean.False;
-            tabPageGrafico.Size = new Size(1020, 346);
+            tabPageGrafico.Size = new Size(1020, 353);
             tabPageGrafico.Text = "Grafico";
+            // 
+            // splashScreenManager1
+            // 
+            splashScreenManager1.ClosingDelay = 500;
             // 
             // ProctorControl
             // 
@@ -374,23 +407,25 @@
             ((System.ComponentModel.ISupportInitialize)textEdit1.Properties.CalendarTimeProperties).EndInit();
             ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)ensayoProctorBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit2.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit4.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)textEdit5.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit6.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cmbPesoMartillo.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cmbTemperaturaSecado.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cmbNorma.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cmbMetotoUtilizado.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl2).EndInit();
             layoutControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)txtDiametroMoldeCm.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtAlturaMoldeCm.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit8.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit9.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit10.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cmbNumeroCapas.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cmbGolpesPorCapa.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cmbTipoProctor.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
@@ -410,29 +445,32 @@
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraEditors.DateEdit textEdit1;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
         private DevExpress.XtraLayout.LayoutControl layoutControl2;
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraEditors.TextEdit txtDiametroMoldeCm;
         private DevExpress.XtraEditors.TextEdit txtAlturaMoldeCm;
-        private DevExpress.XtraEditors.TextEdit textEdit8;
-        private DevExpress.XtraEditors.TextEdit textEdit9;
-        private DevExpress.XtraEditors.TextEdit textEdit10;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem9;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
-        private DevExpress.XtraEditors.TextEdit textEdit4;
         private DevExpress.XtraEditors.TextEdit textEdit5;
-        private DevExpress.XtraEditors.TextEdit textEdit6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraTab.XtraTabControl tabResultadosProctor;
         private BindingSource ensayoProctorBindingSource;
         private DevExpress.XtraTab.XtraTabPage tabPageGrafico;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbPesoMartillo;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbNumeroCapas;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbGolpesPorCapa;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbTemperaturaSecado;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbTipoProctor;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbNorma;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem11;
+        private DevExpress.XtraEditors.ComboBoxEdit cmbMetotoUtilizado;
+        private DevExpress.XtraSplashScreen.SplashScreenManager splashScreenManager1;
     }
 }

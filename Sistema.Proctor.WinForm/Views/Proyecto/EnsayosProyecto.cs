@@ -53,12 +53,11 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
 
         private void XtraTabControlEnsayos_CloseButtonClick(object? sender, EventArgs e)
         {
-            if (sender is XtraTabControl { SelectedTabPage: not null } tabControl)
-            {
-                var index = tabControl.SelectedTabPageIndex;
-                ListEnsayoProctor.RemoveAt(index-1);
-                tabControl.TabPages.Remove(tabControl.SelectedTabPage);
-            }
+            if (sender is not XtraTabControl { SelectedTabPage: not null } tabControl) return;
+            var index = tabControl.SelectedTabPageIndex;
+            if (index == 0) return;
+            ListEnsayoProctor.RemoveAt(index-1);
+            tabControl.TabPages.Remove(tabControl.SelectedTabPage);
         }
 
         private async void EnsayosProyecto_Load(object sender, EventArgs e)

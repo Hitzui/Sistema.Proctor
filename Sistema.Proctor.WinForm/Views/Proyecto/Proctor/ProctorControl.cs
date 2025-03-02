@@ -13,6 +13,7 @@ using MathNet.Numerics;
 using NLog;
 using Sistema.Proctor.Data;
 using Sistema.Proctor.Data.Repositories;
+using Sistema.Proctor.WinForm.Data.Enum;
 using Sistema.Proctor.WinForm.Views.Proyecto.Reportes;
 using DashStyle = DevExpress.XtraCharts.DashStyle;
 using FillMode = DevExpress.XtraCharts.FillMode;
@@ -26,18 +27,53 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
         private EnsayoProctor _EnsayoProctor;
         private int _Counter;
         private List<ResultadosProctor> ResultadosProctorList = new List<ResultadosProctor>();
+        private readonly Enumeradores Enumeradores = new Enumeradores();
 
         public ProctorControl(EnsayoProctor ensayoProctor)
         {
             InitializeComponent();
             _EnsayoProctor = ensayoProctor;
-            if (_EnsayoProctor.Idensayo<=0)
+            if (_EnsayoProctor.Idensayo <= 0)
             {
                 _EnsayoProctor.DiametroMoldeCm = 15.2m;
                 _EnsayoProctor.AlturaMoldeCm = 12.0m;
             }
+
             ensayoProctorBindingSource.DataSource = _EnsayoProctor;
             _Counter = 0;
+            if (Enumeradores.PesoMartillo.Count > 0)
+            {
+                cmbPesoMartillo.Properties.Items.AddRange(Enumeradores.PesoMartillo);
+            }
+
+            if (Enumeradores.NumeroCapas.Count > 0)
+            {
+                cmbNumeroCapas.Properties.Items.AddRange(Enumeradores.NumeroCapas);
+            }
+
+            if (Enumeradores.GolpesPorCapa.Count > 0)
+            {
+                cmbGolpesPorCapa.Properties.Items.AddRange(Enumeradores.GolpesPorCapa);
+            }
+
+            if (Enumeradores.TemperaturaSecado.Count > 0)
+            {
+                cmbTemperaturaSecado.Properties.Items.AddRange(Enumeradores.TemperaturaSecado);
+            }
+
+            if (Enumeradores.TipoProctor.Count > 0)
+            {
+                cmbTipoProctor.Properties.Items.AddRange(Enumeradores.TipoProctor);
+            }
+            if (Enumeradores.Norma.Count > 0)
+            {
+                cmbNorma.Properties.Items.AddRange(Enumeradores.Norma);
+            }
+
+            if (Enumeradores.MetodoUtilizado.Count > 0)
+            {
+                cmbMetotoUtilizado.Properties.Items.AddRange(Enumeradores.MetodoUtilizado);
+            }
         }
 
         private void tabResultadosProctor_CustomHeaderButtonClick(object sender, CustomHeaderButtonEventArgs e)
@@ -113,7 +149,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
             var xtraTabPage = arg.Page as XtraTabPage;
             var indexOf = tabResultadosProctor.TabPages.IndexOf(xtraTabPage);
             XtraMessageBox.Show($"Indice {indexOf}");
-            ResultadosProctorList.RemoveAt(indexOf-1);
+            ResultadosProctorList.RemoveAt(indexOf - 1);
             tabResultadosProctor.TabPages.Remove(xtraTabPage);
         }
 
@@ -158,7 +194,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                         MessageBoxIcon.Exclamation);
                     return;
                 }
-
+                splashScreenManager1.ShowWaitForm();
                 using IUnitOfWork unitOfWork = new UnitOfWork();
                 var usuario = DependenciasGlobalesForm.Instance.Usuario;
                 var muestraRepository = unitOfWork.MuestrasRepository;
@@ -172,6 +208,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                         tipoEnsayo => tipoEnsayo.Descripcion == "Proctor");
                 if (tipoEnsayoProctor is null)
                 {
+                    splashScreenManager1.CloseWaitForm();
                     XtraMessageBox.Show(
                         "No existe el parametro del tipo de ensayo Proctor en la base de datos, genere el parametro de tipo de ensayo para continuar",
                         "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -181,6 +218,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                 var muestra = await muestraRepository.GetByIdAsync(DependenciasGlobalesForm.Instance.SelectedIdMuestra);
                 if (muestra is null)
                 {
+                    splashScreenManager1.CloseWaitForm();
                     XtraMessageBox.Show("No hay muestra disponible en la base de datos con el codigo suministrado",
                         "Guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -204,13 +242,20 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                     };
                     await ensayoRepository.AddAsync(ensayo);
                 }
+
                 var humedadOptimaList = new List<double>();
                 var densidadMaximaList = new List<double>();
 
                 _EnsayoProctor.Idempleado = muestra.Idempleado ?? 0;
                 _EnsayoProctor.Idmuestra = muestra.Idmuestra;
-                _EnsayoProctor.Norma = "ASTM D698";
-                if (_EnsayoProctor.Idensayo>0)
+                _EnsayoProctor.TemperaturaSecado = float.Parse(cmbTemperaturaSecado.SelectedItem.ToString()!);
+                _EnsayoProctor.NumCapas = int.Parse(cmbNumeroCapas.SelectedItem.ToString()!);
+                _EnsayoProctor.NumGolpes = int.Parse(cmbGolpesPorCapa.SelectedItem.ToString()!);
+                _EnsayoProctor.PesoMartilloLb = float.Parse(cmbPesoMartillo.SelectedItem.ToString()!);
+                _EnsayoProctor.Norma = cmbNorma.SelectedItem.ToString()!;
+                _EnsayoProctor.TipoProctor = cmbTipoProctor.SelectedItem.ToString()!;
+                _EnsayoProctor.MetodoUtilizado = cmbMetotoUtilizado.SelectedItem.ToString()!;
+                if (_EnsayoProctor.Idensayo > 0)
                 {
                     _EnsayoProctor.UpdatedBy = Convert.ToInt32(usuario.Idusuario);
                     _EnsayoProctor.UpdatedAt = DateTime.Now;
@@ -223,7 +268,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                     var ensayoProctorEntry = await ensayoProctorRepository.AddAsync(_EnsayoProctor);
                     _EnsayoProctor = ensayoProctorEntry.Entity;
                 }
-                
+
 
                 ResultadosProctorList.RemoveAll(proctor =>
                     proctor.DensidadSeca != null && proctor.DensidadSeca.Value.CompareTo(decimal.Zero) <= 0);
@@ -233,16 +278,20 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                     {
                         resultadosProctor.EnsayoProctor = _EnsayoProctor;
                     }
+
                     // Add values to the lists
                     humedadOptimaList.Add((double)(resultadosProctor.AguaAgregada ?? decimal.Zero));
                     densidadMaximaList.Add((double)(resultadosProctor.DensidadSeca ?? decimal.Zero));
                 }
+
                 // Ajuste polinómico de grado 5
-                var coeficientes = Fit.Polynomial(humedadOptimaList.ToArray(), densidadMaximaList.ToArray(), ResultadosProctorList.Count-1);
-                (var humedadOptima, var densidadMax) = Formulas.EncontrarMaximo(coeficientes, humedadOptimaList.Min(), densidadMaximaList.Max());
+                var coeficientes = Fit.Polynomial(humedadOptimaList.ToArray(), densidadMaximaList.ToArray(),
+                    ResultadosProctorList.Count - 1);
+                (var humedadOptima, var densidadMax) = Formulas.EncontrarMaximo(coeficientes, humedadOptimaList.Min(),
+                    densidadMaximaList.Max());
                 _EnsayoProctor.DensidadMaxima = (decimal)densidadMax;
                 _EnsayoProctor.HumedadOptima = (decimal)humedadOptima;
-                if (_EnsayoProctor.Idensayo>0)
+                if (_EnsayoProctor.Idensayo > 0)
                 {
                     foreach (var resultadosProctor in ResultadosProctorList)
                     {
@@ -253,11 +302,14 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                 {
                     await resultadoProctorRepository.AddRangeAsync(ResultadosProctorList);
                 }
-                
+
                 await unitOfWork.CompleteAsync();
+                splashScreenManager1.CloseWaitForm();
+                await XtraMessageBox.ShowAsync("Se han guardado los datos de forma correcta");
             }
             catch (Exception e)
             {
+                await XtraMessageBox.ShowAsync($"No fue posible guardar los datos, revise la siguiente información: {e.Message}");
                 Logger.Error(e, "Error al guardar el ensayo de proctor");
             }
         }
@@ -287,7 +339,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
             };
 
             // Ajuste polinómico de grado 5
-            var coeficientes = Fit.Polynomial(humedad.ToArray(), densidad.ToArray(), ResultadosProctorList.Count-1);
+            var coeficientes = Fit.Polynomial(humedad.ToArray(), densidad.ToArray(), ResultadosProctorList.Count - 1);
 
             // Encontrar la humedad óptima y la densidad máxima
             (var humedadOptima, var densidadMax) = Formulas.EncontrarMaximo(coeficientes, humedad.Min(), humedad.Max());
@@ -379,12 +431,13 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
 
             var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
             var resultadosEnsayoProctorRepository = unitOfWork.ResultadosEnsayoProctorRepository;
-            var resultados = await resultadosEnsayoProctorRepository.GetResultadosEnsayoProctor(_EnsayoProctor.Idensayo);
+            var resultados =
+                await resultadosEnsayoProctorRepository.GetResultadosEnsayoProctor(_EnsayoProctor.Idensayo);
             var reporteResultadosEnsayoProctor = new ReporteResultadosEnsayoProctor();
 
             var graficoProctor = reporteResultadosEnsayoProctor.graficoProctor;
             // Ajuste polinómico de grado 5
-            var coeficientes = Fit.Polynomial(humedad.ToArray(), densidad.ToArray(), ResultadosProctorList.Count-1);
+            var coeficientes = Fit.Polynomial(humedad.ToArray(), densidad.ToArray(), ResultadosProctorList.Count - 1);
 
             // Encontrar la humedad óptima y la densidad máxima
             (var humedadOptima, var densidadMax) = Formulas.EncontrarMaximo(coeficientes, humedad.Min(), humedad.Max());
@@ -400,7 +453,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
             // Crear serie de curva ajustada
             var serieCurva = new Series("Curva Ajustada", ViewType.Spline);
             var serieCurvaView = (LineSeriesView)serieCurva.View;
-            serieCurvaView.MarkerVisibility= DefaultBoolean.False;
+            serieCurvaView.MarkerVisibility = DefaultBoolean.False;
             for (var x = humedad.Min(); x <= humedad.Max(); x += 0.05)
             {
                 var y = Formulas.EvaluatePolynomial(coeficientes, x);
@@ -463,9 +516,10 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
             {
                 resultadosEnsayoProctorDto.NombreTranscribio = DependenciasGlobalesForm.Instance.Usuario.Nombre;
             }
+
             reporteResultadosEnsayoProctor.DataSource = resultados;
             var sucursal = DependenciasGlobalesForm.Instance.SelectedSucursal;
-            if (sucursal.Logo.Length>0)
+            if (sucursal.Logo.Length > 0)
             {
                 reporteResultadosEnsayoProctor.xrPictureBox1.ImageSource = null;
                 using var memory = new MemoryStream(sucursal.Logo);
