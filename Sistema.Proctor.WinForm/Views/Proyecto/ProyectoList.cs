@@ -1,24 +1,16 @@
-﻿using DevExpress.XtraEditors;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using DevExpress.Data;
+using DevExpress.XtraBars;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using NLog;
-using Sistema.Proctor.Data;
 using Sistema.Proctor.WinForm.Data;
 using Sistema.Proctor.WinForm.Dto;
 
 namespace Sistema.Proctor.WinForm.Views.Proyecto
 {
-    public partial class ProyectoList : DevExpress.XtraEditors.XtraForm
+    public partial class ProyectoList : XtraForm
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
 
         public ProyectoList()
         {
@@ -31,11 +23,12 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
             gridControlProyectos.DataSource = DependenciasGlobalesForm.Instance.ListadoProyectos;
         }
 
-        private void gridViewProyectos_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
+        private void gridViewProyectos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedRowsCount = gridViewProyectos.SelectedRowsCount;
             if (selectedRowsCount <= 0) return;
-            var proyecto = (Sistema.Proctor.Data.Entities.Proyecto)gridViewProyectos.GetRow(gridViewProyectos.FocusedRowHandle);
+            var proyecto =
+                (Sistema.Proctor.Data.Entities.Proyecto)gridViewProyectos.GetRow(gridViewProyectos.FocusedRowHandle);
             DependenciasGlobalesForm.Instance.SelectedProyecto = new ProyectoDto().GetProyectoDto(proyecto);
         }
 
@@ -47,7 +40,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
             }
         }
 
-        private async void barManagerProyecto_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private async void barManagerProyecto_ItemClick(object sender, ItemClickEventArgs e)
         {
             try
             {
@@ -74,7 +67,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
             }
             catch (Exception exception)
             {
-                Logger.Error(exception, "Error al cargar la lista de muestras");
+                logger.Error(exception, "Error al cargar la lista de muestras");
             }
         }
     }

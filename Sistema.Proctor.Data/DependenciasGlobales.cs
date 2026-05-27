@@ -10,7 +10,7 @@ public class DependenciasGlobales
 
     public static DependenciasGlobales Instance => instance.Value;
 
-    private readonly IServiceProvider serviceProvider;
+    private readonly IServiceProvider _ServiceProvider;
 
     private DependenciasGlobales()
     {
@@ -25,11 +25,11 @@ public class DependenciasGlobales
         serviceCollection.AddSingleton<DataContextProctor>();
         // Agrega más servicios y repositorios según sea necesario
 
-        serviceProvider = serviceCollection.BuildServiceProvider();
+        _ServiceProvider = serviceCollection.BuildServiceProvider();
     }
 
     public T? GetService<T>()
     {
-        return serviceProvider.GetService<T>();
+        return _ServiceProvider.GetService<T>();
     }
 }

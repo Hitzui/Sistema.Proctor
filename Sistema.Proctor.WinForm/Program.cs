@@ -1,4 +1,3 @@
-using DevExpress.XtraEditors;
 using Sistema.Proctor.WinForm.Views;
 
 namespace Sistema.Proctor.WinForm;
@@ -11,11 +10,12 @@ static class Program
     [STAThread]
     static void Main()
     {
+        //Add the following code to a method that starts the application.
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
         using var frmLogin = new LoginView();
-        if (frmLogin.ShowDialog( )== DialogResult.Yes)
+        if (frmLogin.ShowDialog() == DialogResult.Yes)
         {
             Application.Run(new MainView());
         }

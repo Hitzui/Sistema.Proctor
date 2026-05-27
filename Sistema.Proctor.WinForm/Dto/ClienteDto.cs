@@ -1,8 +1,9 @@
 ﻿using AutoMapper;
 using DevExpress.XtraEditors.DXErrorProvider;
+using NLog.Extensions.Logging;
+using Sistema.Proctor.Data;
 using Sistema.Proctor.Data.Entities;
 using System.ComponentModel;
-using Sistema.Proctor.Data;
 
 namespace Sistema.Proctor.WinForm.Dto;
 
@@ -42,6 +43,8 @@ public class ClienteDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXDa
 
     private DateTime _UpdatedAt;
 
+    private IMapper _Mapper;
+
     public ClienteDto()
     {
         _Celular = string.Empty;
@@ -55,6 +58,8 @@ public class ClienteDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXDa
         _NombreComercial = string.Empty;
         _Ruc = string.Empty;
         _Telefono = string.Empty;
+        var mapperConfiguration = new MapperConfiguration(cfg => { cfg.AddProfile<ClienteProfile>(); }, new NLogLoggerFactory());
+        _Mapper = mapperConfiguration.CreateMapper();
     }
 
     public int Idcliente
@@ -225,72 +230,72 @@ public class ClienteDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXDa
         }
     }
     public int? CreatedBy
+    {
+        get
         {
-            get
+            return this._CreatedBy;
+        }
+        set
+        {
+            if (this._CreatedBy != value)
             {
-                return this._CreatedBy;
-            }
-            set
-            {
-                if (this._CreatedBy != value)
-                {
-                    this.SendPropertyChanging("CreatedBy");
-                    this._CreatedBy = value;
-                    this.SendPropertyChanged("CreatedBy");
-                }
+                this.SendPropertyChanging("CreatedBy");
+                this._CreatedBy = value;
+                this.SendPropertyChanged("CreatedBy");
             }
         }
+    }
 
-        public DateTime CreatedAt
+    public DateTime CreatedAt
+    {
+        get
         {
-            get
+            return this._CreatedAt;
+        }
+        set
+        {
+            if (this._CreatedAt != value)
             {
-                return this._CreatedAt;
-            }
-            set
-            {
-                if (this._CreatedAt != value)
-                {
-                    this.SendPropertyChanging("CreatedAt");
-                    this._CreatedAt = value;
-                    this.SendPropertyChanged("CreatedAt");
-                }
+                this.SendPropertyChanging("CreatedAt");
+                this._CreatedAt = value;
+                this.SendPropertyChanged("CreatedAt");
             }
         }
+    }
 
-        public int? UpdatedBy
+    public int? UpdatedBy
+    {
+        get
         {
-            get
+            return this._UpdatedBy;
+        }
+        set
+        {
+            if (this._UpdatedBy != value)
             {
-                return this._UpdatedBy;
-            }
-            set
-            {
-                if (this._UpdatedBy != value)
-                {
-                    this.SendPropertyChanging("UpdatedBy");
-                    this._UpdatedBy = value;
-                    this.SendPropertyChanged("UpdatedBy");
-                }
+                this.SendPropertyChanging("UpdatedBy");
+                this._UpdatedBy = value;
+                this.SendPropertyChanged("UpdatedBy");
             }
         }
+    }
 
-        public DateTime UpdatedAt
+    public DateTime UpdatedAt
+    {
+        get
         {
-            get
+            return this._UpdatedAt;
+        }
+        set
+        {
+            if (this._UpdatedAt != value)
             {
-                return this._UpdatedAt;
-            }
-            set
-            {
-                if (this._UpdatedAt != value)
-                {
-                    this.SendPropertyChanging("UpdatedAt");
-                    this._UpdatedAt = value;
-                    this.SendPropertyChanged("UpdatedAt");
-                }
+                this.SendPropertyChanging("UpdatedAt");
+                this._UpdatedAt = value;
+                this.SendPropertyChanged("UpdatedAt");
             }
         }
+    }
 
 
     #region Extensibility Method Definitions
@@ -361,21 +366,8 @@ public class ClienteDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXDa
     {
     }
 
-    public Cliente GetCliente()
-    {
-        var config = new MapperConfiguration(cfg => { cfg.AddProfile<ClienteProfile>(); });
+    public Cliente GetCliente() => _Mapper.Map<Cliente>(this);
 
-        // Crear el mapper
-        var mapper = config.CreateMapper();
-        return mapper.Map<Cliente>(this);
-    }
+    public ClienteDto GetClienteDto(Cliente cliente) => _Mapper.Map<ClienteDto>(cliente);
 
-    public ClienteDto GetClienteDto(Cliente cliente)
-    {
-        var config = new MapperConfiguration(cfg => { cfg.AddProfile<ClienteProfile>(); });
-
-        // Crear el mapper
-        var mapper = config.CreateMapper();
-        return mapper.Map<ClienteDto>(cliente);
-    }
 }

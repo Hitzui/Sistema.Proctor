@@ -39,7 +39,7 @@
             barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(Cliente.WaitForm1), true, true);
+            splashScreenManager1 = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::Sistema.Proctor.WinForm.Views.Cliente.WaitForm1), true, true);
             ((System.ComponentModel.ISupportInitialize)treeListEnsayos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)popupMenuEnsayos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
@@ -52,11 +52,13 @@
             // 
             // treeListEnsayos
             // 
-            treeListEnsayos.Location = new Point(0, 0);
+            treeListEnsayos.Caption = "Proyectos";
+            treeListEnsayos.CaptionHeight = 15;
+            treeListEnsayos.Location = new System.Drawing.Point(0, 0);
             treeListEnsayos.Name = "treeListEnsayos";
             treeListEnsayos.OptionsBehavior.ReadOnly = true;
             treeListEnsayos.OptionsSelection.SelectNodesOnRightClick = true;
-            treeListEnsayos.Size = new Size(400, 649);
+            treeListEnsayos.Size = new System.Drawing.Size(400, 649);
             treeListEnsayos.TabIndex = 1;
             treeListEnsayos.FocusedNodeChanged += treeListEnsayos_FocusedNodeChanged;
             treeListEnsayos.PopupMenuShowing += treeListEnsayos_PopupMenuShowing;
@@ -71,7 +73,7 @@
             // 
             barButtonItemVerEnsayo.Caption = "Abrir Ensayo";
             barButtonItemVerEnsayo.Id = 0;
-            barButtonItemVerEnsayo.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemVerEnsayo.ImageOptions.SvgImage");
+            barButtonItemVerEnsayo.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)resources.GetObject("barButtonItemVerEnsayo.ImageOptions.SvgImage"));
             barButtonItemVerEnsayo.Name = "barButtonItemVerEnsayo";
             // 
             // barManager1
@@ -88,34 +90,34 @@
             // barDockControlTop
             // 
             barDockControlTop.CausesValidation = false;
-            barDockControlTop.Dock = DockStyle.Top;
-            barDockControlTop.Location = new Point(0, 0);
+            barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
+            barDockControlTop.Location = new System.Drawing.Point(0, 0);
             barDockControlTop.Manager = barManager1;
-            barDockControlTop.Size = new Size(1089, 0);
+            barDockControlTop.Size = new System.Drawing.Size(1089, 0);
             // 
             // barDockControlBottom
             // 
             barDockControlBottom.CausesValidation = false;
-            barDockControlBottom.Dock = DockStyle.Bottom;
-            barDockControlBottom.Location = new Point(0, 645);
+            barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            barDockControlBottom.Location = new System.Drawing.Point(0, 645);
             barDockControlBottom.Manager = barManager1;
-            barDockControlBottom.Size = new Size(1089, 0);
+            barDockControlBottom.Size = new System.Drawing.Size(1089, 0);
             // 
             // barDockControlLeft
             // 
             barDockControlLeft.CausesValidation = false;
-            barDockControlLeft.Dock = DockStyle.Left;
-            barDockControlLeft.Location = new Point(0, 0);
+            barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
+            barDockControlLeft.Location = new System.Drawing.Point(0, 0);
             barDockControlLeft.Manager = barManager1;
-            barDockControlLeft.Size = new Size(0, 645);
+            barDockControlLeft.Size = new System.Drawing.Size(0, 645);
             // 
             // barDockControlRight
             // 
             barDockControlRight.CausesValidation = false;
-            barDockControlRight.Dock = DockStyle.Right;
-            barDockControlRight.Location = new Point(1089, 0);
+            barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
+            barDockControlRight.Location = new System.Drawing.Point(1089, 0);
             barDockControlRight.Manager = barManager1;
-            barDockControlRight.Size = new Size(0, 645);
+            barDockControlRight.Size = new System.Drawing.Size(0, 645);
             // 
             // splashScreenManager1
             // 
@@ -123,18 +125,17 @@
             // 
             // EnsayosProyecto
             // 
-            AutoScaleDimensions = new SizeF(6F, 13F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1089, 645);
+            AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1089, 645);
             Controls.Add(treeListEnsayos);
             Controls.Add(barDockControlLeft);
             Controls.Add(barDockControlRight);
             Controls.Add(barDockControlBottom);
             Controls.Add(barDockControlTop);
-            Name = "EnsayosProyecto";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             Text = "EnsayosProyecto";
-            WindowState = FormWindowState.Maximized;
+            WindowState = System.Windows.Forms.FormWindowState.Maximized;
             FormClosed += EnsayosProyecto_FormClosed;
             Load += EnsayosProyecto_Load;
             ((System.ComponentModel.ISupportInitialize)treeListEnsayos).EndInit();
@@ -146,7 +147,7 @@
 
         #endregion
         private DevExpress.XtraTreeList.Columns.TreeListBand treeListBand1;
-        private DevExpress.XtraTreeList.TreeList treeListEnsayos;
+        public DevExpress.XtraTreeList.TreeList treeListEnsayos;
         private DevExpress.XtraBars.PopupMenu popupMenuEnsayos;
         private DevExpress.XtraBars.BarButtonItem barButtonItemVerEnsayo;
         private DevExpress.XtraBars.BarManager barManager1;

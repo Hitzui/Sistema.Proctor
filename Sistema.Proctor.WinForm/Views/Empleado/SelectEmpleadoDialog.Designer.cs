@@ -43,10 +43,6 @@
             ((System.ComponentModel.ISupportInitialize)gridViewSeleccionarEmpleado).BeginInit();
             SuspendLayout();
             // 
-            // stackPanelFooter
-            // 
-            stackPanelFooter.Location = new Point(0, 351);
-            // 
             // btnCancelar
             // 
             btnCancelar.Appearance.BackColor = DevExpress.LookAndFeel.DXSkinColors.FillColors.Danger;
@@ -55,7 +51,6 @@
             btnCancelar.Appearance.Options.UseForeColor = true;
             btnCancelar.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnCancelar.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnCancelar.ImageOptions.SvgImage");
-            btnCancelar.Location = new Point(496, 22);
             btnCancelar.Click += btnCancelar_Click;
             // 
             // btnGuardar
@@ -66,7 +61,7 @@
             btnGuardar.Appearance.Options.UseForeColor = true;
             btnGuardar.ImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             btnGuardar.ImageOptions.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("btnGuardar.ImageOptions.SvgImage");
-            btnGuardar.Location = new Point(310, 22);
+            btnGuardar.Location = new Point(313, 22);
             btnGuardar.Size = new Size(133, 32);
             btnGuardar.Text = "Seleccionar";
             btnGuardar.Click += btnGuardar_Click;
@@ -78,7 +73,7 @@
             gridControlSeleccionarEmpleado.Location = new Point(0, 0);
             gridControlSeleccionarEmpleado.MainView = gridViewSeleccionarEmpleado;
             gridControlSeleccionarEmpleado.Name = "gridControlSeleccionarEmpleado";
-            gridControlSeleccionarEmpleado.Size = new Size(676, 351);
+            gridControlSeleccionarEmpleado.Size = new Size(676, 353);
             gridControlSeleccionarEmpleado.TabIndex = 3;
             gridControlSeleccionarEmpleado.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewSeleccionarEmpleado });
             // 
@@ -119,7 +114,7 @@
             // 
             AutoScaleDimensions = new SizeF(6F, 13F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(676, 428);
+            ClientSize = new Size(676, 430);
             Controls.Add(gridControlSeleccionarEmpleado);
             FormBorderEffect = DevExpress.XtraEditors.FormBorderEffect.Shadow;
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -127,6 +122,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "SelectEmpleadoDialog";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Seleccionar Empleado";
             Load += SelectEmpleadoDialog_Load;
             Controls.SetChildIndex(stackPanelFooter, 0);

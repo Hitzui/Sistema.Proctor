@@ -1,4 +1,6 @@
-﻿using NLog;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using NLog;
 using Sistema.Proctor.Data.Entities;
 
 namespace Sistema.Proctor.Data.Repositories;
@@ -16,7 +18,12 @@ public interface IUnitOfWork : IDisposable
     IProyectoRepository ProyectoRepository { get; }
     IUsuarioRepository UsuarioRepository { get; }
     IEmpresaRepository EmpresaRepository { get; }
+    IEnsayoHumedadRepository EnsayoHumedadRepository{ get; }
+    IResultadoEnsayoHumedadRepository ResultadoEnsayoHumedadRepository { get; }
+    Task<Parametro?> Parametros();
     Task<int> CompleteAsync();
+    Task<IDbContextTransaction> BeginTransaction();
+    Task<int> PreviewSaveChanges();
     void ClearTracking();
 }
 
@@ -39,6 +46,8 @@ public class UnitOfWork : IUnitOfWork, IAsyncDisposable
         ProyectoRepository = new ProyectoRepository(_Context);
         UsuarioRepository = new UsuarioRepository(_Context);
         EmpresaRepository = new EmpresaRepository(_Context);
+        EnsayoHumedadRepository = new EnsayoHumedadRepository(_Context);
+        ResultadoEnsayoHumedadRepository = new ResultadoEnsayoHumedadRepository(_Context);
     }
 
     public IRepository<Cliente> ClienteRepository { get; }
@@ -52,18 +61,38 @@ public class UnitOfWork : IUnitOfWork, IAsyncDisposable
     public IProyectoRepository ProyectoRepository { get; }
     public IUsuarioRepository UsuarioRepository { get; }
     public IEmpresaRepository EmpresaRepository { get; }
+    public IEnsayoHumedadRepository EnsayoHumedadRepository{ get; }
+    public IResultadoEnsayoHumedadRepository ResultadoEnsayoHumedadRepository { get; }
+
+    private IDbContextTransaction? _transaction;
+
+    public async Task<IDbContextTransaction> BeginTransaction()
+    {
+        _transaction= await _Context.Database.BeginTransactionAsync();
+        return _transaction;
+    }
+    
+    public Task<Parametro?> Parametros()
+    {
+        return _Context.Parametros.AsNoTracking().FirstOrDefaultAsync();
+    }
+
+    public Task<int> PreviewSaveChanges()
+    {
+        return _Context.SaveChangesAsync();
+    }
     public async Task<int> CompleteAsync()
     {
-        await using var transaction = await _Context.Database.BeginTransactionAsync();
+        _transaction ??= await _Context.Database.BeginTransactionAsync();
         try
         {
             var result = await _Context.SaveChangesAsync();
-            await transaction.CommitAsync();
+            await _transaction.CommitAsync();
             return result;
         }
         catch
         {
-            await transaction.RollbackAsync();
+            await _transaction.RollbackAsync();
             throw;
         }
         finally

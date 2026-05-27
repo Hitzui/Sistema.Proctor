@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using DevExpress.XtraEditors.DXErrorProvider;
+using NLog.Extensions.Logging;
+using Sistema.Proctor.Data;
 using Sistema.Proctor.Data.Entities;
 using System.ComponentModel;
-using Sistema.Proctor.Data;
-using MySqlX.XDevAPI;
 
 namespace Sistema.Proctor.WinForm.Dto;
 
@@ -215,7 +215,7 @@ public class EmpleadoDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXD
 
     public Empleado GetEmpleado()
     {
-        var config = new MapperConfiguration(cfg => { cfg.AddProfile<EmpleadoProfile>(); });
+        var config = new MapperConfiguration(cfg => { cfg.AddProfile<EmpleadoProfile>(); }, new NLogLoggerFactory());
 
         // Crear el mapper
         var mapper = config.CreateMapper();
@@ -224,7 +224,7 @@ public class EmpleadoDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXD
 
     public EmpleadoDto GetEmpleadoDto(Empleado empleado)
     {
-        var config = new MapperConfiguration(cfg => { cfg.AddProfile<EmpleadoProfile>(); });
+        var config = new MapperConfiguration(cfg => { cfg.AddProfile<EmpleadoProfile>(); }, new NLogLoggerFactory());
 
         // Crear el mapper
         var mapper = config.CreateMapper();

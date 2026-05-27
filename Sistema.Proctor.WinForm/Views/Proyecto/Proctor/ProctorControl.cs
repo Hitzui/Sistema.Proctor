@@ -16,7 +16,6 @@ using Sistema.Proctor.Data.Repositories;
 using Sistema.Proctor.WinForm.Data.Enum;
 using Sistema.Proctor.WinForm.Views.Proyecto.Reportes;
 using DashStyle = DevExpress.XtraCharts.DashStyle;
-using FillMode = DevExpress.XtraCharts.FillMode;
 using Series = DevExpress.XtraCharts.Series;
 
 namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
@@ -33,6 +32,11 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
         {
             InitializeComponent();
             _EnsayoProctor = ensayoProctor;
+            Init();
+        }
+
+        private void Init()
+        {
             if (_EnsayoProctor.Idensayo <= 0)
             {
                 _EnsayoProctor.DiametroMoldeCm = 15.2m;
@@ -65,14 +69,15 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
             {
                 cmbTipoProctor.Properties.Items.AddRange(Enumeradores.TipoProctor);
             }
-            if (Enumeradores.Norma.Count > 0)
+
+            if (Enumeradores.NormaProctor.Count > 0)
             {
-                cmbNorma.Properties.Items.AddRange(Enumeradores.Norma);
+                cmbNorma.Properties.Items.AddRange(Enumeradores.NormaProctor);
             }
 
-            if (Enumeradores.MetodoUtilizado.Count > 0)
+            if (Enumeradores.MetodoUtilizadoProctor.Count > 0)
             {
-                cmbMetotoUtilizado.Properties.Items.AddRange(Enumeradores.MetodoUtilizado);
+                cmbMetotoUtilizado.Properties.Items.AddRange(Enumeradores.MetodoUtilizadoProctor);
             }
         }
 
@@ -115,17 +120,24 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
             tabResultadosProctor.SelectedTabPage = xtraTabPage;
         }
 
-        private async void ProctorControl_Load(object sender, EventArgs e)
+        private async void ProctorControl_Load(object? sender, EventArgs e)
         {
             try
             {
-                var unitOfWork = DependenciasGlobales.Instance.GetService<IUnitOfWork>();
+                using IUnitOfWork unitOfWork = new UnitOfWork();
                 var resultadosProctorRepository = unitOfWork.ResultadosProctorRepository;
                 if (_EnsayoProctor.Idensayo > 0)
                 {
+                    _Counter = 0;
                     var resultados =
                         await resultadosProctorRepository.GetByCriteriaAsync(proctor =>
                             proctor.Idensayo == _EnsayoProctor.Idensayo);
+                    ResultadosProctorList.Clear();
+                    while (tabResultadosProctor.TabPages.Count > 1)
+                    {
+                        tabResultadosProctor.TabPages.RemoveAt(1);
+                    }
+
                     foreach (var resultadosProctor in resultados)
                     {
                         AddPage(resultadosProctor);
@@ -194,6 +206,7 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                         MessageBoxIcon.Exclamation);
                     return;
                 }
+
                 splashScreenManager1.ShowWaitForm();
                 using IUnitOfWork unitOfWork = new UnitOfWork();
                 var usuario = DependenciasGlobalesForm.Instance.Usuario;
@@ -306,10 +319,12 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto.Proctor
                 await unitOfWork.CompleteAsync();
                 splashScreenManager1.CloseWaitForm();
                 await XtraMessageBox.ShowAsync("Se han guardado los datos de forma correcta");
+                ProctorControl_Load(null, EventArgs.Empty);
             }
             catch (Exception e)
             {
-                await XtraMessageBox.ShowAsync($"No fue posible guardar los datos, revise la siguiente información: {e.Message}");
+                await XtraMessageBox.ShowAsync(
+                    $"No fue posible guardar los datos, revise la siguiente información: {e.Message}");
                 Logger.Error(e, "Error al guardar el ensayo de proctor");
             }
         }

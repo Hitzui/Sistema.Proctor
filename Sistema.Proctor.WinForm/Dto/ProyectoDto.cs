@@ -1,8 +1,10 @@
-﻿using Sistema.Proctor.Data.Entities;
-using System.ComponentModel;
+﻿using AutoMapper;
 using DevExpress.XtraEditors.DXErrorProvider;
-using AutoMapper;
+using NLog.Extensions.Logging;
 using Sistema.Proctor.Data;
+using Sistema.Proctor.Data.Entities;
+using System.ComponentModel;
+using NLog;
 
 namespace Sistema.Proctor.WinForm.Dto;
 
@@ -392,7 +394,7 @@ public class ProyectoDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXD
 
     public Proyecto GetProyecto()
     {
-        var config = new MapperConfiguration(cfg => { cfg.AddProfile<ProyectoProfile>(); });
+        var config = new MapperConfiguration(cfg => { cfg.AddProfile<ProyectoProfile>(); }, new NLogLoggerFactory());
 
         // Crear el mapper
         var mapper = config.CreateMapper();
@@ -401,7 +403,7 @@ public class ProyectoDto : INotifyPropertyChanging, INotifyPropertyChanged, IDXD
 
     public ProyectoDto GetProyectoDto(Proyecto proyecto)
     {
-        var config = new MapperConfiguration(cfg => { cfg.AddProfile<ProyectoProfile>(); });
+        var config = new MapperConfiguration(cfg => { cfg.AddProfile<ProyectoProfile>(); }, new NLogLoggerFactory());
 
         // Crear el mapper
         var mapper = config.CreateMapper();

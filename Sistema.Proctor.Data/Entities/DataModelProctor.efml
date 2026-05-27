@@ -10,6 +10,12 @@
     <property name="SiguienteCodigoProyecto" type="Int32" p1:ValidateRequired="true" p1:Guid="255739ce-de50-4a3a-bbf5-f11f52460863">
       <column name="siguiente_codigo_proyecto" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
+    <property name="VerificadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="99f08a63-111f-4ebe-804c-132c7ff2e7df">
+      <column name="verificado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="AutorizadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="bb7df3f1-e70a-4b6c-81a7-fcf811e5e0f0">
+      <column name="autorizado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
   </class>
   <class name="TipoFalla" entity-set="TipoFallas" table="tipo_falla" schema="dicesa" p1:Guid="785124a9-dbab-4f70-a53b-b286210c38a9">
     <id name="IdTipoFalla" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="4bb3f3f2-506b-4a1d-834f-c64dff4ff1ed">
@@ -66,23 +72,11 @@
     <property name="Descripcion" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="b85824a1-3e73-46f1-aa6b-3b59a6302df9">
       <column name="descripcion" default="NULL" not-null="False" sql-type="tinytext" p1:unicode="False" />
     </property>
-    <property name="DescripcionMezcla" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ea006c9c-7b6e-4bc8-bb8e-6e1fa2ac448a">
-      <column name="descripcion_mezcla" default="NULL" not-null="False" sql-type="tinytext" p1:unicode="False" />
-    </property>
     <property name="FechaFin" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="2ecfe80b-a4a9-4c46-833f-c2605147a7df">
       <column name="fecha_fin" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
     </property>
     <property name="FechaInicio" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7f0d7a18-3d05-43e3-8872-8634b05cc53c">
       <column name="fecha_inicio" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
-    </property>
-    <property name="FechaMuestreo" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="e19838f1-417e-4370-8e44-d7d4f6a28ee0">
-      <column name="fecha_muestreo" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
-    </property>
-    <property name="ProecedenciaConcreto" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5a1e9390-bc42-459c-8865-e722e18883aa">
-      <column name="proecedencia_concreto" default="NULL" not-null="False" sql-type="tinytext" p1:unicode="False" />
-    </property>
-    <property name="UbicacionMuestra" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="46e00daf-22a2-4970-9bc6-31422331e526">
-      <column name="ubicacion_muestra" default="NULL" not-null="False" sql-type="tinytext" p1:unicode="False" />
     </property>
     <property name="UbicacionProyecto" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="4c071cf1-ceaa-4f5e-850a-245f82d3592a">
       <column name="ubicacion_proyecto" default="NULL" not-null="False" sql-type="tinytext" p1:unicode="False" />
@@ -227,8 +221,8 @@
     </property>
   </class>
   <class name="Usuario" entity-set="Usuarios" table="usuario" schema="dicesa" p1:Guid="4446a093-6d23-4dc3-b48d-28c4c4500160">
-    <id name="Idusuario" type="Int64" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="43f7b6d2-98eb-44a6-b59c-2d4a4cc215da">
-      <column name="idusuario" not-null="True" precision="20" scale="0" sql-type="bigint" p1:unicode="False" />
+    <id name="Idusuario" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="43f7b6d2-98eb-44a6-b59c-2d4a4cc215da">
+      <column name="idusuario" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </id>
     <property name="Activo" type="Boolean" p1:ValidateRequired="true" p1:Guid="db61d8bd-2005-4c45-a483-94b5c528d82d">
       <column name="activo" not-null="True" precision="1" sql-type="bit" p1:unicode="False" />
@@ -253,6 +247,12 @@
     </property>
     <property name="UpdatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="efd186c2-e8b4-49db-a7fd-595ada1f2633">
       <column name="updated_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="AuthKey" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="95d376ed-d866-4cdc-be73-c5c6fe934ff6">
+      <column name="auth_key" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
+    </property>
+    <property name="AccessToken" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="2acddfaf-541b-46de-bbcd-e3cd51c44901">
+      <column name="access_token" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="False" />
     </property>
   </class>
   <class name="ResultadosProctor" entity-set="ResultadosProctors" table="resultados_proctor" schema="dicesa" p1:Guid="df23ce7d-4a1b-48f4-8295-73e51eb4bffe">
@@ -365,6 +365,18 @@
     </property>
     <property name="UpdatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="87fa2e88-c8e8-4967-a2e5-f99064a7990c">
       <column name="updated_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="EnsayadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="b6d9964d-db79-42b7-a830-2a48e316accd">
+      <column name="ensayado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="RevisadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="e9ce9245-e345-4af0-ab15-c0493445911a">
+      <column name="revisado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="VerificadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="1cbf1530-3570-4d6d-9a37-a5d6bea1a490">
+      <column name="verificado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="AutorizadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="c4e43166-49cc-49a7-a924-b8059e8e8a39">
+      <column name="autorizado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
     </property>
   </class>
   <class name="TipoEspeciman" entity-set="TipoEspecimen" table="tipo_especimen" schema="dicesa" p1:Guid="a3191bb7-79fd-4adb-a86f-8ceddc2ee7f1">
@@ -602,6 +614,30 @@
     <property name="RealizadoEn" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="16406ecc-7d8b-4b74-93b9-25627ac26af1">
       <column name="realizado_en" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
     </property>
+    <property name="CreatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="735aef44-7a49-40db-b1b6-90aaa48b12f1">
+      <column name="created_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="8ebb57ca-8118-4917-a054-f89b36be5636">
+      <column name="created_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="dae6f136-5bd8-4b6d-b2b8-8e0fade9c137">
+      <column name="updated_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="UpdateAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="0cf10948-5a7f-44e3-983d-08c81dd85a2e">
+      <column name="update_at" default="current_timestamp()" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="EnsayadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="cbd182f3-af98-425d-a76e-27d139430cb0">
+      <column name="ensayado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="RevisadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="9e390979-f826-4191-8183-5d6623a3a7e0">
+      <column name="revisado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="VerificadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ef5291c7-26db-409b-93fc-5e9a2e2c4e99">
+      <column name="verificado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="AutorizadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="c5b98ffc-2785-4302-901e-d8e845b05b2f">
+      <column name="autorizado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
   </class>
   <class name="ResultadoHumedad" entity-set="ResultadoHumedads" table="resultado_humedad" schema="dicesa" p1:Guid="15f224da-ad9e-4a01-9887-b13688c912cc">
     <id name="Idresultadohumedad" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="082b23cd-62af-4a20-a4be-d6d415b67d3f">
@@ -636,6 +672,370 @@
     </property>
     <property name="Idensayohumedad" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="00ae9540-3757-42d1-917f-48d33a151e39">
       <column name="idensayohumedad" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="fbc647cd-6211-46f7-9600-d3ac6363c4ff">
+      <column name="created_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="d9b0f8c7-4758-4a14-9334-5094b739958c">
+      <column name="created_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="b3c90fcc-ccba-403d-bd72-06f21b38d714">
+      <column name="updated_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="UpdateAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="e678f699-b794-48df-8069-917cbffcb381">
+      <column name="update_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Clasificacionsuc" entity-set="Clasificacionsucs" table="clasificacionsucs" schema="dicesa" p1:Guid="7d32e700-66ea-455f-83ea-7b3e2e3a878f">
+    <id name="IdClasificacion" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="d9bfb7a7-8ddb-40e1-8448-d2eb894d552f">
+      <column name="IdClasificacion" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="IdMuestra" type="Int32" p1:ValidateRequired="true" p1:Guid="f3a6a4ce-eb29-4b9e-a8bf-268243194bcf">
+      <column name="IdMuestra" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="GrupoSUCS" type="String" p1:ValidateMaxLength="10" p1:ValidateRequired="true" p1:Guid="848b7021-81e2-4a00-9ad9-ea4b3c94193c">
+      <column name="GrupoSUCS" not-null="True" length="10" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Descripcion" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f927e306-78a9-42d8-bc97-7f873108c4bf">
+      <column name="Descripcion" default="NULL" not-null="False" sql-type="text" p1:unicode="True" />
+    </property>
+  </class>
+  <class name="EnsayoGranulometria" entity-set="EnsayoGranulometrias" table="ensayo_granulometria" schema="dicesa" p1:Guid="4e2810c9-490e-45c3-88ed-0f4d805338f8">
+    <id name="Idensayogranulometria" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="8e66e67e-6f42-41b2-86c1-bc9bfbb4448e">
+      <column name="idensayogranulometria" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="InformeNumero" type="String" p1:ValidateMaxLength="255" p1:ValidateRequired="true" p1:Guid="942265ed-3031-49fd-b71f-057c9dea7685">
+      <column name="informe_numero" not-null="True" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Idmuestra" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d1a6ce16-1617-4a2e-99d3-421994425ec0">
+      <column name="idmuestra" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="FechaIngreso" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="00ffcc45-0044-4797-8d22-182e4463f369">
+      <column name="fecha_ingreso" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="DescripcionMaterial" type="Clob" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f625302c-ae99-4736-b7eb-0984deaa8612">
+      <column name="descripcion_material" default="NULL" not-null="False" sql-type="text" p1:unicode="True" />
+    </property>
+    <property name="ProfundidadInicial" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="4995d77d-b850-404f-8e85-fd30de8f94d9">
+      <column name="profundidad_inicial" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="TamizSeparacion" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="51932053-94f4-4af3-aa09-7310e123dc4d">
+      <column name="tamiz_separacion" default="NULL" not-null="False" length="250" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="FechaEmision" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="9603fc2d-bbff-4e81-addc-20526501befa">
+      <column name="fecha_emision" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="MetodoMuestreo" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="9819cd26-6d17-42e2-ab36-db6d4ac5c117">
+      <column name="metodo_muestreo" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="FechaMuestreo" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="44db22e9-b3bf-404c-b28d-f0d9c3acec61">
+      <column name="fecha_muestreo" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="FechaInicio" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="02f979db-a457-478b-be11-5ea756e67c5a">
+      <column name="fecha_inicio" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="FechaFin" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="a860b7f4-e75d-4b29-8ccb-0d8097c13022">
+      <column name="fecha_fin" default="NULL" not-null="False" sql-type="date" p1:unicode="False" />
+    </property>
+    <property name="CodigoIngreso" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="b77fcdd0-bb03-4b23-a54f-d9ee4e84767f">
+      <column name="codigo_ingreso" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Metodo" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="9470d8cd-2d54-4dbf-b73b-d102018f0958">
+      <column name="metodo" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="RealizadoEn" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="193d4b4a-65dc-4189-a038-0c841bfb958c">
+      <column name="realizado_en" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="CreatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="77de7a03-3771-4748-a028-3619fa709fb2">
+      <column name="created_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="00d2e7af-781b-4818-9804-9d031f380ea0">
+      <column name="created_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="adc99ecb-3b03-4760-9849-21509729b492">
+      <column name="updated_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="UpdateAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="72ba3964-3995-4662-8f52-a146bbacf049">
+      <column name="update_at" default="current_timestamp()" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="EnsayadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="3f807161-3a1c-4461-b242-a2abf9c7243e">
+      <column name="ensayado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="RevisadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f58fe0ee-09e1-4dd1-b322-3350f1a880c6">
+      <column name="revisado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="VerificadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="136a2478-f4b8-476a-af55-9edcbddba6e2">
+      <column name="verificado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="ProfundidadFinal" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7093d3df-5d04-4568-86bb-2eebe001b16d">
+      <column name="profundidad_final" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="AutorizadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="bde60dee-8b7f-41a7-a082-cea736283f86">
+      <column name="autorizado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Granulometria" entity-set="Granulometrias" table="granulometria" schema="dicesa" p1:Guid="a7466bb8-5054-414c-b301-6a0f8b308847">
+    <id name="IdGranulometria" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="afa9c5a5-e227-4e75-990c-38734adac9c6">
+      <column name="IdGranulometria" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Idensayogranulometria" type="Int32" p1:ValidateRequired="true" p1:Guid="3d0a4f62-fbff-483b-bf54-772710a0aa0f">
+      <column name="idensayogranulometria" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Arena" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="16009e73-ef44-4a86-8936-edf3a1b35b8b">
+      <column name="Arena" default="NULL" not-null="False" precision="5" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Limo" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="a3bc2aa9-19cb-4e8f-a60a-1fabf6a6a884">
+      <column name="Limo" default="NULL" not-null="False" precision="5" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Arcilla" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="097083aa-436b-4d83-a0b2-e7e8d20bb666">
+      <column name="Arcilla" default="NULL" not-null="False" precision="5" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Grava" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="e988a487-8477-4d09-bc4f-9265a11cbd36">
+      <column name="Grava" default="NULL" not-null="False" precision="5" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PesoInicial" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="37cd9632-5f32-4763-b8df-fe38f8fd0875">
+      <column name="peso_inicial" default="NULL" not-null="False" precision="5" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="RetenidoTamiz4" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="dc37232f-afd5-4c40-9ba5-4b4767e7c233">
+      <column name="retenido_tamiz_4" default="NULL" not-null="False" precision="5" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="MaterialPasaTamiz4" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="00dd80e4-0df5-4e4b-8f27-fc95255725fd">
+      <column name="material_pasa_tamiz_4" default="NULL" not-null="False" precision="5" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PesoRepresentativo" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="e37443ba-e4b5-468a-99ae-3facb0c9fcff">
+      <column name="peso_representativo" default="NULL" not-null="False" precision="5" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PesoMuestraLuegoLavado" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="41be6deb-5359-408f-97e2-f1a20a955ef7">
+      <column name="peso_muestra_luego_lavado" default="NULL" not-null="False" precision="5" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PasaTamizPorLavado" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="22302251-ce1e-445f-a9c3-280241e92362">
+      <column name="pasa_tamiz_por_lavado" default="NULL" not-null="False" precision="5" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PasaTamizPorTamizado" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f34810f8-71f8-49de-bff5-71f73c16ca18">
+      <column name="pasa_tamiz_por_tamizado" default="NULL" not-null="False" precision="5" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="CreatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ef537e31-7e84-4cef-a866-190a3e09d8fa">
+      <column name="created_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="c134ecc4-c265-4d32-b690-6f2dbd879fb3">
+      <column name="created_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="605ae8c2-4e3b-4d17-a729-4b6daef9b0f7">
+      <column name="updated_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="UpdateAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="aadcc862-0324-4504-985f-a6589e38f1e7">
+      <column name="update_at" default="current_timestamp()" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="EnsayadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7c9a3224-009f-4799-8e47-ff59d85fec43">
+      <column name="ensayado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="RevisadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="2230e10a-6949-47f1-893a-987e488cd869">
+      <column name="revisado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="VerificadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="b9cccd86-384f-4e34-ba41-e02ab85e7ba4">
+      <column name="verificado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="AutorizadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ee83e72f-f874-471a-96d7-b10905366046">
+      <column name="autorizado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Granulometriadetalle" entity-set="Granulometriadetalles" table="granulometriadetalle" schema="dicesa" p1:Guid="e7d8e5b2-ed58-4640-a975-d476d8e74586">
+    <id name="IdDetalle" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="ecc2fa67-6ed3-44bc-81a3-e988051fa487">
+      <column name="IdDetalle" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="IdGranulometria" type="Int32" p1:ValidateRequired="true" p1:Guid="094e470d-1dc2-4101-adf0-52c2c5688710">
+      <column name="IdGranulometria" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="Tamiz" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="20" p1:ValidateRequired="false" p1:Guid="25a51999-f700-4f98-b788-225eeacca5dd">
+      <column name="Tamiz" default="NULL" not-null="False" length="20" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="TamanoMM" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7e99ff8d-2b56-47f5-958e-aa1d669621b3">
+      <column name="TamanoMM" default="NULL" not-null="False" precision="5" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Retenido1" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="378a647c-479c-4df5-a329-865e37c7b2ea">
+      <column name="Retenido1" default="NULL" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Retenido2" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="cbefad13-57e3-469f-a57f-8f48fa4be6b6">
+      <column name="Retenido2" default="NULL" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="RetenidoPorcentaje" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="66642196-09df-4d07-b5a3-00a1e4c76733">
+      <column name="RetenidoPorcentaje" default="NULL" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="RetenidoAcumulado" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="6adb34df-c92e-4367-a103-3523eaf29239">
+      <column name="RetenidoAcumulado" default="NULL" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PorcentajePasa" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="4a0ea29e-7a73-4f87-8933-6bf188e48423">
+      <column name="PorcentajePasa" default="NULL" not-null="False" precision="10" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="Limitesatterberg" entity-set="Limitesatterbergs" table="limitesatterberg" schema="dicesa" p1:Guid="8cffe61a-722a-46a6-935f-7797f4dda90f">
+    <id name="IdLimites" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="438cc1fd-000a-4ac6-a8fc-85c8ea73b27b">
+      <column name="IdLimites" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="IdMuestra" type="Int32" p1:ValidateRequired="true" p1:Guid="6147c2f4-dfa4-4dff-a57c-6b1c8b4420be">
+      <column name="IdMuestra" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="LL" type="Decimal" p1:ValidateRequired="true" p1:Guid="f37b5619-2219-4d42-913d-f277598ca2da">
+      <column name="LL" not-null="True" precision="5" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="LP" type="Decimal" p1:ValidateRequired="true" p1:Guid="d8d61f39-77e1-4568-9885-9a93bc0baa78">
+      <column name="LP" not-null="True" precision="5" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="IP" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5c638ef4-df5f-4df4-b306-5676e84d66ab">
+      <column name="IP" default="NULL" not-null="False" precision="5" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="EnsayoLimite" entity-set="EnsayoLimites" table="ensayo_limites" schema="dicesa" p1:Guid="b80fafb5-fb56-46e6-8171-229ddb0e5f66">
+    <id name="Idensayolimites" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="2af3f371-23c9-43e9-9359-4d23ec777a0a">
+      <column name="idensayolimites" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="ProfundidadInicial" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="c24759e1-e37b-409d-9e98-95d3865ac983">
+      <column name="profundidad_inicial" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="ProfundidadFinal" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="0ec59332-961a-49cf-a5e2-6338bce2b268">
+      <column name="profundidad_final" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="InformeNo" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="7533f3ae-0c66-4058-a052-cdd1b954e61b">
+      <column name="informe_no" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="Muestra" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="de720286-c71d-4dba-97b3-830aaf0f5a34">
+      <column name="muestra" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="FechaIngreso" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="8ce48019-dd5a-4a6d-8ccb-ec084cdbb3a7">
+      <column name="fecha_ingreso" default="NULL" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="DescripcionMaterial" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="ac9bcace-9e17-46c5-9367-c8c77d417d5b">
+      <column name="descripcion_material" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="MuestraNo" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7d8dc1a7-2ce4-4176-885d-e72451a71fd6">
+      <column name="muestra_no" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="FechaEmision" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="92769668-9279-44b4-9037-5de1bf09022f">
+      <column name="fecha_emision" default="NULL" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="MetodoMuestreo" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="1b2878eb-976f-4088-b46c-4cb17e73364b">
+      <column name="metodo_muestreo" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="FechaMuestreo" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="2aa3fe2d-8de3-49ae-8060-b69b989a43ec">
+      <column name="fecha_muestreo" default="NULL" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="CodigoIngreso" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="255" p1:ValidateRequired="false" p1:Guid="c08c845f-1a36-414d-bb70-11cea291f337">
+      <column name="codigo_ingreso" default="NULL" not-null="False" length="255" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="FechaEnsayoInicio" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="817c6141-21e0-4721-99af-6dad41f0667f">
+      <column name="fecha_ensayo_inicio" default="NULL" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="FechaEnsayoFin" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="c0e9fdcb-18be-4c76-9238-f2eb38d1dcea">
+      <column name="fecha_ensayo_fin" default="NULL" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="PasaTamiz4" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="da55ad80-758a-4d13-9d96-3aaff0e57ea4">
+      <column name="pasa_tamiz_4" default="NULL" not-null="False" precision="5" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PasaTamiz10" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="fa337cda-f17a-4f05-a307-c541e6aae81b">
+      <column name="pasa_tamiz_10" default="NULL" not-null="False" precision="5" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PasaTamiz40" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d1f62c83-e783-48be-a7b7-cecb6abebb22">
+      <column name="pasa_tamiz_40" default="NULL" not-null="False" precision="5" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PasaTamiz200" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="d6cddf77-ac7b-4f04-bf03-1a9e9776dee6">
+      <column name="pasa_tamiz_200" default="NULL" not-null="False" precision="5" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="CreatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="cedfc565-18b4-4746-ad0a-9cbc4a9bbeec">
+      <column name="created_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CreatedAt" type="DateTime" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="fff998d7-6c54-442a-8916-ba6a7410225d">
+      <column name="created_at" default="current_timestamp()" not-null="True" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="UpdatedBy" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7dd1c681-5a8e-45c5-9643-d6f0c65acc16">
+      <column name="updated_by" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="UpdateAt" type="DateTime" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="a1ac257e-7e5d-40df-acde-0b6f4625bc0b">
+      <column name="update_at" default="current_timestamp()" not-null="False" sql-type="datetime" p1:unicode="False" />
+    </property>
+    <property name="EnsayadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="4862441e-bfa7-4b05-a0b7-4a81e3f35361">
+      <column name="ensayado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="RevisadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="24af419f-e61f-4818-aecb-891b30373aa0">
+      <column name="revisado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="VerificadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ae9c07e4-93f0-4cc4-97bf-58a0c6f6e704">
+      <column name="verificado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="AutorizadoPor" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="91cd6fe8-056d-4c56-a734-19c5ea8bf266">
+      <column name="autorizado_por" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="LimiteLiquido" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7ce241e0-eb31-484d-acb5-4b88309873dd">
+      <column name="limite_liquido" default="NULL" not-null="False" precision="5" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="LimitePlastico" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="5b23325e-3c7b-4bd6-9b42-cb608ae11a4e">
+      <column name="limite_plastico" default="NULL" not-null="False" precision="5" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="IndicePlasticidad" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="fa913383-6ebb-4854-9eb9-67cc55a80375">
+      <column name="indice_plasticidad" default="NULL" not-null="False" precision="5" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+  </class>
+  <class name="LimiteLiquido" entity-set="LimiteLiquidos" table="limite_liquido" schema="dicesa" p1:Guid="90c8d948-e1c7-454d-bd86-d72de0ea005b">
+    <id name="Idlimiteliquido" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="2260755c-2524-4b5e-b38b-911edfd047f0">
+      <column name="idlimiteliquido" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Idensayolimites" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="db2814eb-ba8d-490f-9e7d-e05411f5e984">
+      <column name="idensayolimites" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="NumGolpes" type="Int32" p1:ValidateRequired="true" p1:Guid="dcbcce2f-6bc6-49bc-9951-710343c502ff">
+      <column name="num_golpes" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CodigoTara" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="250" p1:ValidateRequired="false" p1:Guid="73b6fdb9-ec8b-450b-af0e-abb800679364">
+      <column name="codigo_tara" default="NULL" not-null="False" length="250" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="PesoTara" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="fc23a206-4aa5-4872-9513-d0e6f979cf89">
+      <column name="peso_tara" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PesoTaraMuestraHumeda" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="ae4f7874-d21b-4648-b158-110c0c3574ac">
+      <column name="peso_tara_muestra_humeda" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PesoTaraMuestraSeca" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7e538007-6463-4b0e-b085-ba052659ae03">
+      <column name="peso_tara_muestra_seca" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PesoMuestraSeca" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="2a564b8e-6cdc-46c3-a6a4-70ce47ba448d">
+      <column name="peso_muestra_seca" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PesoAgua" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="af04c462-fdda-4a7d-a407-22f2c9503af4">
+      <column name="peso_agua" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Humedad" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="cfbd264b-26a7-4362-80a3-d4782eed1654">
+      <column name="humedad" default="NULL" not-null="False" precision="5" scale="2" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Metodo" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="cc444628-5c66-480f-9298-d112fdd41ccd">
+      <column name="metodo" default="NULL" not-null="False" length="50" sql-type="varchar" p1:unicode="True" />
+    </property>
+  </class>
+  <class name="LimitePlastico" entity-set="LimitePlasticos" table="limite_plastico" schema="dicesa" p1:Guid="dcb19f39-db30-436b-85f7-a583c4984137">
+    <id name="Idlimiteplastico" type="Int32" value-generated="OnAdd" p1:ValidateRequired="true" p1:Guid="e45b0ad4-ef86-48c9-b5cc-97b4b18f03b9">
+      <column name="idlimiteplastico" not-null="True" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </id>
+    <property name="Idensayolimites" type="Int32" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="b62de21b-6a60-42be-a1c1-b6fde3a3e09b">
+      <column name="idensayolimites" default="NULL" not-null="False" precision="11" scale="0" sql-type="int" p1:unicode="False" />
+    </property>
+    <property name="CodigoTara" type="String" p1:nullable="True" value-generated="OnAdd" p1:ValidateMaxLength="50" p1:ValidateRequired="false" p1:Guid="631ffd5c-afcf-4738-9ef6-5f3e53a3edd8">
+      <column name="codigo_tara" default="NULL" not-null="False" length="50" sql-type="varchar" p1:unicode="True" />
+    </property>
+    <property name="PesoTara" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="092611bd-b178-4720-bee9-26328d6bc576">
+      <column name="peso_tara" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PesoTaraMuestraHumeda" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7eea8d15-c06f-4039-b34a-1b854bf42b1e">
+      <column name="peso_tara_muestra_humeda" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PesoTaraMuestraSeca" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="0742620b-bd20-486f-bd2f-e1e8f08e0bec">
+      <column name="peso_tara_muestra_seca" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PesoMuestraSeca" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="f9e1f7af-79f8-4134-9657-6437d6699909">
+      <column name="peso_muestra_seca" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="PesoAgua" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="7236d5a9-cc5c-4c74-80c8-3368dc5d176c">
+      <column name="peso_agua" default="NULL" not-null="False" precision="10" scale="3" sql-type="decimal" p1:unicode="False" />
+    </property>
+    <property name="Humedad" type="Decimal" p1:nullable="True" value-generated="OnAdd" p1:ValidateRequired="false" p1:Guid="35d08e12-d9fa-4056-be96-fe106d063198">
+      <column name="humedad" default="NULL" not-null="False" precision="5" scale="2" sql-type="decimal" p1:unicode="False" />
     </property>
   </class>
   <associations>
@@ -749,6 +1149,62 @@
       </end1>
       <end2 multiplicity="Many" name="ResultadoHumedads" class="EnsayoHumedad" relation-class="ResultadoHumedad" lazy="False" p1:Guid="d9a786a9-259d-4519-a404-1dee50beed97">
         <property name="Idensayohumedad" />
+      </end2>
+    </association>
+    <association name="Muestra_Clasificacionsuc" cardinality="OneToMany" on-delete="Cascade" p1:Guid="cb4db2b2-4db8-4a1c-a055-ab651067875d">
+      <end1 multiplicity="One" name="Muestra" class="Clasificacionsuc" relation-class="Muestra" constrained="True" lazy="False" p1:Guid="0b30fb13-a4fc-4187-af2c-14934de6cdf0">
+        <property name="Idmuestra" />
+      </end1>
+      <end2 multiplicity="Many" name="Clasificacionsucs" class="Muestra" relation-class="Clasificacionsuc" lazy="False" p1:Guid="1ff5985a-69e3-486c-9703-c58e4146ff6b">
+        <property name="IdMuestra" />
+      </end2>
+    </association>
+    <association name="Muestra_EnsayoGranulometria" cardinality="OneToMany" p1:Guid="36271463-207c-4f5f-aec4-415603b183c4">
+      <end1 multiplicity="ZeroOrOne" name="Muestra" class="EnsayoGranulometria" relation-class="Muestra" constrained="True" lazy="False" p1:Guid="80305cc2-730a-4ab2-85de-0e244bbd3c3e">
+        <property name="Idmuestra" />
+      </end1>
+      <end2 multiplicity="Many" name="EnsayoGranulometrias" class="Muestra" relation-class="EnsayoGranulometria" lazy="False" p1:Guid="6de30fa9-dedf-42ba-a046-ca416d9d35f2">
+        <property name="Idmuestra" />
+      </end2>
+    </association>
+    <association name="EnsayoGranulometria_Granulometria" cardinality="OneToMany" p1:Guid="9842c434-deac-48f6-be1a-d5ae708773e7">
+      <end1 multiplicity="One" name="EnsayoGranulometria" class="Granulometria" relation-class="EnsayoGranulometria" constrained="True" lazy="False" p1:Guid="26bf3b96-06e5-4fc2-bd39-1ba0db855975">
+        <property name="Idensayogranulometria" />
+      </end1>
+      <end2 multiplicity="Many" name="Granulometrias" class="EnsayoGranulometria" relation-class="Granulometria" lazy="False" p1:Guid="f360aaa6-df97-4bdf-8667-a53ec9a71647">
+        <property name="Idensayogranulometria" />
+      </end2>
+    </association>
+    <association name="Granulometria_Granulometriadetalle" cardinality="OneToMany" on-delete="Restrict" p1:Guid="8aa832c1-f45b-45b7-9016-794c2b6115fa">
+      <end1 multiplicity="One" name="Granulometria" class="Granulometriadetalle" relation-class="Granulometria" constrained="True" lazy="False" p1:Guid="52356ec1-92a5-4ec7-93c2-1bc883e8e932">
+        <property name="IdGranulometria" />
+      </end1>
+      <end2 multiplicity="Many" name="Granulometriadetalles" class="Granulometria" relation-class="Granulometriadetalle" lazy="False" p1:Guid="76abff7f-c741-4723-b062-f6ac214f937a">
+        <property name="IdGranulometria" />
+      </end2>
+    </association>
+    <association name="Muestra_Limitesatterberg" cardinality="OneToMany" on-delete="Cascade" p1:Guid="bb3f668e-d8a1-4e11-9607-454ba067b301">
+      <end1 multiplicity="One" name="Muestra" class="Limitesatterberg" relation-class="Muestra" constrained="True" lazy="False" p1:Guid="8c0791d0-f9c8-4f28-95dd-cb8310a25580">
+        <property name="Idmuestra" />
+      </end1>
+      <end2 multiplicity="Many" name="Limitesatterbergs" class="Muestra" relation-class="Limitesatterberg" lazy="False" p1:Guid="a244468f-c6cb-44d8-aaf4-008181f1b738">
+        <property name="IdMuestra" />
+      </end2>
+    </association>
+    <association name="EnsayoLimite_LimiteLiquido" cardinality="OneToMany" on-delete="Cascade" p1:Guid="32b4cf86-0a9d-42ed-b487-d7fd3396f01e">
+      <end1 multiplicity="ZeroOrOne" name="EnsayoLimite" class="LimiteLiquido" relation-class="EnsayoLimite" constrained="True" lazy="False" p1:Guid="4f62fbc0-9399-4a63-a140-2cbc82133799">
+        <property name="Idensayolimites" />
+      </end1>
+      <end2 multiplicity="Many" name="LimiteLiquidos" class="EnsayoLimite" relation-class="LimiteLiquido" lazy="False" p1:Guid="7df846f4-8937-4b88-a3f0-5c9482c94991">
+        <property name="Idensayolimites" />
+      </end2>
+    </association>
+    <association name="EnsayoLimite_LimitePlastico" cardinality="OneToMany" on-delete="Cascade" p1:Guid="b58af872-eb1c-4164-bd82-908dc57a377c">
+      <end1 multiplicity="ZeroOrOne" name="EnsayoLimite" class="LimitePlastico" relation-class="EnsayoLimite" constrained="True" lazy="False" p1:Guid="c34772c9-a521-4b8c-a4e3-1302f2d27c9a">
+        <property name="Idensayolimites" />
+      </end1>
+      <end2 multiplicity="Many" name="LimitePlasticos" class="EnsayoLimite" relation-class="LimitePlastico" lazy="False" p1:Guid="69e1a32f-1d3b-44d1-a22f-1c4c08ca936b">
+        <property name="Idensayolimites" />
       </end2>
     </association>
   </associations>

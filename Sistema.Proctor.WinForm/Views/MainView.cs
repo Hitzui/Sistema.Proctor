@@ -1,20 +1,18 @@
 ﻿using DevExpress.XtraBars;
-using DevExpress.Utils;
-using DevExpress.XtraCharts;
 using DevExpress.XtraEditors;
-using DevExpress.XtraTab;
-using MathNet.Numerics;
 using NLog;
+using Sistema.Proctor.Data.Entities;
 using Sistema.Proctor.WinForm.Data;
 using Sistema.Proctor.WinForm.Dto;
 using Sistema.Proctor.WinForm.Views.Cliente;
 using Sistema.Proctor.WinForm.Views.Empleado;
 using Sistema.Proctor.WinForm.Views.Empresa;
 using Sistema.Proctor.WinForm.Views.Proyecto;
+using Sistema.Proctor.WinForm.Views.Proyecto.Granulometria;
+using Sistema.Proctor.WinForm.Views.Proyecto.Humedad;
 using Sistema.Proctor.WinForm.Views.Proyecto.Muestra;
 using Sistema.Proctor.WinForm.Views.Proyecto.Proctor;
-using Control = System.Windows.Forms.Control;
-using Series = DevExpress.XtraCharts.Series;
+using TipoEnsayo = Sistema.Proctor.WinForm.Data.Enum.TipoEnsayo;
 
 namespace Sistema.Proctor.WinForm.Views
 {
@@ -132,13 +130,13 @@ namespace Sistema.Proctor.WinForm.Views
             if (formEnsayoProyectos is null) return;
             try
             {
-                formEnsayoProyectos.AddTabPageProctor("Ensayo Proctor", null);
+                formEnsayoProyectos.AddTabPage(TipoEnsayo.Proctor, new EnsayoProctor(),
+                    formEnsayoProyectos.ListEnsayoProctor, proctor => new ProctorControl(proctor));
             }
             catch (Exception exception)
             {
                 XtraMessageBox.Show(exception.Message);
             }
-
         }
 
         private void barButtonItemGenerarGrafico_ItemClick(object sender, ItemClickEventArgs e)
@@ -158,28 +156,60 @@ namespace Sistema.Proctor.WinForm.Views
             }
         }
 
-        private void barButtonItemGuardarEnsayoProctor_ItemClick(object sender, ItemClickEventArgs e)
+        private async void barButtonItemGuardarEnsayo_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var formEnsayoProyectos = MdiChildren.OfType<EnsayosProyecto>().FirstOrDefault();
-            if (formEnsayoProyectos == null) return;
-
             try
             {
+                var formEnsayoProyectos = MdiChildren.OfType<EnsayosProyecto>().FirstOrDefault();
+                if (formEnsayoProyectos == null) return;
                 var selectedTabPage = formEnsayoProyectos.xtraTabControlEnsayos.SelectedTabPage;
-                var proctorControl = selectedTabPage.Controls.OfType<ProctorControl>().FirstOrDefault();
-                proctorControl?.btnGuardarEnsayoProctor_Click();
+                if (selectedTabPage?.Tag is null)
+                {
+                    return;
+                }
+                var tipoEnsayo = (TipoEnsayo)selectedTabPage.Tag;
+                try
+                {
+                    switch (tipoEnsayo)
+                    {
+                        case TipoEnsayo.Proctor:
+                            var proctorControl = selectedTabPage.Controls.OfType<ProctorControl>().FirstOrDefault();
+                            proctorControl?.btnGuardarEnsayoProctor_Click();
+                            break;
+                        case TipoEnsayo.Humedad:
+                            var humedadControl = selectedTabPage.Controls.OfType<HumedadControl>().FirstOrDefault();
+                            if (humedadControl != null)
+                            {
+                                await humedadControl.Save();
+                                formEnsayoProyectos.treeListEnsayos.Refresh(true);
+                                formEnsayoProyectos.treeListEnsayos.RefreshDataSource();
+                            }
+
+                            break;
+                        case TipoEnsayo.Limites:
+                        default:
+                            Logger.Warn($"Tipo de ensayo no soportado: {tipoEnsayo}");
+                            break;
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Logger.Error(exception, $"Error al guardar ensayo {tipoEnsayo}");
+                }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                Logger.Error(exception, "Error al guardar Ensayo proctor");
+                Logger.Error(ex, "Error al guardar ensayo");
             }
         }
+
 
         private void barButtonItemAgregarMuestra_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (DependenciasGlobalesForm.Instance.SelectedProyecto is null)
             {
-                XtraMessageBox.Show("Seleccione un proyecto para añadir muestras", "Muestra", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("Seleccione un proyecto para añadir muestras", "Muestra", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -194,9 +224,11 @@ namespace Sistema.Proctor.WinForm.Views
             {
                 if (DependenciasGlobalesForm.Instance.SelectedProyecto is null)
                 {
-                    XtraMessageBox.Show("Seleccione un proyecto para abrir", "Proyecto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    XtraMessageBox.Show("Seleccione un proyecto para abrir", "Proyecto", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                     return;
                 }
+
                 splashScreenManager1.ShowWaitForm();
                 var selectedProyectoIdproyecto = DependenciasGlobalesForm.Instance.SelectedProyecto.Idproyecto;
                 await DependenciasGlobalesForm.Instance.FillListadoMuestras(selectedProyectoIdproyecto);
@@ -213,22 +245,42 @@ namespace Sistema.Proctor.WinForm.Views
         {
             var formEnsayoProyectos = MdiChildren.OfType<EnsayosProyecto>().FirstOrDefault();
             if (formEnsayoProyectos == null) return;
-
+            var selectedTabPage = formEnsayoProyectos.xtraTabControlEnsayos.SelectedTabPage;
+            if (selectedTabPage?.Tag is null)
+            {
+                return;
+            }
+            var tipoEnsayo = (TipoEnsayo)selectedTabPage.Tag;
             try
             {
-                var selectedTabPage = formEnsayoProyectos.xtraTabControlEnsayos.SelectedTabPage;
-                var proctorControl = selectedTabPage.Controls.OfType<ProctorControl>().FirstOrDefault();
-                if (proctorControl == null)
+
+                switch (tipoEnsayo)
                 {
-                    XtraMessageBox.Show("No se ha seleccionado un ensayo proctor", "Proctor", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    case TipoEnsayo.Proctor:
+                        var proctorControl = selectedTabPage.Controls.OfType<ProctorControl>().FirstOrDefault();
+                        if (proctorControl == null)
+                        {
+                            XtraMessageBox.Show("No se ha seleccionado un ensayo proctor", "Proctor", MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                            return;
+                        }
+
+                        proctorControl.PrintReport();
+                        break;
+                    case TipoEnsayo.Humedad:
+                        var humedadControl = selectedTabPage.Controls.OfType<HumedadControl>().FirstOrDefault();
+                        humedadControl?.Print();
+                        break;
+                    default:
+                        Logger.Warn($"Tipo de ensayo no soportado: {tipoEnsayo}");
+                        break;
                 }
-                proctorControl.PrintReport();
             }
             catch (Exception exception)
             {
-                Logger.Error(exception, "Error al guardar Ensayo proctor");
+                Logger.Error(exception, $"Error al generar el reporte de ensayo {tipoEnsayo}");
             }
+
         }
 
         private void barButtonItemAbrirEnsayoProctor_ItemClick(object sender, ItemClickEventArgs e)
@@ -273,7 +325,8 @@ namespace Sistema.Proctor.WinForm.Views
             if (DependenciasGlobalesForm.Instance.SelectedEmpresa is null)
             {
                 splashScreenManager1.CloseWaitForm();
-                XtraMessageBox.Show("Seleccione una empresa para editar", "Empresa", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                XtraMessageBox.Show("Seleccione una empresa para editar", "Empresa", MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 return;
             }
 
@@ -289,14 +342,18 @@ namespace Sistema.Proctor.WinForm.Views
                 var muestraDto = await DependenciasGlobalesForm.Instance.GetMuestraDto();
                 if (DependenciasGlobalesForm.Instance.SelectedProyecto is null)
                 {
-                    XtraMessageBox.Show("Seleccione un proyecto para añadir muestras", "Muestra", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    XtraMessageBox.Show("Seleccione un proyecto para añadir muestras", "Muestra", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                     return;
                 }
+
                 if (muestraDto is null)
                 {
-                    XtraMessageBox.Show("Seleccione una muestra para editar", "Muestra", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    XtraMessageBox.Show("Seleccione una muestra para editar", "Muestra", MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                     return;
                 }
+
                 var frmMuestras = new AgregarMuestra(muestraDto);
                 frmMuestras.IsNew = false;
                 frmMuestras.ShowDialog();
@@ -305,6 +362,41 @@ namespace Sistema.Proctor.WinForm.Views
             {
                 Logger.Error(exception, "Error al recuperar la muestra");
             }
+        }
+
+        private void barButtonItemAgregarHumedad_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var formEnsayoProyectos = MdiChildren.OfType<EnsayosProyecto>().FirstOrDefault();
+            if (formEnsayoProyectos is null) return;
+            try
+            {
+                formEnsayoProyectos.AddTabPage(TipoEnsayo.Humedad, new EnsayoHumedadDto(),
+                    formEnsayoProyectos.ListaEnsayoHumedad, humedad => new HumedadControl(humedad));
+            }
+            catch (Exception exception)
+            {
+                XtraMessageBox.Show(exception.Message);
+            }
+        }
+
+        private void barButtonItemLimites_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var formEnsayoProyectos = MdiChildren.OfType<EnsayosProyecto>().FirstOrDefault();
+            if (formEnsayoProyectos is null) return;
+            try
+            {
+                formEnsayoProyectos.AddTabPage(TipoEnsayo.Limites, new EnsayoLimitesDto(),
+                    formEnsayoProyectos.ListaEnsayoLimites, limite => new LimitesControl(limite));
+            }
+            catch (Exception exception)
+            {
+                XtraMessageBox.Show(exception.Message);
+            }
+        }
+
+        private void barButtonItemCompresionC39_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
         }
     }
 }

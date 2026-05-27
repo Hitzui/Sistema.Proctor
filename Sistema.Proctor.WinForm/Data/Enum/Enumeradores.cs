@@ -7,17 +7,26 @@ public class Enumeradores
     public List<string> GolpesPorCapa;
     public List<string> NumeroCapas;
     public List<string> TipoProctor;
-    public List<string> Norma;
-    public List<string> MetodoUtilizado;
+    public List<string> NormaProctor;
+    public List<string> MetodoUtilizadoProctor;
+    public List<string> MetodoUtilizadoHumedad;
 
     public Enumeradores()
     {
-        PesoMartillo=new List<string>{"5.5","10"};
-        TemperaturaSecado=new List<string>{"60","110"};
-        GolpesPorCapa=new List<string>{"25","56"};
-        NumeroCapas=new List<string>{"3","5"};
-        TipoProctor=new List<string>{"Proctor modificado","Proctor estándar"};
-        Norma=new List<string>{"ASTM D1557-12(2021)","ASTM D 698-12(2021)"};
-        MetodoUtilizado=new List<string>{"A","B","C"};
+        PesoMartillo = new List<string> { "5.5", "10" };
+        TemperaturaSecado = new List<string> { "60", "110" };
+        GolpesPorCapa = new List<string> { "25", "56" };
+        NumeroCapas = new List<string> { "3", "5" };
+        TipoProctor = new List<string> { "Proctor modificado", "Proctor estándar" };
+        NormaProctor = new List<string> { "ASTM D1557-12(2021)", "ASTM D 698-12(2021)" };
+        MetodoUtilizadoProctor = new List<string> { "A", "B", "C" };
+        MetodoUtilizadoHumedad = new List<string> { "A", "B" };
     }
+}
+
+public enum TipoEnsayo
+{
+    Proctor,
+    Humedad,
+    Limites
 }

@@ -25,4 +25,19 @@ public class HelperMethods
                 return null;
         }
     }
+    public static decimal ConvertToDecimal(TextEdit? textEdit, decimal valorDefecto = 0)
+    {
+        if (textEdit == null || string.IsNullOrWhiteSpace(textEdit.Text))
+            return valorDefecto;
+
+        return decimal.TryParse(textEdit.Text, out decimal resultado) ? resultado : valorDefecto;
+    }
+
+    public static int ConvertToInt(TextEdit? textEdit, int valorDefecto = 0)
+    {
+        if (textEdit == null || string.IsNullOrWhiteSpace(textEdit.Text))
+            return valorDefecto;
+
+        return int.TryParse(textEdit.Text, out int resultado) ? resultado : valorDefecto;
+    }
 }

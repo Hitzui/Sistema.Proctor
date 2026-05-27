@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using DevExpress.XtraEditors.DXErrorProvider;
-using MySqlX.XDevAPI;
+using NLog.Extensions.Logging;
 using Sistema.Proctor.Data.Entities;
+using Sistema.Proctor.WinForm.Data;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Sistema.Proctor.WinForm.Data;
 
 namespace Sistema.Proctor.WinForm.Dto;
 
-public class MuestraDto: INotifyPropertyChanged, IDXDataErrorInfo
+public class MuestraDto : INotifyPropertyChanged, IDXDataErrorInfo
 {
     private int _Idmuestra;
 
@@ -198,7 +198,7 @@ public class MuestraDto: INotifyPropertyChanged, IDXDataErrorInfo
     {
         if (propertyName == "CodigoIngreso" && CodigoIngreso == "" ||
             propertyName == "MuestraNumero" && MuestraNumero == "" ||
-            propertyName == "SondeoNumero" && SondeoNumero== "" ||
+            propertyName == "SondeoNumero" && SondeoNumero == "" ||
             propertyName == "Idempleado" && Idempleado == 0)
         {
             info.ErrorText = String.Format("The '{0}' field cannot be empty", propertyName);
@@ -212,7 +212,7 @@ public class MuestraDto: INotifyPropertyChanged, IDXDataErrorInfo
 
     public Muestra GetMuestra()
     {
-        var config = new MapperConfiguration(cfg => { cfg.AddProfile<MuestraProfile>(); });
+        var config = new MapperConfiguration(cfg => { cfg.AddProfile<MuestraProfile>(); }, new NLogLoggerFactory());
 
         // Crear el mapper
         var mapper = config.CreateMapper();
@@ -221,7 +221,7 @@ public class MuestraDto: INotifyPropertyChanged, IDXDataErrorInfo
 
     public MuestraDto GetMuestraDto(Muestra muestra)
     {
-        var config = new MapperConfiguration(cfg => { cfg.AddProfile<MuestraProfile>(); });
+        var config = new MapperConfiguration(cfg => { cfg.AddProfile<MuestraProfile>(); }, new NLogLoggerFactory());
 
         // Crear el mapper
         var mapper = config.CreateMapper();

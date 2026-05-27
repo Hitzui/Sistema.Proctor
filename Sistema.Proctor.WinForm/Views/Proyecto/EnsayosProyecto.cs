@@ -9,7 +9,9 @@ using Sistema.Proctor.Data.Entities;
 using Sistema.Proctor.Data.Repositories;
 using Sistema.Proctor.WinForm.Data;
 using Sistema.Proctor.WinForm.Dto;
+using Sistema.Proctor.WinForm.Views.Proyecto.Humedad;
 using Sistema.Proctor.WinForm.Views.Proyecto.Proctor;
+using TipoEnsayo = Sistema.Proctor.WinForm.Data.Enum.TipoEnsayo;
 
 namespace Sistema.Proctor.WinForm.Views.Proyecto
 {
@@ -18,10 +20,13 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         public XtraTabControl xtraTabControlEnsayos;
         private Panel panelIzquierdo;
-        private List<EnsayoProctor> ListEnsayoProctor = new();
+        public List<EnsayoProctor> ListEnsayoProctor = new();
+        public List<EnsayoHumedadDto> ListaEnsayoHumedad = new();
+        public List<EnsayoLimitesDto> ListaEnsayoLimites = new();
         public EnsayoRecordDto? SelectedEnsayoRecordDto;
         private IEnsayoRepository EnsayoRepository;
         private readonly IUnitOfWork? UnitOfWork;
+        private readonly Dictionary<XtraTabPage, object> _tabPageEnsayoMap = new();
 
         public EnsayosProyecto()
         {
@@ -54,10 +59,26 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
         private void XtraTabControlEnsayos_CloseButtonClick(object? sender, EventArgs e)
         {
             if (sender is not XtraTabControl { SelectedTabPage: not null } tabControl) return;
-            var index = tabControl.SelectedTabPageIndex;
-            if (index == 0) return;
-            ListEnsayoProctor.RemoveAt(index-1);
-            tabControl.TabPages.Remove(tabControl.SelectedTabPage);
+            var selectedPage = tabControl.SelectedTabPage;
+
+            if (_tabPageEnsayoMap.TryGetValue(selectedPage, out var ensayoObj))
+            {
+                // Eliminar el ensayo correspondiente de la lista asociada
+                switch (ensayoObj)
+                {
+                    case EnsayoProctor ensayoProctor:
+                        ListEnsayoProctor.Remove(ensayoProctor);
+                        break;
+                    case EnsayoHumedadDto ensayoHumedad:
+                        ListaEnsayoHumedad.Remove(ensayoHumedad);
+                        break;
+                    // Agregar más casos según sea necesario para otros tipos de ensayos
+                }
+
+                _tabPageEnsayoMap.Remove(selectedPage);
+            }
+
+            tabControl.TabPages.Remove(selectedPage);
         }
 
         private async void EnsayosProyecto_Load(object sender, EventArgs e)
@@ -65,7 +86,8 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
             try
             {
                 var findAll = DependenciasGlobalesForm.Instance.ListadoMuestras;
-                treeListEnsayos.Columns.Add(new DevExpress.XtraTreeList.Columns.TreeListColumn() { Caption = @"Codigo muestra", VisibleIndex = 0 });
+                treeListEnsayos.Columns.Add(new DevExpress.XtraTreeList.Columns.TreeListColumn()
+                    { Caption = @"Codigo muestra", VisibleIndex = 0 });
                 treeListEnsayos.ShowLoadingPanel();
                 treeListEnsayos.BeginUnboundLoad();
                 foreach (var muestra in findAll)
@@ -92,7 +114,8 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
             }
         }
 
-        private void treeListEnsayos_FocusedNodeChanged(object sender, DevExpress.XtraTreeList.FocusedNodeChangedEventArgs e)
+        private void treeListEnsayos_FocusedNodeChanged(object sender,
+            DevExpress.XtraTreeList.FocusedNodeChangedEventArgs e)
         {
             if (e.Node != null)
             {
@@ -122,24 +145,33 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
             mdiParent.ribbonPageEnsayos.Visible = false;
         }
 
-        public void AddTabPageProctor(string tabName, EnsayoProctor? ensayoProctor)
+        public void AddTabPage<TEnsayo, TControl>(TipoEnsayo tipoEnsayo, TEnsayo? ensayo,
+            IList<TEnsayo> listaEnsayos, Func<TEnsayo, TControl> controlFactory)
+            where TEnsayo : new()
+            where TControl : Control
         {
             // Crear y agregar la nueva pestaña
             var newPage = new XtraTabPage
             {
-                Text = tabName,
+                Tag = tipoEnsayo,
+                Text = tipoEnsayo.ToString(),
                 ShowCloseButton = DefaultBoolean.True
             };
-            ensayoProctor ??= new EnsayoProctor();
-           
-            ListEnsayoProctor.Add(ensayoProctor);
-            // Agregar el control deseado a la pestaña
-            newPage.Controls.Add(new ProctorControl(ensayoProctor)
-            {
-                Dock = DockStyle.Fill
-            });
+
+            ensayo ??= new TEnsayo();
+            listaEnsayos.Add(ensayo);
+
+            // Asocia la pestaña con su lista para facilitar la eliminación
+            _tabPageEnsayoMap[newPage] = listaEnsayos;
+
+            // Crear el control y agregarlo a la pestaña
+            var control = controlFactory(ensayo);
+            control.Dock = DockStyle.Fill;
+            newPage.Controls.Add(control);
+
             xtraTabControlEnsayos.TabPages.Add(newPage);
         }
+
 
         public async void FindEnsayos(int tipoEnsayo)
         {
@@ -150,29 +182,50 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
                 {
                     return;
                 }
-                
+
                 var tipoEnsayoRepository = UnitOfWork.TipoEnsayoRepository;
                 var ensayoProctorRepository = UnitOfWork.EnsayosProctorRepository;
+                var ensayoHumedadRepository = UnitOfWork.EnsayoHumedadRepository;
                 EnsayoRepository = UnitOfWork.EnsayosRepository;
                 var findTipoEnsayo = await tipoEnsayoRepository.GetByIdAsync(tipoEnsayo);
                 if (findTipoEnsayo is null)
                 {
-                    XtraMessageBox.Show("No se encontró el tipo de ensayo","Abrir ensayo", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    XtraMessageBox.Show("No se encontró el tipo de ensayo", "Abrir ensayo", MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
                     return;
                 }
 
-                if (findTipoEnsayo.Descripcion=="Proctor")
+                switch (findTipoEnsayo.Descripcion)
                 {
-                    var findEnsayoProctor = await ensayoProctorRepository.GetByCriteriaAsync(proctor =>
-                        proctor.Idmuestra == SelectedEnsayoRecordDto.IdMuestra);
-                    if (findEnsayoProctor.Count <= 0) return;
-                    xtraTabControlEnsayos.TabPages.Clear();
-                    foreach (var ensayoProctor in findEnsayoProctor)
+                    case "Proctor":
                     {
-                        AddTabPageProctor("Proctor", ensayoProctor);
-                    }
+                        var findEnsayoProctor = await ensayoProctorRepository.GetByCriteriaAsync(proctor =>
+                            proctor.Idmuestra == SelectedEnsayoRecordDto.IdMuestra);
+                        if (findEnsayoProctor.Count <= 0) return;
+                        xtraTabControlEnsayos.TabPages.Clear();
+                        foreach (var ensayoProctor in findEnsayoProctor)
+                        {
+                            AddTabPage(TipoEnsayo.Proctor, ensayoProctor, ListEnsayoProctor,
+                                proctor => new ProctorControl(proctor));
+                        }
 
+                        break;
+                    }
+                    case "Humedad":
+                        var findEnsayoHumedad = await ensayoHumedadRepository.GetByCriteriaAsync(proctor =>
+                            proctor.Idmuestra == SelectedEnsayoRecordDto.IdMuestra);
+                        if (findEnsayoHumedad.Count <= 0) return;
+                        xtraTabControlEnsayos.TabPages.Clear();
+                        foreach (var humedadDto in findEnsayoHumedad.Select(ensayoHumedad =>
+                                     new EnsayoHumedadDto().GetEnsayoHumedadDto(ensayoHumedad)))
+                        {
+                            AddTabPage(TipoEnsayo.Humedad, humedadDto, ListaEnsayoHumedad,
+                                humedad => new HumedadControl(humedad));
+                        }
+
+                        break;
                 }
+
                 splashScreenManager1.CloseWaitForm();
             }
             catch (Exception e)
@@ -182,7 +235,8 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
         }
 
 
-        private void treeListEnsayos_PopupMenuShowing(object sender, DevExpress.XtraTreeList.PopupMenuShowingEventArgs e)
+        private void treeListEnsayos_PopupMenuShowing(object sender,
+            DevExpress.XtraTreeList.PopupMenuShowingEventArgs e)
         {
             if (e.MenuType == TreeListMenuType.Node)
             {
@@ -192,12 +246,13 @@ namespace Sistema.Proctor.WinForm.Views.Proyecto
 
         private void barManager1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (e.Item== barButtonItemVerEnsayo)
+            if (e.Item == barButtonItemVerEnsayo)
             {
                 if (SelectedEnsayoRecordDto is null)
                 {
                     return;
                 }
+
                 FindEnsayos(SelectedEnsayoRecordDto.IdTipoEnsayo);
             }
         }

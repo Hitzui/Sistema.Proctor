@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <EntityDeveloper Version="7.2.21.0">
   <ModelSettings xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" AppConnectionStringName="DefaultConnection" ConnectionStringInAppConfig="True" RegenareteConnectionStringInAppConfig="True" TargetFramework="Net80" DetectTPTInheritance="True" EntityFrameworkCoreVersion="Version7" DetectFunctionBasedColumnDefault="True">
-    <Connection ConnectionString="persistsecurityinfo=True;server=localhost;user id=root;password=root1.2Blandon;database=dicesa" Provider="MySql.Data.MySqlClient" />
+    <Connection ConnectionString="persistsecurityinfo=True;server=72.167.79.215;user id=k81xm6zglxxb;password=Dicesa2023*;database=dicesa" Provider="MySql.Data.MySqlClient" />
     <Generation>
       <GeneratedFiles>
         <File Name="DataModelProctor.DataContextProctor.cs" />
@@ -24,6 +24,14 @@
         <File Name="DataModelProctor.Empresa.cs" />
         <File Name="DataModelProctor.EnsayoHumedad.cs" />
         <File Name="DataModelProctor.ResultadoHumedad.cs" />
+        <File Name="DataModelProctor.Clasificacionsuc.cs" />
+        <File Name="DataModelProctor.EnsayoGranulometria.cs" />
+        <File Name="DataModelProctor.Granulometria.cs" />
+        <File Name="DataModelProctor.Granulometriadetalle.cs" />
+        <File Name="DataModelProctor.Limitesatterberg.cs" />
+        <File Name="DataModelProctor.EnsayoLimite.cs" />
+        <File Name="DataModelProctor.LimiteLiquido.cs" />
+        <File Name="DataModelProctor.LimitePlastico.cs" />
       </GeneratedFiles>
     </Generation>
     <DatabaseFirstNamingRules>

@@ -1,10 +1,10 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using AutoMapper;
+﻿using AutoMapper;
 using DevExpress.XtraEditors.DXErrorProvider;
-using Sistema.Proctor.Data;
+using NLog.Extensions.Logging;
 using Sistema.Proctor.Data.Entities;
 using Sistema.Proctor.WinForm.Data;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Sistema.Proctor.WinForm.Dto;
 
@@ -166,7 +166,7 @@ public class EmpresaDto : INotifyPropertyChanged, IDXDataErrorInfo
 
     public Empresa GetEmpresa()
     {
-        var config = new MapperConfiguration(cfg => { cfg.AddProfile<EmpresaProfile>(); });
+        var config = new MapperConfiguration(cfg => { cfg.AddProfile<EmpresaProfile>(); }, new NLogLoggerFactory());
 
         // Crear el mapper
         var mapper = config.CreateMapper();
@@ -175,7 +175,7 @@ public class EmpresaDto : INotifyPropertyChanged, IDXDataErrorInfo
 
     public EmpresaDto GetEmpresaDto(Empresa empresa)
     {
-        var config = new MapperConfiguration(cfg => { cfg.AddProfile<EmpresaProfile>(); });
+        var config = new MapperConfiguration(cfg => { cfg.AddProfile<EmpresaProfile>(); }, new NLogLoggerFactory());
         // Crear el mapper
         var mapper = config.CreateMapper();
         return mapper.Map<EmpresaDto>(empresa);
